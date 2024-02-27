@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 fallVelocity;
     private float xRotation;
     private float currentSpeed;
+    private bool canRun;
 
     private void Awake()
     {
@@ -48,13 +49,17 @@ public class PlayerController : MonoBehaviour
 
     private void Sprinting(InputAction.CallbackContext context)
     {
+        if(!canRun)
+        {
+            return;
+        }
         //Tunary operator that is an if-statement in setting the currentSpeed
         currentSpeed = context.performed ? runSpeed : walkSpeed;
     }
 
     private void Jumping(InputAction.CallbackContext context)
     {
-        if(controller.isGrounded)
+        if(controller.isGrounded )
         {
             fallVelocity.y = jumpPower;
         }
@@ -102,5 +107,25 @@ public class PlayerController : MonoBehaviour
     public Transform GetCamera()
     {
         return cam;
+    }
+
+    public void SetCanRun(bool canRun)
+    {
+        this.canRun = canRun;
+
+        if(!canRun)
+        {
+            GetWalkSpeed();
+        }
+    }
+
+    public float GetWalkSpeed()
+    {
+        return walkSpeed;
+    }
+
+    public float GetRunSpeed()
+    {
+        return runSpeed;
     }
 }
