@@ -20,6 +20,10 @@ public class Inventory : Singleton<Inventory>
     private void Start()
     {
         inventoryItems = new InventoryItem[inventoryCapacity];
+        for (int i = 0; i < inventoryItems.Length; i++)
+        {
+            inventoryItems[i] = new InventoryItem(null, 0);
+        }
         PlayerController.playerInput.Player.Inventory.performed += ToggleInventory;
         playerController = GetComponent<PlayerController>();
     }
@@ -37,17 +41,6 @@ public class Inventory : Singleton<Inventory>
 
     public bool AddItem(Item newItem)
     {
-        /*
-        foreach (InventoryItem inventoryItem in inventoryItems)
-        {
-            if(inventoryItem.item == newItem)
-            {
-                if(inventoryItem.currentStack >= inventoryItem.item.maxStack) { continue; }
-                inventoryItem.currentStack++;
-                onAddItem?.Invoke(inventoryItem, Array.IndexOf(inventoryItems, inventoryItem));
-                return true;
-            }
-        }*/
         for (int i = 0; i < inventoryItems.Length; i++)
         {
             if (inventoryItems[i] != null && inventoryItems[i].item == newItem)
@@ -59,14 +52,16 @@ public class Inventory : Singleton<Inventory>
             }
         }
 
+        //This for-loop makes NO sense... It works fine when the inspector isn't looking at the array, but not when it does...
         int index;
         for (index = 0; index < inventoryItems.Length - 1; index++)
         {
-            if(inventoryItems[index] == null)
+            if(inventoryItems[index].item == null)
             {
                 break;
             }
         }
+        if(index == inventoryCapacity - 1 && inventoryItems[inventoryCapacity - 1].item != null) { Debug.Log("Not enough space in inventory"); return false; }
         Debug.Log(index);
         InventoryItem invItem = new InventoryItem(newItem);
         inventoryItems[index] = invItem;
@@ -76,32 +71,33 @@ public class Inventory : Singleton<Inventory>
         return true;
     }
 
-    public void UpdateItem(InventoryItem item, int index)
+    public InventoryItem UpdateItem(InventoryItem item, int index)
     {
-        if(inventoryItems[index] != item)
+        if(inventoryItems[index] != null && inventoryItems[index].item != null && inventoryItems[index].item == item.item)
         {
-            inventoryItems[index] = item;
-            return;
-        }
-        InventoryItem storedItem = inventoryItems[index];
-        if(storedItem.item == item.item)
-        {
-            if((storedItem.currentStack + item.currentStack) <= item.item.maxStack)
+            if((inventoryItems[index].currentStack + item.currentStack) <= item.item.maxStack)
             {
-                storedItem.currentStack += item.currentStack;
+                inventoryItems[index].currentStack += item.currentStack;
             }
             else
             {
-                storedItem.currentStack += item.currentStack;
-                int exchange = storedItem.currentStack - storedItem.item.maxStack;
+                inventoryItems[index].currentStack += item.currentStack;
+                int exchange = inventoryItems[index].currentStack - inventoryItems[index].item.maxStack;
                 item.currentStack = exchange;
-                storedItem.currentStack = storedItem.item.maxStack;
+                inventoryItems[index].currentStack = inventoryItems[index].item.maxStack;
             }
         }
+        else
+        {
+            Debug.Log(item.item);
+            inventoryItems[index] = new InventoryItem(item.item, item.currentStack);
+        }
+        return inventoryItems[index];
     }
 
     public void RemoveItem(int index)
     {
-        inventoryItems[index] = null;
+        inventoryItems[index].item = null;
+        inventoryItems[index].currentStack = 0;
     }
 }

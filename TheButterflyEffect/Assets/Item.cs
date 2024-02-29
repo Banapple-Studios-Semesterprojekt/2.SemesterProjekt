@@ -20,6 +20,11 @@ public class InventoryItem
         this.item = item;
         currentStack = 1;
     }
+    public InventoryItem(Item item, int currentStack)
+    {
+        this.item = item;
+        this.currentStack = currentStack;
+    }
 }
 
 public enum ItemType

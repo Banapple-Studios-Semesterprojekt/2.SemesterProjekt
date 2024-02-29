@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cab05eb67103074499717ad3de555078, type: 3}
-  m_Name: Flashlight
+  m_Name: Butterfly
   m_EditorClassIdentifier: 
-  itemType: 2
-  itemObject: {fileID: 8412741395499950035, guid: e2578a8ae2f5b0840a1777de6bfde68c,
+  itemType: 0
+  itemObject: {fileID: 2285536683331239113, guid: 95696f86348eacb47b1403fe8664a89b,
     type: 3}
-  itemSprite: {fileID: 21300000, guid: 403e1679acd01c641803b46dfdcdace6, type: 3}
-  maxStack: 10
+  itemSprite: {fileID: 21300000, guid: 5f60253ce42f6544787a930ae9c48153, type: 3}
+  maxStack: 1
