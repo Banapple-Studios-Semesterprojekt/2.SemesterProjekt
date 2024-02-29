@@ -35,15 +35,26 @@ public class PlayerController : MonoBehaviour
         //Referencing objects
         controller = GetComponent<CharacterController>();
 
-        //Subscribing button events to functions
-        playerInput.Player.Jump.performed += Jumping;
-        playerInput.Player.Sprint.performed += Sprinting;
-        playerInput.Player.Sprint.canceled += Sprinting;
-
         currentSpeed = walkSpeed;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    private void OnEnable()
+    {
+        //Subscribing button events to functions
+        playerInput.Player.Jump.performed += Jumping;
+        playerInput.Player.Sprint.performed += Sprinting;
+        playerInput.Player.Sprint.canceled += Sprinting;
+    }
+
+    private void OnDisable()
+    {
+        //Unsubscribing button events to functions
+        playerInput.Player.Jump.performed -= Jumping;
+        playerInput.Player.Sprint.performed -= Sprinting;
+        playerInput.Player.Sprint.canceled -= Sprinting;
     }
 
     private void Sprinting(InputAction.CallbackContext context)
