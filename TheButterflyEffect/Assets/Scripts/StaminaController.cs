@@ -21,6 +21,7 @@ public class StaminaController : MonoBehaviour
     //"Range" = Restricts a variable to be between two values. In this case 0 and 50. 
     [Range(0, 50)] [SerializeField] private float staminaDrain = 0.5f; 
     [Range(0, 50)][SerializeField] private float staminaRegen = 0.5f;
+    [SerializeField] private float delayStaminaRegen = 5f;
 
     [Header("Stamina UI Elements")]
     [SerializeField] private Image staminaProgressUI;
@@ -46,7 +47,9 @@ public class StaminaController : MonoBehaviour
         if(!sprinting)
         {   //Regenerates stamina
             if(playerStamina <= maxStamina - 0.01)
-            {   //Stamina regenerates over time.
+            {
+                //Invoke("DelayStaminaBarRegen", delayStaminaRegen);
+                //Stamina regenerates over time.
                 playerStamina += staminaRegen * Time.deltaTime;
                 UpdateStamina(1);
 
@@ -74,6 +77,11 @@ public class StaminaController : MonoBehaviour
             }
             
         }
+    }
+
+    public void DelayStaminaBarRegen()
+    {
+        
     }
 
     public void Sprinting(InputAction.CallbackContext context)
