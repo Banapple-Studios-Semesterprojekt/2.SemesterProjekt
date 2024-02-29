@@ -21,7 +21,7 @@ public class StaminaController : MonoBehaviour
     //"Range" = Restricts a variable to be between two values. In this case 0 and 50. 
     [Range(0, 50)] [SerializeField] private float staminaDrain = 0.5f; 
     [Range(0, 50)][SerializeField] private float staminaRegen = 0.5f;
-    [SerializeField] private float delayStaminaRegen = 5f;
+    [SerializeField] private float delayStaminaRegen = 1f;
 
     [Header("Stamina UI Elements")]
     [SerializeField] private Image staminaProgressUI;
@@ -44,18 +44,19 @@ public class StaminaController : MonoBehaviour
 
     private void Update()
     {
-        if(!sprinting)
-        {   //Regenerates stamina
-            if(playerStamina <= maxStamina - 0.01)
+        if(!sprinting && playerStamina <= maxStamina - 0.01)
+        {
+            playerController.SetCanRun(true);
+            Invoke("DelayStaminaBarRegen", delayStaminaRegen);
+
+            //Regenerates stamina
+            /*if(playerStamina <= maxStamina - 0.01) 
             {
-                //Invoke("DelayStaminaBarRegen", delayStaminaRegen);
-                //Stamina regenerates over time.
-                playerStamina += staminaRegen * Time.deltaTime;
-                UpdateStamina(1);
-
                 playerController.SetCanRun(true);
+                Invoke("DelayStaminaBarRegen", delayStaminaRegen);
 
-                if (playerStamina >= maxStamina)
+                Debug.Log("Update stamina regen");*/
+            if (playerStamina >= maxStamina)
                 {
                     playerStamina = maxStamina;
                     //Reset alpha value for slider
@@ -63,31 +64,38 @@ public class StaminaController : MonoBehaviour
 
                     hasRegenerated = true;
                 }
-            }
+            //}
         }
         else
         {
             playerStamina -= staminaDrain * Time.deltaTime;
             UpdateStamina(1);
+            Debug.Log("Stamina is drained");
 
             if (playerStamina <= 0)
             {
                 playerController.SetCanRun(false);
                 sprinting = false;
+                Debug.Log("I can't run");
+ 
             }
-            
         }
     }
 
     public void DelayStaminaBarRegen()
     {
+        playerStamina += staminaRegen * Time.deltaTime;
+        UpdateStamina(1);
         
+        Debug.Log("Delay regen");
+ 
     }
 
     public void Sprinting(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
+            Debug.Log("Running");
             if (hasRegenerated)
             {
                 sprinting = true;
