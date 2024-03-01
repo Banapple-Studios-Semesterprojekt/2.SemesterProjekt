@@ -14,8 +14,9 @@ public class StaminaController : MonoBehaviour
     [SerializeField] private float maxStamina = 100f;
     [SerializeField] private float jumpCost = 20; //How much stamina it costs to jump. 
     //"HideInInspector" = Hidden in inspector but used if variables need to be public. 
-    [HideInInspector] public bool hasRegenerated = true; //Stamina bar is regernerating?
-    [HideInInspector] public bool sprinting; //Default is false
+    public bool hasRegenerated = true; //Stamina bar is regernerating?
+    public bool sprinting;
+    private bool canRegen;
 
     [Header("Stamina Regen Parameters")]
     //"Range" = Restricts a variable to be between two values. In this case 0 and 50. 
@@ -44,29 +45,31 @@ public class StaminaController : MonoBehaviour
 
     private void Update()
     {
-        if(!sprinting && playerStamina <= maxStamina - 0.01)
+        if(!sprinting)
         {
-            playerController.SetCanRun(true);
-            Invoke("DelayStaminaBarRegen", delayStaminaRegen);
-
-            //Regenerates stamina
-            /*if(playerStamina <= maxStamina - 0.01) 
-            {
-                playerController.SetCanRun(true);
-                Invoke("DelayStaminaBarRegen", delayStaminaRegen);
-
-                Debug.Log("Update stamina regen");*/
-            if (playerStamina >= maxStamina)
+            if (!hasRegenerated && canRegen)
+            { 
+                if (playerStamina <= maxStamina - 0.01)
                 {
+                    hasRegenerated = false;
+                    playerController.SetCanRun(true);
+                    playerStamina += staminaRegen * Time.deltaTime;
+                    
+                    UpdateStamina(1);
+                }
+            } 
+
+            //Removes stamina bar, so it is not visible.
+            if (playerStamina >= maxStamina)
+            {
                     playerStamina = maxStamina;
                     //Reset alpha value for slider
                     sliderCanvasGroup.alpha = 0;
 
                     hasRegenerated = true;
-                }
-            //}
+            }
         }
-        else
+        else if(sprinting)
         {
             playerStamina -= staminaDrain * Time.deltaTime;
             UpdateStamina(1);
@@ -84,18 +87,17 @@ public class StaminaController : MonoBehaviour
 
     public void DelayStaminaBarRegen()
     {
-        playerStamina += staminaRegen * Time.deltaTime;
-        UpdateStamina(1);
-        
-        Debug.Log("Delay regen");
- 
+        canRegen = true;
     }
 
     public void Sprinting(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
+            CancelInvoke();
+            canRegen = false;
             Debug.Log("Running");
+
             if (hasRegenerated)
             {
                 sprinting = true;
@@ -110,6 +112,8 @@ public class StaminaController : MonoBehaviour
         }
         else if (context.canceled)
         {
+            canRegen = false;
+            Invoke("DelayStaminaBarRegen", delayStaminaRegen);
             sprinting = false;
         }
         
