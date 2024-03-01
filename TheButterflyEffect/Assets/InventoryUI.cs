@@ -79,16 +79,15 @@ public class InventoryUI : MonoBehaviour
         if (grabbedItemGO != null)
         {
             Vector2 mouseDelta = PlayerController.playerInput.Player.CameraLook.ReadValue<Vector2>();
-            float xScale = 1 + Mathf.Abs(mouseDelta.x); xScale = Mathf.Clamp(xScale, 1f, 4f);
-            float yScale = 1 + Mathf.Abs(mouseDelta.y); yScale = Mathf.Clamp(yScale, 1f, 4f);
+            float xScale = 1 + Mathf.Abs(mouseDelta.x) * 0.7f; xScale = Mathf.Clamp(xScale, 1f, 3f);
+            float yScale = 1 + Mathf.Abs(mouseDelta.y) * 0.7f; yScale = Mathf.Clamp(yScale, 1f, 3f);
             grabbedItemGO.transform.position = Mouse.current.position.value;
             grabbedItemGO.transform.localScale = Vector3.Lerp(grabbedItemGO.transform.localScale, new Vector2(xScale, yScale), 15 * Time.deltaTime);
         }
     }
     private void InventorySlotInteract(InputAction.CallbackContext context)
     {
-        Debug.Log("Click");
-
+    
         //First raycast to any ui graphic, to select an item from the inventory
         List<RaycastResult> results = UIRaycasting();
 
@@ -112,6 +111,7 @@ public class InventoryUI : MonoBehaviour
             if(results.Count <= 0) { return; }
             InventorySlot hitSlot = results[0].gameObject.GetComponentInParent<InventorySlot>();
             grabbedItemIndex = Array.IndexOf(slots, hitSlot);
+            if(hitSlot != null && hitSlot.currentItem != null && hitSlot.currentItem.item != grabbedItem.item) { return; }
             TakeOrPlaceItem(hitSlot, false);
         }
     }
@@ -154,8 +154,8 @@ public class InventoryUI : MonoBehaviour
         }
         else if (grabbedItemGO != null && hitSlot != null && hitSlot.currentItem != null)
         {
-            InventoryItem itemInHand = grabbedItem;
-            InventoryItem itemInSlot = hitSlot.currentItem;
+            InventoryItem itemInHand = new InventoryItem(grabbedItem.item, grabbedItem.currentStack);
+            InventoryItem itemInSlot = new InventoryItem(hitSlot.currentItem.item, hitSlot.currentItem.currentStack);
             if(itemInHand.item != itemInSlot.item) 
             {
                 PlaceItem(fullPlace);
@@ -164,6 +164,7 @@ public class InventoryUI : MonoBehaviour
             else if(itemInSlot.currentStack < itemInSlot.item.maxStack)
             {
                 PlaceItem(fullPlace);
+                if(grabbedItem != null && grabbedItem.currentStack > 0) { return; }
                 grabbedItem = null;
                 Destroy(grabbedItemGO);
                 grabbedItemGO = null;
@@ -180,7 +181,7 @@ public class InventoryUI : MonoBehaviour
     {
         if(fullPlace)
         {
-            InventoryItem placedItem = Inventory.Instance().UpdateItem(grabbedItem, grabbedItemIndex);
+            InventoryItem placedItem = Inventory.Instance().UpdateItem(new InventoryItem(grabbedItem.item, grabbedItem.currentStack), grabbedItemIndex);
             SetSpecificSlot(placedItem, grabbedItemIndex);
             grabbedItem = null;
             Destroy(grabbedItemGO);
@@ -193,10 +194,12 @@ public class InventoryUI : MonoBehaviour
                 PlaceItem(true);
                 return;
             }
+            bool isOdd = grabbedItem.currentStack % 2 != 0;
             grabbedItem.currentStack /= 2;
-            InventoryItem placedItem = Inventory.Instance().UpdateItem(grabbedItem, grabbedItemIndex);
+            InventoryItem placedItem = Inventory.Instance().UpdateItem(new InventoryItem(grabbedItem.item, grabbedItem.currentStack), grabbedItemIndex);
             SetSpecificSlot(placedItem, grabbedItemIndex);
             grabbedItem = new InventoryItem(grabbedItem.item, grabbedItem.currentStack);
+            grabbedItem.currentStack += isOdd ? 1 : 0;
         }
     }
     private void GrabItem(InventoryItem invItem, InventoryItem exchangeItem)
@@ -212,7 +215,10 @@ public class InventoryUI : MonoBehaviour
         image.raycastTarget = false;
 
         slots[grabbedItemIndex].SetInventorySlot(exchangeItem == null ? null : exchangeItem);
-        Inventory.Instance().RemoveItem(grabbedItemIndex);
+        if(exchangeItem == null)
+        {
+            Inventory.Instance().RemoveItem(grabbedItemIndex);
+        }
         print("Instanitate");
     }
 
@@ -240,7 +246,6 @@ public class InventoryUI : MonoBehaviour
             Transform target = Inventory.Instance().transform;
             GameObject droppedItem = Instantiate(item.item.itemObject, target.position + Vector3.up * 0.5f + target.forward, Quaternion.identity);
             droppedItem.name = item.item.name;
-            Debug.Log("SPAWNING ITEM!");
             yield return new WaitForSeconds(0.2f);
         }
     }

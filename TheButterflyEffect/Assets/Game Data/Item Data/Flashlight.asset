@@ -16,4 +16,4 @@ MonoBehaviour:
   itemObject: {fileID: 8412741395499950035, guid: e2578a8ae2f5b0840a1777de6bfde68c,
     type: 3}
   itemSprite: {fileID: 21300000, guid: 403e1679acd01c641803b46dfdcdace6, type: 3}
-  maxStack: 10
+  maxStack: 1

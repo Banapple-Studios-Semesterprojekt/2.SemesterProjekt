@@ -27,7 +27,8 @@ public class Inventory : Singleton<Inventory>
         PlayerController.playerInput.Player.Inventory.performed += ToggleInventory;
         playerController = GetComponent<PlayerController>();
     }
-
+  
+    
     private void ToggleInventory(InputAction.CallbackContext context)
     {
         playerController.enabled = !playerController.enabled;
@@ -61,8 +62,7 @@ public class Inventory : Singleton<Inventory>
                 break;
             }
         }
-        if(index == inventoryCapacity - 1 && inventoryItems[inventoryCapacity - 1].item != null) { Debug.Log("Not enough space in inventory"); return false; }
-        Debug.Log(index);
+        if(index == inventoryCapacity - 1 && inventoryItems[inventoryCapacity - 1].item != null) { return false; }
         InventoryItem invItem = new InventoryItem(newItem);
         inventoryItems[index] = invItem;
 
@@ -89,8 +89,10 @@ public class Inventory : Singleton<Inventory>
         }
         else
         {
-            Debug.Log(item.item);
-            inventoryItems[index] = new InventoryItem(item.item, item.currentStack);
+            inventoryItems[index].item = item.item;
+            inventoryItems[index].currentStack = item.currentStack;
+            //inventoryItems[index] = item;
+            Debug.Log(item.item.itemType);
         }
         return inventoryItems[index];
     }
@@ -100,4 +102,5 @@ public class Inventory : Singleton<Inventory>
         inventoryItems[index].item = null;
         inventoryItems[index].currentStack = 0;
     }
+
 }
