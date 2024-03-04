@@ -16,12 +16,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpPower = 3f;
     [SerializeField] private float mouseSensitivity = 1f;
     [SerializeField] private float gravity = -9.82f;
+    [SerializeField] private float crouchSpeed = 1.5f;
 
     //Cached private variables
     private Vector3 move;
     private Vector3 fallVelocity;
     private float xRotation;
     private float currentSpeed;
+    private float normalHeight;
+    private float crouchHeight;
+    private bool isCrouching;
 
     private void Awake()
     {
@@ -48,6 +52,7 @@ public class PlayerController : MonoBehaviour
         playerInput.Player.Sprint.performed += Sprinting;
         playerInput.Player.Sprint.canceled += Sprinting;
     }
+        playerInput.Player.Crouch.performed += Crouching;
 
     private void OnDisable()
     {
@@ -68,6 +73,17 @@ public class PlayerController : MonoBehaviour
         if(controller.isGrounded)
         {
             fallVelocity.y = jumpPower;
+        }
+    }
+
+    private void Crouching(InputAction.CallbackContext context)
+    {
+        if (context.performed) //when controlkey is pressed
+        {
+            isCrouching = !isCrouching; //toggle
+            controller.height = isCrouching ? 1 : 2;
+            currentSpeed = isCrouching ? crouchSpeed : walkSpeed;
+            Debug.Log("Player is crouching");
         }
     }
 

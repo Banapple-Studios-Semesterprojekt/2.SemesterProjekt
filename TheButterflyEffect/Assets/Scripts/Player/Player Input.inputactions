@@ -67,6 +67,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Crouch",
+                    "type": "Button",
+                    "id": "b10d55f0-f685-4203-a919-82e437adb7c7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -188,6 +197,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "02ce8ec0-754c-42e5-bebc-1c4bb482626b",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crouch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

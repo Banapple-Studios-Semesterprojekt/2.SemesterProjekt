@@ -89,6 +89,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Crouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""b10d55f0-f685-4203-a919-82e437adb7c7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -212,6 +221,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""02ce8ec0-754c-42e5-bebc-1c4bb482626b"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -227,6 +247,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
         m_Player_PrimaryAction = m_Player.FindAction("Primary Action", throwIfNotFound: true);
         m_Player_SecondaryAction = m_Player.FindAction("Secondary Action", throwIfNotFound: true);
+        m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -295,6 +316,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Inventory;
     private readonly InputAction m_Player_PrimaryAction;
     private readonly InputAction m_Player_SecondaryAction;
+    private readonly InputAction m_Player_Crouch;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -306,6 +328,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
         public InputAction @PrimaryAction => m_Wrapper.m_Player_PrimaryAction;
         public InputAction @SecondaryAction => m_Wrapper.m_Player_SecondaryAction;
+        public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -336,6 +359,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @SecondaryAction.started += instance.OnSecondaryAction;
             @SecondaryAction.performed += instance.OnSecondaryAction;
             @SecondaryAction.canceled += instance.OnSecondaryAction;
+            @Crouch.started += instance.OnCrouch;
+            @Crouch.performed += instance.OnCrouch;
+            @Crouch.canceled += instance.OnCrouch;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -361,6 +387,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @SecondaryAction.started -= instance.OnSecondaryAction;
             @SecondaryAction.performed -= instance.OnSecondaryAction;
             @SecondaryAction.canceled -= instance.OnSecondaryAction;
+            @Crouch.started -= instance.OnCrouch;
+            @Crouch.performed -= instance.OnCrouch;
+            @Crouch.canceled -= instance.OnCrouch;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -387,5 +416,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnInventory(InputAction.CallbackContext context);
         void OnPrimaryAction(InputAction.CallbackContext context);
         void OnSecondaryAction(InputAction.CallbackContext context);
+        void OnCrouch(InputAction.CallbackContext context);
     }
 }
