@@ -51,8 +51,8 @@ public class PlayerController : MonoBehaviour
         playerInput.Player.Jump.performed += Jumping;
         playerInput.Player.Sprint.performed += Sprinting;
         playerInput.Player.Sprint.canceled += Sprinting;
-    }
         playerInput.Player.Crouch.performed += Crouching;
+    }
 
     private void OnDisable()
     {
@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
         playerInput.Player.Jump.performed -= Jumping;
         playerInput.Player.Sprint.performed -= Sprinting;
         playerInput.Player.Sprint.canceled -= Sprinting;
+        playerInput.Player.Crouch.performed += Crouching;
     }
 
     private void Sprinting(InputAction.CallbackContext context)
@@ -70,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jumping(InputAction.CallbackContext context)
     {
-        if(controller.isGrounded)
+        if (controller.isGrounded)
         {
             fallVelocity.y = jumpPower;
         }
@@ -100,7 +101,7 @@ public class PlayerController : MonoBehaviour
         move = transform.forward * moveInput.y + transform.right * moveInput.x;
 
         //Resetting fallvelocity if grounded
-        if(controller.isGrounded && fallVelocity.y < 0)
+        if (controller.isGrounded && fallVelocity.y < 0)
         {
             fallVelocity.y = -2f;
         }
