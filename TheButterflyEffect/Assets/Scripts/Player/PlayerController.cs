@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
     {
         if(!canRun)
         {
-            return;
+            GetWalkSpeed();
         }
         //Tunary operator that is an if-statement in setting the currentSpeed
         currentSpeed = context.performed ? runSpeed : walkSpeed;
@@ -113,6 +113,7 @@ public class PlayerController : MonoBehaviour
     {
         this.canRun = canRun;
 
+        //This needed if it is in the Sprinting function?
         if(!canRun)
         {
             GetWalkSpeed();
