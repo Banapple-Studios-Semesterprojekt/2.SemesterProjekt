@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System.Linq.Expressions;
 
 public class StaminaController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private PlayerController playerController;
+    private CharacterController playerCharacterController;
 
     [Header("Stamina Main Parameters")]
     public float playerStamina = 100f; //Max stamina player has, measures how much stamina the player has left.
     [SerializeField] private float maxStamina = 100f;
     [SerializeField] private float jumpCost = 20; //How much stamina it costs to jump. 
     //"HideInInspector" = Hidden in inspector but used if variables need to be public. 
-    public bool hasRegenerated = true; //Stamina bar is regernerating?
     public bool sprinting;
+    public bool isMoving;
+    public bool regenBegun;
     private bool canRegen;
+
 
     [Header("Stamina Regen Parameters")]
     //"Range" = Restricts a variable to be between two values. In this case 0 and 50. 
@@ -40,77 +44,86 @@ public class StaminaController : MonoBehaviour
         PlayerController.playerInput.Player.Jump.performed += StaminaJump;
         PlayerController.playerInput.Player.Sprint.performed += Sprinting;
         PlayerController.playerInput.Player.Sprint.canceled += Sprinting;
+
+        playerCharacterController = GetComponent<CharacterController>(); 
     }
 
 
     private void Update()
     {
-        if (!sprinting)
+        //SETS isMoving to "true" when player's velocity is greater than 0, if not it is SET to "false".
+        isMoving = playerCharacterController.velocity.sqrMagnitude > 0;
+
+        if (!sprinting || (sprinting && !isMoving))
         {
-            if (playerStamina <= maxStamina - 0.01 && canRegen)
+            if (playerStamina <= maxStamina && canRegen)
             {
-                playerController.SetCanRun(true);
                 playerStamina += staminaRegen * Time.deltaTime;
+                playerController.SetCanRun(true);
 
                 UpdateStamina(1);
             }
 
             //Removes stamina bar, so it is not visible.
-            else if (playerStamina >= maxStamina)
+            if (playerStamina >= maxStamina )
             {
                 playerStamina = maxStamina;
                 //Reset alpha value for slider
-                sliderCanvasGroup.alpha = 0;
-
-                hasRegenerated = true;
+                UpdateStamina(0);
             }
+
         }
 
-        else if (sprinting)
-        {
+        else if (sprinting && isMoving)
+        {  
+            if(regenBegun)
+            {
+                CancelInvoke();
+                canRegen = false;
+                regenBegun = false;
+            }
+
             playerStamina -= staminaDrain * Time.deltaTime;
             UpdateStamina(1);
-            Debug.Log("Stamina is drained");
 
             if (playerStamina <= 0)
             {
-                sprinting = false;
+                playerStamina = 0;
                 playerController.SetCanRun(false);
             }
         }
+
+        //Can still regen when you are not moving and pressing Lshift
+        if((sprinting && !isMoving && !regenBegun) || (!sprinting && !regenBegun))
+        {
+            canRegen = false;
+            CancelInvoke();
+            Invoke("DelayStaminaBarRegen", delayStaminaRegen);
+            regenBegun = true;
+        }
+
     }
 
     public void DelayStaminaBarRegen()
     {
         canRegen = true;
+        Debug.Log("Im confused");
     }
 
     public void Sprinting(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            CancelInvoke();
-            canRegen = false;
-
-            if (hasRegenerated)
-            {
-                sprinting = true;
-
-                if (playerStamina <= 0)
-                {
-                    hasRegenerated = false;
-                    playerController.GetRunSpeed();
-                    sliderCanvasGroup.alpha = 0; //Does not update stamina bar, but sets alpha to 0 --> Invisible.
-                }
-            }
-
+            //CancelInvoke();
+            sprinting = true;
             
         }
         else if (context.canceled)
         {
-            canRegen = false;
             sprinting = false;
-            Invoke("DelayStaminaBarRegen", delayStaminaRegen); 
+            /*canRegen = false;
+            Invoke("DelayStaminaBarRegen", delayStaminaRegen);
+            regenBegun = false;*/
         }
         
     }

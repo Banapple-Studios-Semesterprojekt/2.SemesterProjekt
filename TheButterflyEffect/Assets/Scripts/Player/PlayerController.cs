@@ -24,11 +24,19 @@ public class PlayerController : MonoBehaviour
     private float currentSpeed;
     private bool canRun;
 
+    //What the hell?? --> Created events
+    public delegate void JumpAction(); //"delegate" = Function you can subscribe other function to. Will call all functions that have been subscribed to it. 
+    public event JumpAction onJump;
+    public delegate void SprintAction(bool isRunning);
+    public event SprintAction onSprint;
+
+
     private void Awake()
     {
         //Creating new input
         playerInput = new PlayerInput();
         playerInput.Enable();
+
     }
 
     private void Start()
@@ -45,23 +53,27 @@ public class PlayerController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        canRun = true;
     }
 
     private void Sprinting(InputAction.CallbackContext context)
     {
         if(!canRun)
         {
-            GetWalkSpeed();
+            return;
         }
         //Tunary operator that is an if-statement in setting the currentSpeed
         currentSpeed = context.performed ? runSpeed : walkSpeed;
+        onSprint.Invoke(context.performed);
     }
 
     private void Jumping(InputAction.CallbackContext context)
     {
-        if(controller.isGrounded )
+        if(controller.isGrounded)
         {
             fallVelocity.y = jumpPower;
+            onJump?.Invoke();
         }
     }
 
@@ -113,10 +125,9 @@ public class PlayerController : MonoBehaviour
     {
         this.canRun = canRun;
 
-        //This needed if it is in the Sprinting function?
         if(!canRun)
         {
-            GetWalkSpeed();
+            currentSpeed = walkSpeed;
         }
     }
 
