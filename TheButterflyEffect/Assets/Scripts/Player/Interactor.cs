@@ -5,15 +5,25 @@ public class Interactor : MonoBehaviour
 {
     private RaycastHit hit;
     private Transform cam;
+
     [Header("Raycast Settings")]
     [SerializeField] private float rayDistance = 2f;
+
     [SerializeField] private LayerMask rayMask;
 
     private Interactable currentInteractable;
-    
+
     private void Start()
     {
-        cam = GetComponent<PlayerController>().GetCamera();
+        PlayerController playerController = GetComponent<PlayerController>();
+        if (playerController != null)
+        {
+            cam = playerController.GetCamera();
+        }
+        else
+        {
+            Debug.LogError("PlayerController component not found!");
+        }
     }
 
     private void OnEnable()
@@ -28,7 +38,7 @@ public class Interactor : MonoBehaviour
 
     private void Interact(InputAction.CallbackContext context)
     {
-        if(currentInteractable != null)
+        if (currentInteractable != null)
         {
             currentInteractable.onInteract?.Invoke();
         }
