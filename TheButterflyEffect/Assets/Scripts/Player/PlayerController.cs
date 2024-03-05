@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -59,13 +60,15 @@ public class PlayerController : MonoBehaviour
 
     private void Sprinting(InputAction.CallbackContext context)
     {
+        onSprint.Invoke(context.performed);
+        
         if(!canRun)
         {
             return;
         }
         //Tunary operator that is an if-statement in setting the currentSpeed
         currentSpeed = context.performed ? runSpeed : walkSpeed;
-        onSprint.Invoke(context.performed);
+        
     }
 
     private void Jumping(InputAction.CallbackContext context)
