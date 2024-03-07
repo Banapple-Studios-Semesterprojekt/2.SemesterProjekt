@@ -31,6 +31,7 @@ public class StaminaSadFace : MonoBehaviour
     [SerializeField] private CanvasGroup sliderCanvasGroup;
 
     private Coroutine StaminaCoroutine;
+    private Coroutine DelayRegenCoroutine;
 
     private void Start()
     {
@@ -38,75 +39,72 @@ public class StaminaSadFace : MonoBehaviour
         playerCharacterController = GetComponent<CharacterController>();
 
         StaminaCoroutine = StartCoroutine(Stamina());
+        canJump = true;
     }
 
     private void Update()
     {
         isMoving = playerCharacterController.velocity.sqrMagnitude > 0;
-        isRegenerating = !sprinting ^ (sprinting && !isMoving);
-        canJump = playerStamina >= maxStamina * jumpCost / maxStamina;
+        isRegenerating = (!sprinting ^ (sprinting && !isMoving)) && DelayRegenCoroutine == null;
 
-        if (isRegenerating)
-        {
-            if (StaminaCoroutine == null)
-                StartCoroutine(Stamina());
-        }
-        else
-        {
-            if (StaminaCoroutine != null)
-                StopCoroutine(Stamina());
-        }
     }
    
 
     private void Jumping()
     {
-        if(canJump && playerCharacterController.isGrounded)
-        StartCoroutine(DelayedJumpAndRegen());
+        playerStamina -= jumpCost;
+        UpdateStaminaUI(1);
+
+        if (DelayRegenCoroutine != null) { StopCoroutine(DelayRegenCoroutine); }
+        DelayRegenCoroutine = StartCoroutine(DelayRegenerating());
+
+        playerController.SetCanJump(true);
+        canJump = true;
+        if (playerStamina < jumpCost)
+        {
+            canJump = false;
+            playerController.SetCanJump(false);
+            Invoke("DelayStaminaRegen", regenTime);
+            isRegenerating = true;
+        }
     }
 
     private void Sprinting(bool isRunning)
     {
         sprinting = isRunning;
-
+        if(!isRunning && !isRegenerating)
+        {
+            if(DelayRegenCoroutine != null) { StopCoroutine(DelayRegenCoroutine); }
+            DelayRegenCoroutine = StartCoroutine(DelayRegenerating());
+            
+        }
     }
 
-    private IEnumerator DelayedJumpAndRegen()
+    IEnumerator DelayRegenerating()
     {
-        canJump = false;
-
-        playerStamina -= jumpCost;
-        UpdateStaminaUI(1);   
- 
+        isRegenerating = false;
         yield return new WaitForSeconds(regenTime);
-        
-        DelayStaminaRegen();
-        canJump = true;
+        isRegenerating = true;
+        DelayRegenCoroutine = null;
     }
-
-    
 
     IEnumerator Stamina()
     {
-        float timeSinceLastRegeneration = 0f;
-        bool delayTime = true;
-
-        while(playerStamina <= maxStamina)
+        while(true)
         {
-
-            timeSinceLastRegeneration += Time.deltaTime;
-
-            if (timeSinceLastRegeneration >= regenTime)
-                delayTime = true;
-            else
-                delayTime = false;
-
             if (isRegenerating)
             {
-                if (delayTime && ((!sprinting && delayTime) || (sprinting && !isMoving) || (playerStamina < maxStamina && sprinting)))
+                if ((((!sprinting) || (sprinting && !isMoving) || (playerStamina < maxStamina && sprinting))) || canJump)
                 {
                     playerController.SetCanRun(true);
                     playerStamina += staminaRegen * Time.deltaTime;
+
+                    if(playerStamina >= jumpCost)
+                    {
+                        canJump = true;
+                        playerController.SetCanJump(true);
+                    }
+
                     UpdateStaminaUI(1);
 
                 }
@@ -119,8 +117,6 @@ public class StaminaSadFace : MonoBehaviour
             }
             else 
             {
-                timeSinceLastRegeneration = 0f;
-
                 if (playerStamina <= maxStamina)
                 {
                     if (sprinting && isMoving)
@@ -128,6 +124,11 @@ public class StaminaSadFace : MonoBehaviour
                         playerController.SetCanRun(true);
                         playerStamina -= staminaDrain * Time.deltaTime;
                         UpdateStaminaUI(1);
+                        if (playerStamina < jumpCost)
+                        {
+                            canJump = false;
+                            playerController.SetCanJump(false);
+                        }
                         if (playerStamina <= 0)
                         {
                             playerStamina = 0;

@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private float xRotation;
     private float currentSpeed;
     private bool canRun;
+    private bool canJump;
 
     //What the hell?? --> Created events
     public delegate void JumpAction(); //"delegate" = Function you can subscribe other function to. Will call all functions that have been subscribed to it. 
@@ -56,6 +57,7 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
 
         canRun = true;
+        canJump = true;
     }
 
     private void Sprinting(InputAction.CallbackContext context)
@@ -73,7 +75,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jumping(InputAction.CallbackContext context)
     {
-        if(controller.isGrounded)
+        if(controller.isGrounded && canJump)
         {
             fallVelocity.y = jumpPower;
             onJump?.Invoke();
@@ -132,6 +134,10 @@ public class PlayerController : MonoBehaviour
         {
             currentSpeed = walkSpeed;
         }
+    }
+    public void SetCanJump(bool canJump)
+    {
+        this.canJump = canJump;
     }
 
     public float GetWalkSpeed()
