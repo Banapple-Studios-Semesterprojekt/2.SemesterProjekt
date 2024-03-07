@@ -23,11 +23,12 @@ public class PlayerController : MonoBehaviour
     private Vector3 fallVelocity;
     private float xRotation;
     private float currentSpeed;
+    //bools needed for the stamina script to work
     private bool canRun;
     private bool canJump;
 
-    //What the hell?? --> Created events
-    public delegate void JumpAction(); //"delegate" = Function you can subscribe other function to. Will call all functions that have been subscribed to it. 
+    //Events
+    public delegate void JumpAction(); //"delegate" = Function you can subscribe other functions to. Will call all functions that have been subscribed to it. 
     public event JumpAction onJump;
     public delegate void SprintAction(bool isRunning);
     public event SprintAction onSprint;
@@ -46,7 +47,7 @@ public class PlayerController : MonoBehaviour
         //Referencing objects
         controller = GetComponent<CharacterController>();
 
-        //Subscribing button events to functions
+        //Subscribing button events to functions 
         playerInput.Player.Jump.performed += Jumping;
         playerInput.Player.Sprint.performed += Sprinting;
         playerInput.Player.Sprint.canceled += Sprinting;
@@ -56,6 +57,7 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        //Sets the bools so they are true from the beginning.
         canRun = true;
         canJump = true;
     }
@@ -126,8 +128,13 @@ public class PlayerController : MonoBehaviour
         return cam;
     }
 
+    //Functions that are needed in the Stamina Script
+    //Checks if it's possible for the player to run 
     public void SetCanRun(bool canRun)
     {
+        //Sets the bool of "PlayeController" to the bool of the function.
+        //When the function is called the bool will change depending on the Stamina script.
+        //The bool "canJump" works similarly
         this.canRun = canRun;
 
         if(!canRun)
@@ -135,18 +142,10 @@ public class PlayerController : MonoBehaviour
             currentSpeed = walkSpeed;
         }
     }
+
+    //Checks if the player can jump. 
     public void SetCanJump(bool canJump)
     {
         this.canJump = canJump;
-    }
-
-    public float GetWalkSpeed()
-    {
-        return walkSpeed;
-    }
-
-    public float GetRunSpeed()
-    {
-        return runSpeed;
     }
 }
