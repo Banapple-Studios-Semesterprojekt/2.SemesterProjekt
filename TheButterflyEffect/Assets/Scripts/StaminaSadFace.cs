@@ -16,11 +16,12 @@ public class StaminaSadFace : MonoBehaviour
     [SerializeField] private float jumpCost = 20;
     public bool isMoving;
     public bool sprinting;
+    public bool canJump;
 
     [Header("Stamina regen parameters")]
     [Range(0, 50)][SerializeField] private float staminaDrain;
     [Range(0, 50)][SerializeField] private float staminaRegen;
-    public float delayStamina = 3;
+    //public float delayStamina = 3;
     public float multiplier;
     public bool isRegenerating;
     public float regenTime = 3f;
@@ -39,52 +40,51 @@ public class StaminaSadFace : MonoBehaviour
         StaminaCoroutine = StartCoroutine(Stamina());
     }
 
-    private void OnEnable()
-    {
-        playerController.onSprint += Sprinting;
-        playerController.onJump += Jumping;
-    }
-
-    private void OnDisable()
-    {
-        playerController.onSprint -= Sprinting;
-        playerController.onJump -= Jumping;
-    }
-
-    private void Jumping()
-    {
-        if (playerStamina >= maxStamina * jumpCost / maxStamina)
-            playerStamina -= jumpCost;
-    }
-
-    private void Sprinting(bool isRunning)
-    {
-        CancelInvoke();
-        sprinting = isRunning;
-
-    }
-
     private void Update()
-    {   
+    {
         isMoving = playerCharacterController.velocity.sqrMagnitude > 0;
         isRegenerating = !sprinting ^ (sprinting && !isMoving);
+        canJump = playerStamina >= maxStamina * jumpCost / maxStamina;
 
         if (isRegenerating)
         {
             if (StaminaCoroutine == null)
-            StartCoroutine(Stamina());
+                StartCoroutine(Stamina());
         }
         else
         {
-            if(StaminaCoroutine != null)
-            StopCoroutine(Stamina());
+            if (StaminaCoroutine != null)
+                StopCoroutine(Stamina());
         }
     }
+   
 
-    public void DelayStaminaRegen()
+    private void Jumping()
     {
-        isRegenerating = true;
+        if(canJump && playerCharacterController.isGrounded)
+        StartCoroutine(DelayedJumpAndRegen());
     }
+
+    private void Sprinting(bool isRunning)
+    {
+        sprinting = isRunning;
+
+    }
+
+    private IEnumerator DelayedJumpAndRegen()
+    {
+        canJump = false;
+
+        playerStamina -= jumpCost;
+        UpdateStaminaUI(1);   
+ 
+        yield return new WaitForSeconds(regenTime);
+        
+        DelayStaminaRegen();
+        canJump = true;
+    }
+
+    
 
     IEnumerator Stamina()
     {
@@ -146,6 +146,23 @@ public class StaminaSadFace : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    public void DelayStaminaRegen()
+    {
+        isRegenerating = true;
+    }
+
+    private void OnEnable()
+    {
+        playerController.onSprint += Sprinting;
+        playerController.onJump += Jumping;
+    }
+
+    private void OnDisable()
+    {
+        playerController.onSprint -= Sprinting;
+        playerController.onJump -= Jumping;
     }
 
     void UpdateStaminaUI(int value)

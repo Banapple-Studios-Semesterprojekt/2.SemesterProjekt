@@ -193,10 +193,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1009373174889714102, guid: cbc692c8bf8cc254da1903cc0d768fd2,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1563695838}
-    - targetCorrespondingSourceObject: {fileID: 1009373174889714102, guid: cbc692c8bf8cc254da1903cc0d768fd2,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1563695844}
   m_SourcePrefab: {fileID: 100100000, guid: cbc692c8bf8cc254da1903cc0d768fd2, type: 3}
 --- !u!1 &324463633
@@ -770,30 +766,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 52415230}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1563695838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1563695837}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a94ba8ef820df354fab264073fa86320, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerController: {fileID: 1563695840}
-  playerStamina: 100
-  maxStamina: 100
-  jumpCost: 20
-  sprinting: 1
-  isMoving: 0
-  regenBegun: 0
-  staminaDrain: 50
-  staminaRegen: 16.2
-  delayStaminaRegen: 3
-  staminaProgressUI: {fileID: 1634036150}
-  sliderCanvasGroup: {fileID: 1464535128}
 --- !u!114 &1563695840 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6989748589526615536, guid: cbc692c8bf8cc254da1903cc0d768fd2,
@@ -824,10 +796,8 @@ MonoBehaviour:
   jumpCost: 20
   isMoving: 0
   sprinting: 0
-  jumping: 0
   staminaDrain: 50
   staminaRegen: 10
-  delayStamina: 3
   multiplier: 0
   isRegenerating: 0
   regenTime: 3
