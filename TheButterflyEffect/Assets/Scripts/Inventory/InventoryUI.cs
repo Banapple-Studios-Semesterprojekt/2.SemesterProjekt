@@ -170,6 +170,7 @@ public class InventoryUI : MonoBehaviour
                 StartCoroutine(DropItem(grabbedItem));
                 grabbedItem = null;
                 Destroy(grabbedItemGO);
+                onPlaceItem?.Invoke();
             }
             return true;
         }
