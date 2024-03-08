@@ -2,26 +2,36 @@ using UnityEngine;
 
 public class Floating : MonoBehaviour
 {
-    //Adjust to control the floating speed
+    // Adjust to control the floating speed
     [SerializeField] private float floatSpeed = 1.0f;
-    //Adjust to control the floating height
-    [SerializeField] private float floatHeight = 0.5f;
+
+    // Minimum and maximum values for random floating height
+    [SerializeField] private float minFloatHeight = 0.2f;
+    [SerializeField] private float maxFloatHeight = 1.0f;
 
     private Vector3 initialPosition;
-    
+    private float floatHeight;
+
     // Start is called before the first frame update
     void Start()
     {
-        //Setting the initial position to the objects transform position
+        // Setting the initial position to the object's transform position
         initialPosition = transform.position;
+
+        // Generate a random floating height within the specified range
+        floatHeight = Random.Range(minFloatHeight, maxFloatHeight);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Calculating the new Y position based on a sine wave
-        float newY = initialPosition.y + Mathf.Sin(Time.time * floatSpeed) * floatHeight;
+        // Calculate the float offset based on Perlin noise
+        float floatOffset = Mathf.PerlinNoise(Time.time * floatSpeed, 0) * 2 - 1;
 
-        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+        // Apply the float offset to the initial position
+        Vector3 newPosition = initialPosition + Vector3.up * floatOffset * floatHeight;
+
+        // Update the object's position
+        transform.position = newPosition;
     }
 }
