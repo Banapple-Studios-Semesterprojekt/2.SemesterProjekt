@@ -33,7 +33,7 @@ public class Inventory : Singleton<Inventory>
     {
         playerController.enabled = !playerController.enabled;
         inventoryCanvas.SetActive(!playerController.enabled);
-        GetComponent<Interactor>().enabled = playerController.enabled;
+        //GetComponent<Interactor>().enabled = playerController.enabled;
         Cursor.visible = !playerController.enabled;
         Cursor.lockState = !playerController.enabled ? CursorLockMode.None : CursorLockMode.Locked;
 
@@ -72,7 +72,7 @@ public class Inventory : Singleton<Inventory>
     }
 
     public InventoryItem UpdateItem(InventoryItem item, int index)
-    {
+    {Debug.Log(index);
         if(inventoryItems[index] != null && inventoryItems[index].item != null && inventoryItems[index].item == item.item)
         {
             if((inventoryItems[index].currentStack + item.currentStack) <= item.item.maxStack)
@@ -101,6 +101,11 @@ public class Inventory : Singleton<Inventory>
     {
         inventoryItems[index].item = null;
         inventoryItems[index].currentStack = 0;
+    }
+
+    public int getinventoryCapacity()
+    {
+        return inventoryCapacity;
     }
 
 }

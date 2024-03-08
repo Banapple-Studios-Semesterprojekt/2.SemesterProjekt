@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -9,6 +10,10 @@ using UnityEngine.UI;
 public class InventoryUI : MonoBehaviour
 {
     public InventorySlot[] slots;
+    public InventorySlot[] HotbarSlots;
+    //the parent object for all inventory slots
+    [SerializeField] private Transform slotsParent;
+    [SerializeField] private Transform slotsParentHotbar;
 
     //canvas references
     private PointerEventData pointerData;
@@ -16,34 +21,39 @@ public class InventoryUI : MonoBehaviour
     private GraphicRaycaster raycaster;
 
     //grabbed item properties (the one your holding in the inventory)
+    private InventorySlotType slotType;
     private InventoryItem grabbedItem;
     private GameObject grabbedItemGO;
     private int grabbedItemIndex;
+    private int inventoryCapacity;
 
-    //the parent object for all inventory slots
-    private GameObject inventorySlotsParent;
+    //events
+    public delegate void PlaceItemAction();
+    public event PlaceItemAction onPlaceItem;
+
+    private void Awake()
+    {
+        //Finding all the inventory slots through the parent object
+        slots = slotsParent.Find("Inventory Slots").GetComponentsInChildren<InventorySlot>();
+        HotbarSlots = slotsParentHotbar.Find("Hotbar Slots").GetComponentsInChildren<InventorySlot>();
+    }
 
     private void Start()
     {
         //Subscribing events from Inventory instance
         Inventory.Instance().onAddItem += AddItemEvent;
         Inventory.Instance().onToggleInventory += ToggleInventoryEvent;
-
-        //Finding the parent object of the inventory slots
-        inventorySlotsParent = transform.Find("Inventory UI").gameObject;
-
-        //Finding all the inventory slots through the parent object
-        slots = inventorySlotsParent.transform.Find("Inventory Slots").GetComponentsInChildren<InventorySlot>();
-
         //Finding the event system and graphic raycaster for the canvas
         eventSystem = FindAnyObjectByType<EventSystem>();
         raycaster = transform.GetComponent<GraphicRaycaster>();
+
+        inventoryCapacity = Inventory.Instance().getinventoryCapacity();
 
         //Resetting all slots (might be changed later for saving data purposes)
         ClearAllSlots();
 
         //Setting the UI inventory to invisible
-        inventorySlotsParent.SetActive(false);
+        slotsParent.gameObject.SetActive(false);
     }
     private void Update()
     {
@@ -55,6 +65,7 @@ public class InventoryUI : MonoBehaviour
     #region Events
     private void AddItemEvent(InventoryItem item, int index)
     {
+        slotType = InventorySlotType.InventorySlots;
         SetSpecificSlot(item, index);
     }
     private void ToggleInventoryEvent(bool isActive)
@@ -97,7 +108,17 @@ public class InventoryUI : MonoBehaviour
 
         //Retrieving the clicked inventory slot
         InventorySlot hitSlot = results[0].gameObject.GetComponentInParent<InventorySlot>();
-        grabbedItemIndex = Array.IndexOf(slots, hitSlot);
+        if (slots.Contains(hitSlot))
+        {   
+            grabbedItemIndex = Array.IndexOf(slots, hitSlot);
+            slotType = InventorySlotType.InventorySlots;
+        }
+        else
+        {
+            grabbedItemIndex = Array.IndexOf(HotbarSlots, hitSlot);
+            slotType = InventorySlotType.HotbarSlots;
+        }
+        
 
         //If the clicked slot is occupied and no grabbed object, take the object on mouse, else if clicked empty slot with grabbed item, place it
         TakeOrPlaceItem(hitSlot, true);
@@ -110,8 +131,17 @@ public class InventoryUI : MonoBehaviour
             List<RaycastResult> results = UIRaycasting();
             if(results.Count <= 0) { return; }
             InventorySlot hitSlot = results[0].gameObject.GetComponentInParent<InventorySlot>();
-            grabbedItemIndex = Array.IndexOf(slots, hitSlot);
-            if(hitSlot != null && hitSlot.currentItem != null && hitSlot.currentItem.item != grabbedItem.item) { return; }
+            if (slots.Contains(hitSlot))
+            {
+                grabbedItemIndex = Array.IndexOf(slots, hitSlot);
+                slotType = InventorySlotType.InventorySlots;
+            }
+            else
+            {
+                grabbedItemIndex = Array.IndexOf(HotbarSlots, hitSlot);
+                slotType = InventorySlotType.HotbarSlots;
+            }
+            if (hitSlot != null && hitSlot.currentItem != null && hitSlot.currentItem.item != grabbedItem.item) { return; }
             TakeOrPlaceItem(hitSlot, false);
         }
     }
@@ -158,8 +188,11 @@ public class InventoryUI : MonoBehaviour
             InventoryItem itemInSlot = new InventoryItem(hitSlot.currentItem.item, hitSlot.currentItem.currentStack);
             if(itemInHand.item != itemInSlot.item) 
             {
-                PlaceItem(fullPlace);
-                GrabItem(itemInSlot, itemInHand);
+                if(slotType == InventorySlotType.InventorySlots || (slotType == InventorySlotType.HotbarSlots && grabbedItem.item.itemType == ItemType.Tools))
+                {
+                    PlaceItem(fullPlace);
+                    GrabItem(itemInSlot, itemInHand);
+                }
             }
             else if(itemInSlot.currentStack < itemInSlot.item.maxStack)
             {
@@ -179,13 +212,18 @@ public class InventoryUI : MonoBehaviour
 
     private void PlaceItem(bool fullPlace)
     {
-        if(fullPlace)
+        if (fullPlace)
         {
-            InventoryItem placedItem = Inventory.Instance().UpdateItem(new InventoryItem(grabbedItem.item, grabbedItem.currentStack), grabbedItemIndex);
-            SetSpecificSlot(placedItem, grabbedItemIndex);
-            grabbedItem = null;
-            Destroy(grabbedItemGO);
-            grabbedItemGO = null;
+            if (slotType == InventorySlotType.InventorySlots || (slotType == InventorySlotType.HotbarSlots && grabbedItem.item.itemType == ItemType.Tools))
+            { 
+                int i = slotType == InventorySlotType.InventorySlots ? grabbedItemIndex : grabbedItemIndex + inventoryCapacity - HotbarSlots.Length;
+                InventoryItem placedItem = Inventory.Instance().UpdateItem(new InventoryItem(grabbedItem.item, grabbedItem.currentStack), i);
+                SetSpecificSlot(placedItem, grabbedItemIndex);
+                grabbedItem = null;
+                Destroy(grabbedItemGO);
+                grabbedItemGO = null;
+                onPlaceItem?.Invoke();
+            }
         }
         else
         {
@@ -194,13 +232,18 @@ public class InventoryUI : MonoBehaviour
                 PlaceItem(true);
                 return;
             }
-            bool isOdd = grabbedItem.currentStack % 2 != 0;
-            grabbedItem.currentStack /= 2;
-            InventoryItem placedItem = Inventory.Instance().UpdateItem(new InventoryItem(grabbedItem.item, grabbedItem.currentStack), grabbedItemIndex);
-            SetSpecificSlot(placedItem, grabbedItemIndex);
-            grabbedItem = new InventoryItem(grabbedItem.item, grabbedItem.currentStack);
-            grabbedItem.currentStack += isOdd ? 1 : 0;
+            else
+            {
+                bool isOdd = grabbedItem.currentStack % 2 != 0;
+                grabbedItem.currentStack /= 2;
+                InventoryItem placedItem = Inventory.Instance().UpdateItem(new InventoryItem(grabbedItem.item, grabbedItem.currentStack), grabbedItemIndex);
+                SetSpecificSlot(placedItem, grabbedItemIndex);
+                grabbedItem = new InventoryItem(grabbedItem.item, grabbedItem.currentStack);
+                grabbedItem.currentStack += isOdd ? 1 : 0;
+            }
+            
         }
+        
     }
     private void GrabItem(InventoryItem invItem, InventoryItem exchangeItem)
     {
@@ -214,10 +257,18 @@ public class InventoryUI : MonoBehaviour
         image.color = new Color(0.9f, 0.9f, 0.9f);
         image.raycastTarget = false;
 
-        slots[grabbedItemIndex].SetInventorySlot(exchangeItem == null ? null : exchangeItem);
+        if (slotType == InventorySlotType.InventorySlots)
+        {
+            slots[grabbedItemIndex].SetInventorySlot(exchangeItem == null ? null : exchangeItem);
+        }else if (slotType == InventorySlotType.HotbarSlots)
+        {
+            HotbarSlots[grabbedItemIndex].SetInventorySlot(exchangeItem == null ? null : exchangeItem);
+        }
+        
         if(exchangeItem == null)
         {
-            Inventory.Instance().RemoveItem(grabbedItemIndex);
+            int i = slotType == InventorySlotType.InventorySlots ? grabbedItemIndex : grabbedItemIndex + inventoryCapacity - HotbarSlots.Length;
+            Inventory.Instance().RemoveItem(i);
         }
         print("Instanitate");
     }
@@ -231,11 +282,24 @@ public class InventoryUI : MonoBehaviour
         {
             item.SetInventorySlot(null);
         }
+        foreach (InventorySlot item in HotbarSlots)
+        {
+            item.SetInventorySlot(null);
+        }
     }
 
     public void SetSpecificSlot(InventoryItem item, int index)
     {
-        slots[index].SetInventorySlot(item);
+        if (slotType == InventorySlotType.InventorySlots)
+        {
+            slots[index].SetInventorySlot(item);
+        }
+        else if(slotType == InventorySlotType.HotbarSlots)
+        {
+            Debug.Log(index);
+            HotbarSlots[index].SetInventorySlot(item);
+        }
+        
     }
 
     IEnumerator DropItem(InventoryItem item)
@@ -249,5 +313,13 @@ public class InventoryUI : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
     }
+
+    public InventorySlot[] GetHotbarSlots() { return HotbarSlots; }
     #endregion
+}
+
+public enum InventorySlotType
+{
+    InventorySlots,
+    HotbarSlots
 }

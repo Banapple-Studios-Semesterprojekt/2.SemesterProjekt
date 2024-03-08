@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfa64466ab7c52409c34536fd9588cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemBackground: {fileID: 533822857417361190}
   itemLogo: {fileID: 4894511373510184160}
   itemQuantityText: {fileID: 3022725639814107497}
 --- !u!1 &5752122157074486296
