@@ -13,11 +13,8 @@ public class Inventory : Singleton<Inventory>
     private PlayerController playerController;
 
     public delegate void AddItemAction(InventoryItem item, int index);
-
     public event AddItemAction onAddItem;
-
     public delegate void ToggleInventoryAction(bool isActive);
-
     public event ToggleInventoryAction onToggleInventory;
 
     private void Start()
@@ -30,12 +27,13 @@ public class Inventory : Singleton<Inventory>
         PlayerController.playerInput.Player.Inventory.performed += ToggleInventory;
         playerController = GetComponent<PlayerController>();
     }
-
+  
+    
     private void ToggleInventory(InputAction.CallbackContext context)
     {
         playerController.enabled = !playerController.enabled;
         inventoryCanvas.SetActive(!playerController.enabled);
-        GetComponent<Interactor>().enabled = playerController.enabled;
+        //GetComponent<Interactor>().enabled = playerController.enabled;
         Cursor.visible = !playerController.enabled;
         Cursor.lockState = !playerController.enabled ? CursorLockMode.None : CursorLockMode.Locked;
 
@@ -59,12 +57,12 @@ public class Inventory : Singleton<Inventory>
         int index;
         for (index = 0; index < inventoryItems.Length - 1; index++)
         {
-            if (inventoryItems[index].item == null)
+            if(inventoryItems[index].item == null)
             {
                 break;
             }
         }
-        if (index == inventoryCapacity - 1 && inventoryItems[inventoryCapacity - 1].item != null) { return false; }
+        if(index == inventoryCapacity - 1 && inventoryItems[inventoryCapacity - 1].item != null) { return false; }
         InventoryItem invItem = new InventoryItem(newItem);
         inventoryItems[index] = invItem;
 
@@ -74,10 +72,10 @@ public class Inventory : Singleton<Inventory>
     }
 
     public InventoryItem UpdateItem(InventoryItem item, int index)
-    {
-        if (inventoryItems[index] != null && inventoryItems[index].item != null && inventoryItems[index].item == item.item)
+    {Debug.Log(index);
+        if(inventoryItems[index] != null && inventoryItems[index].item != null && inventoryItems[index].item == item.item)
         {
-            if ((inventoryItems[index].currentStack + item.currentStack) <= item.item.maxStack)
+            if((inventoryItems[index].currentStack + item.currentStack) <= item.item.maxStack)
             {
                 inventoryItems[index].currentStack += item.currentStack;
             }
@@ -104,4 +102,10 @@ public class Inventory : Singleton<Inventory>
         inventoryItems[index].item = null;
         inventoryItems[index].currentStack = 0;
     }
+
+    public int getinventoryCapacity()
+    {
+        return inventoryCapacity;
+    }
+
 }
