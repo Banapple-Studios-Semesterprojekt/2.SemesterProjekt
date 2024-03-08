@@ -186,14 +186,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6092541396549222222, guid: cbc692c8bf8cc254da1903cc0d768fd2,
+        type: 3}
+      propertyPath: sliderCanvasGroup
+      value: 
+      objectReference: {fileID: 1464535128}
+    - target: {fileID: 6092541396549222222, guid: cbc692c8bf8cc254da1903cc0d768fd2,
+        type: 3}
+      propertyPath: staminaProgressUI
+      value: 
+      objectReference: {fileID: 1634036150}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1009373174889714102, guid: cbc692c8bf8cc254da1903cc0d768fd2,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1563695844}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbc692c8bf8cc254da1903cc0d768fd2, type: 3}
 --- !u!1 &324463633
 GameObject:
@@ -760,49 +766,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &1563695837 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1009373174889714102, guid: cbc692c8bf8cc254da1903cc0d768fd2,
-    type: 3}
-  m_PrefabInstance: {fileID: 52415230}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1563695840 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6989748589526615536, guid: cbc692c8bf8cc254da1903cc0d768fd2,
-    type: 3}
-  m_PrefabInstance: {fileID: 52415230}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1563695837}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cbfa26558ac62543960ff7a48907735, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1563695844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1563695837}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30eb26126cd3288499128eb8c24751b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerController: {fileID: 1563695840}
-  playerStamina: 100
-  maxStamina: 100
-  jumpCost: 20
-  isMoving: 0
-  sprinting: 0
-  staminaDrain: 50
-  staminaRegen: 10
-  multiplier: 0
-  isRegenerating: 0
-  regenTime: 3
-  staminaProgressUI: {fileID: 1634036150}
-  sliderCanvasGroup: {fileID: 1464535128}
 --- !u!1 &1578536773
 GameObject:
   m_ObjectHideFlags: 0
