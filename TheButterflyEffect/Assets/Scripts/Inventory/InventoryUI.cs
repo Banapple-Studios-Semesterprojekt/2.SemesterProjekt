@@ -12,11 +12,13 @@ public class InventoryUI : MonoBehaviour
 
     //canvas references
     private PointerEventData pointerData;
+
     private EventSystem eventSystem;
     private GraphicRaycaster raycaster;
 
     //grabbed item properties (the one your holding in the inventory)
     private InventoryItem grabbedItem;
+
     private GameObject grabbedItemGO;
     private int grabbedItemIndex;
 
@@ -45,21 +47,22 @@ public class InventoryUI : MonoBehaviour
         //Setting the UI inventory to invisible
         inventorySlotsParent.SetActive(false);
     }
+
     private void Update()
     {
         UpdateGrabbedItemToMouse();
     }
 
-
-
     #region Events
+
     private void AddItemEvent(InventoryItem item, int index)
     {
         SetSpecificSlot(item, index);
     }
+
     private void ToggleInventoryEvent(bool isActive)
     {
-        if(isActive)
+        if (isActive)
         {
             PlayerController.playerInput.Player.PrimaryAction.performed += InventorySlotInteract;
             PlayerController.playerInput.Player.SecondaryAction.performed += StackSplit;
@@ -70,9 +73,11 @@ public class InventoryUI : MonoBehaviour
             PlayerController.playerInput.Player.SecondaryAction.performed -= StackSplit;
         }
     }
-    #endregion
+
+    #endregion Events
 
     #region UI_Interaction
+
     private void UpdateGrabbedItemToMouse()
     {
         //Making the grabbed item follow the mouse/cursor
@@ -85,15 +90,15 @@ public class InventoryUI : MonoBehaviour
             grabbedItemGO.transform.localScale = Vector3.Lerp(grabbedItemGO.transform.localScale, new Vector2(xScale, yScale), 15 * Time.deltaTime);
         }
     }
+
     private void InventorySlotInteract(InputAction.CallbackContext context)
     {
-    
         //First raycast to any ui graphic, to select an item from the inventory
         List<RaycastResult> results = UIRaycasting();
 
         //Secondly check if mouse is clicking outside the inventory window. If so, throw out item if is grabbed
         bool isGrabbedandDropping = DropItemIfGrabbed(results.ToArray());
-        if(isGrabbedandDropping) { return; }
+        if (isGrabbedandDropping) { return; }
 
         //Retrieving the clicked inventory slot
         InventorySlot hitSlot = results[0].gameObject.GetComponentInParent<InventorySlot>();
@@ -105,13 +110,13 @@ public class InventoryUI : MonoBehaviour
 
     private void StackSplit(InputAction.CallbackContext context)
     {
-        if(grabbedItemGO != null)
+        if (grabbedItemGO != null)
         {
             List<RaycastResult> results = UIRaycasting();
-            if(results.Count <= 0) { return; }
+            if (results.Count <= 0) { return; }
             InventorySlot hitSlot = results[0].gameObject.GetComponentInParent<InventorySlot>();
             grabbedItemIndex = Array.IndexOf(slots, hitSlot);
-            if(hitSlot != null && hitSlot.currentItem != null && hitSlot.currentItem.item != grabbedItem.item) { return; }
+            if (hitSlot != null && hitSlot.currentItem != null && hitSlot.currentItem.item != grabbedItem.item) { return; }
             TakeOrPlaceItem(hitSlot, false);
         }
     }
@@ -126,6 +131,7 @@ public class InventoryUI : MonoBehaviour
 
         return results;
     }
+
     private bool DropItemIfGrabbed(RaycastResult[] results)
     {
         if (results.Length == 0)
@@ -156,20 +162,19 @@ public class InventoryUI : MonoBehaviour
         {
             InventoryItem itemInHand = new InventoryItem(grabbedItem.item, grabbedItem.currentStack);
             InventoryItem itemInSlot = new InventoryItem(hitSlot.currentItem.item, hitSlot.currentItem.currentStack);
-            if(itemInHand.item != itemInSlot.item) 
+            if (itemInHand.item != itemInSlot.item)
             {
                 PlaceItem(fullPlace);
                 GrabItem(itemInSlot, itemInHand);
             }
-            else if(itemInSlot.currentStack < itemInSlot.item.maxStack)
+            else if (itemInSlot.currentStack < itemInSlot.item.maxStack)
             {
                 PlaceItem(fullPlace);
-                if(grabbedItem != null && grabbedItem.currentStack > 0) { return; }
+                if (grabbedItem != null && grabbedItem.currentStack > 0) { return; }
                 grabbedItem = null;
                 Destroy(grabbedItemGO);
                 grabbedItemGO = null;
             }
-
         }
         else if (grabbedItemGO != null && hitSlot != null && hitSlot.currentItem == null)
         {
@@ -179,7 +184,7 @@ public class InventoryUI : MonoBehaviour
 
     private void PlaceItem(bool fullPlace)
     {
-        if(fullPlace)
+        if (fullPlace)
         {
             InventoryItem placedItem = Inventory.Instance().UpdateItem(new InventoryItem(grabbedItem.item, grabbedItem.currentStack), grabbedItemIndex);
             SetSpecificSlot(placedItem, grabbedItemIndex);
@@ -189,7 +194,7 @@ public class InventoryUI : MonoBehaviour
         }
         else
         {
-            if(grabbedItem.currentStack == 1) 
+            if (grabbedItem.currentStack == 1)
             {
                 PlaceItem(true);
                 return;
@@ -202,6 +207,7 @@ public class InventoryUI : MonoBehaviour
             grabbedItem.currentStack += isOdd ? 1 : 0;
         }
     }
+
     private void GrabItem(InventoryItem invItem, InventoryItem exchangeItem)
     {
         grabbedItem = new InventoryItem(invItem.item, invItem.currentStack);
@@ -215,16 +221,17 @@ public class InventoryUI : MonoBehaviour
         image.raycastTarget = false;
 
         slots[grabbedItemIndex].SetInventorySlot(exchangeItem == null ? null : exchangeItem);
-        if(exchangeItem == null)
+        if (exchangeItem == null)
         {
             Inventory.Instance().RemoveItem(grabbedItemIndex);
         }
         print("Instanitate");
     }
 
-    #endregion
+    #endregion UI_Interaction
 
     #region UIInventory_Functionality
+
     public void ClearAllSlots()
     {
         foreach (InventorySlot item in slots)
@@ -238,7 +245,7 @@ public class InventoryUI : MonoBehaviour
         slots[index].SetInventorySlot(item);
     }
 
-    IEnumerator DropItem(InventoryItem item)
+    private IEnumerator DropItem(InventoryItem item)
     {
         int stack = item.currentStack;
         for (int i = 0; i < stack; i++)
@@ -249,5 +256,6 @@ public class InventoryUI : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
     }
-    #endregion
+
+    #endregion UIInventory_Functionality
 }

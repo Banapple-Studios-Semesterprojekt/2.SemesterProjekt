@@ -10,7 +10,7 @@ public class InventorySlot : MonoBehaviour
 
     public InventoryItem SetInventorySlot(InventoryItem invItem)
     {
-        if(invItem == null)
+        if (invItem == null)
         {
             currentItem = null;
             itemLogo.enabled = false;
@@ -26,7 +26,7 @@ public class InventorySlot : MonoBehaviour
 
     public void RemoveInventorySlot()
     {
-        if(currentItem != null)
+        if (currentItem != null)
         {
             currentItem = null;
             itemLogo.sprite = null;

@@ -9,10 +9,12 @@ public class PlayerController : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Transform cam;
+
     private CharacterController controller;
 
     [Header("Player Properties")]
     [SerializeField] private float walkSpeed = 3f;
+
     [SerializeField] private float runSpeed = 6f;
     [SerializeField] private float jumpPower = 3f;
     [SerializeField] private float mouseSensitivity = 1f;
@@ -21,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     //Cached private variables
     private Vector3 move;
+
     private Vector3 fallVelocity;
     private float xRotation;
     private float currentSpeed;
