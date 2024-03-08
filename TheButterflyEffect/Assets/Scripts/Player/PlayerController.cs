@@ -17,12 +17,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpPower = 3f;
     [SerializeField] private float mouseSensitivity = 1f;
     [SerializeField] private float gravity = -9.82f;
+    [SerializeField] private float crouchSpeed = 1.5f;
 
     //Cached private variables
     private Vector3 move;
     private Vector3 fallVelocity;
     private float xRotation;
     private float currentSpeed;
+    private float normalHeight;
+    private float crouchHeight;
+    private bool isCrouching;
     //bools needed for the stamina script to work
     private bool canRun;
     private bool canJump;
@@ -97,7 +101,7 @@ public class PlayerController : MonoBehaviour
         move = transform.forward * moveInput.y + transform.right * moveInput.x;
 
         //Resetting fallvelocity if grounded
-        if(controller.isGrounded && fallVelocity.y < 0)
+        if (controller.isGrounded && fallVelocity.y < 0)
         {
             fallVelocity.y = -2f;
         }
@@ -132,12 +136,12 @@ public class PlayerController : MonoBehaviour
     //Checks if it's possible for the player to run 
     public void SetCanRun(bool canRun)
     {
-        //Sets the bool of "PlayeController" to the bool of the function.
+        //Sets the bool of "PlayerController" to the bool of the function.
         //When the function is called the bool will change depending on the Stamina script.
         //The bool "canJump" works similarly
         this.canRun = canRun;
 
-        if(!canRun)
+        if (!canRun)
         {
             currentSpeed = walkSpeed;
         }

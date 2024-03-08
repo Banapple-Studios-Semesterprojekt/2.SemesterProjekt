@@ -14,7 +14,16 @@ public class Interactor : MonoBehaviour
     private void Start()
     {
         cam = GetComponent<PlayerController>().GetCamera();
+    }
+
+    private void OnEnable()
+    {
         PlayerController.playerInput.Player.PrimaryAction.performed += Interact;
+    }
+
+    private void OnDisable()
+    {
+        PlayerController.playerInput.Player.PrimaryAction.performed -= Interact;
     }
 
     private void Interact(InputAction.CallbackContext context)
