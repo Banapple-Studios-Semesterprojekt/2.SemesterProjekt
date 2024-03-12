@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
         playerInput.Player.Jump.performed += Jumping;
         playerInput.Player.Sprint.performed += Sprinting;
         playerInput.Player.Sprint.canceled += Sprinting;
+        playerInput.Player.Crouch.performed += Crouching;
 
         currentSpeed = walkSpeed;
 
@@ -71,15 +72,15 @@ public class PlayerController : MonoBehaviour
 
     private void Sprinting(InputAction.CallbackContext context)
     {
-        onSprint.Invoke(context.performed);
+        if(isCrouching) { return; }
+        onSprint?.Invoke(context.performed);
         
         if(!canRun)
         {
             return;
         }
         //Tunary operator that is an if-statement in setting the currentSpeed
-        currentSpeed = context.performed ? runSpeed : walkSpeed;
-        
+        currentSpeed = context.performed ? runSpeed : walkSpeed;   
     }
 
     private void Jumping(InputAction.CallbackContext context)
@@ -88,6 +89,16 @@ public class PlayerController : MonoBehaviour
         {
             fallVelocity.y = jumpPower;
             onJump?.Invoke();
+        }
+    }
+    private void Crouching(InputAction.CallbackContext context)
+    {
+        if (context.performed) //when controlkey is pressed
+        {
+            isCrouching = !isCrouching; //toggle
+            controller.height = isCrouching ? 1 : 2;
+            currentSpeed = isCrouching ? crouchSpeed : walkSpeed;
+            Debug.Log("Player is crouching");
         }
     }
 
