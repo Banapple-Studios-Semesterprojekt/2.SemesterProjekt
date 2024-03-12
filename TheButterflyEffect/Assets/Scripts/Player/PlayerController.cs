@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravity = -9.82f;
     [SerializeField] private float crouchSpeed = 1.5f;
 
+    [SerializeField] ScreenShake screenShake;
+
     //Cached private variables
     private Vector3 move;
 
@@ -80,7 +82,9 @@ public class PlayerController : MonoBehaviour
             return;
         }
         //Tunary operator that is an if-statement in setting the currentSpeed
-        currentSpeed = context.performed ? runSpeed : walkSpeed;   
+        currentSpeed = context.performed ? runSpeed : walkSpeed;
+
+        StartCoroutine(screenShake.Shaking());
     }
 
     private void Jumping(InputAction.CallbackContext context)
@@ -166,4 +170,16 @@ public class PlayerController : MonoBehaviour
     {
         this.canJump = canJump;
     }
+
+
+    /*public void ScreenShakeDoneRunning()
+    {
+        if (runSpeed == 0)
+        {
+            StartCoroutine(screenShake.Shaking());
+        } else
+        {
+            StopCoroutine(screenShake.Shaking());
+        }
+    } */
 }
