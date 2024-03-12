@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 public class HeldItem : MonoBehaviour
@@ -9,6 +10,11 @@ public class HeldItem : MonoBehaviour
     private Item[] items;
     private Interactor interactor;
 
+    //Events
+    public delegate void primaryAction();
+    public event primaryAction onPrimaryAction;
+    public delegate void secondaryAction();
+    public event secondaryAction onSecondaryAction;
 
     private void Start()
     {
@@ -22,6 +28,21 @@ public class HeldItem : MonoBehaviour
 
         FindAnyObjectByType<Hotbar>().onSlotSelect += Hotbar_OnSlotSelect;
         Hotbar_OnSlotSelect(null);
+
+        //Subscribe player input; primary and secondary actions (Don't have to do it again for held items).
+        PlayerController.playerInput.Player.PrimaryAction.performed += PrimaryAction;
+        PlayerController.playerInput.Player.SecondaryAction.performed += SecondaryAction;
+    }
+
+
+    private void PrimaryAction(InputAction.CallbackContext obj)
+    {
+        onPrimaryAction?.Invoke();
+    }
+
+    private void SecondaryAction(InputAction.CallbackContext obj)
+    {
+        onSecondaryAction?.Invoke(); //Toggle or hold for glowstick??
     }
 
     private void Hotbar_OnSlotSelect(InventoryItem item)
