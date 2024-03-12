@@ -916,6 +916,7 @@ GameObject:
   - component: {fileID: 3891068537940574893}
   - component: {fileID: 7681085282976284904}
   - component: {fileID: 3327448067141085153}
+  - component: {fileID: 7141889426154982734}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1048,6 +1049,22 @@ MonoBehaviour:
   staminaDrain: 30
   staminaRegen: 10
   regenTime: 2
+--- !u!114 &7141889426154982734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5415498283470065664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d83152d22bac8843bc6ad58f9f92535, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayDistance: 2
+  rayMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &5746175990067591115
 GameObject:
   m_ObjectHideFlags: 0
