@@ -21,6 +21,7 @@ public class HeldItem : MonoBehaviour
         items = itemMechs.ToArray();
 
         FindAnyObjectByType<Hotbar>().onSlotSelect += Hotbar_OnSlotSelect;
+        Hotbar_OnSlotSelect(null);
     }
 
     private void Hotbar_OnSlotSelect(InventoryItem item)

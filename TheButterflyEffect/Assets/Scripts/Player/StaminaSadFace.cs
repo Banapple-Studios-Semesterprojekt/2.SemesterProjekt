@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,36 +7,42 @@ using UnityEngine.UI;
 
 public class StaminaSadFace : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private PlayerController playerController;
+    //[Header("References")]
+    private PlayerController playerController;
     private CharacterController playerCharacterController;
 
     [Header("Stamina parameters")]
-    public float playerStamina = 100;
     [SerializeField] private float maxStamina = 100;
     [SerializeField] private float jumpCost = 20;
-    public bool isMoving;
-    public bool sprinting;
-    public bool canJump;
+    private float playerStamina = 100;
+    private bool isMoving;
+    private bool sprinting;
+    private bool canJump;
 
     [Header("Stamina regen parameters")]
-    [Range(0, 50)][SerializeField] private float staminaDrain;
-    [Range(0, 50)][SerializeField] private float staminaRegen;
-    public bool isRegenerating;
-    public float regenTime = 3f;
+    [Range(0, 50)][SerializeField] private float staminaDrain = 30;
+    [Range(0, 50)][SerializeField] private float staminaRegen = 10;
+    [SerializeField] private float regenTime = 3f;
+    private bool isRegenerating;
 
-    [Header("Stamina UI")]
-    [SerializeField] private Image staminaProgressUI;
-    [SerializeField] private CanvasGroup sliderCanvasGroup;
+    //[Header("Stamina UI")]
+    //[SerializeField] private Image staminaProgressUI;
+    //[SerializeField] private CanvasGroup sliderCanvasGroup;
 
     private Coroutine StaminaCoroutine;
     private Coroutine DelayRegenCoroutine;
 
-    private void Start()
+    public delegate void StaminaUpdateAction(float stamina, bool visible);
+    public event StaminaUpdateAction onStaminaUpdate;
+
+    private void Awake()
     {
         //Get components to references
         playerController = GetComponent<PlayerController>();
         playerCharacterController = GetComponent<CharacterController>();
+    }
+    private void Start()
+    {
 
         //Sets the Stamina() coroutine as the variable "StaminaCoroutine".
         StaminaCoroutine = StartCoroutine(Stamina());
@@ -56,7 +63,7 @@ public class StaminaSadFace : MonoBehaviour
     {
         //Substracts the jump cost from the player's stamina.
         playerStamina -= jumpCost;
-        UpdateStaminaUI(1);
+        onStaminaUpdate?.Invoke(playerStamina / maxStamina, true);
 
         //If the DelayRegenCoroutine is not null, then it will be stopped. Else it is started.
         if (DelayRegenCoroutine != null) { StopCoroutine(DelayRegenCoroutine); }
@@ -119,14 +126,15 @@ public class StaminaSadFace : MonoBehaviour
                         canJump = true;
                         playerController.SetCanJump(true);
                     }
-                    UpdateStaminaUI(1);
+                    onStaminaUpdate?.Invoke(playerStamina / maxStamina, true);
                 }
                 
                 //If the playerStamina reaches maxStamina (or above), "playerStamina = maxStamina" and UI becomes invisible.
                 if (playerStamina >= maxStamina)
                 {
                     playerStamina = maxStamina;
-                    UpdateStaminaUI(0);
+                    onStaminaUpdate?.Invoke(playerStamina / maxStamina, false);
+
                 }
             }
             else //(!isRegenerating)
@@ -137,7 +145,8 @@ public class StaminaSadFace : MonoBehaviour
                     { 
                         playerController.SetCanRun(true);
                         playerStamina -= staminaDrain * Time.deltaTime; //Stamina drain
-                        UpdateStaminaUI(1);
+                        onStaminaUpdate?.Invoke(playerStamina / maxStamina, true);
+
 
                         //If playerStamina is less than jumpCost, they cannot jump.
                         if (playerStamina < jumpCost)
@@ -188,7 +197,7 @@ public class StaminaSadFace : MonoBehaviour
     }
 
     //Updates the UI if the Stamina bar
-    void UpdateStaminaUI(int value)
+    /*void UpdateStaminaUI(int value)
     {
         staminaProgressUI.fillAmount = playerStamina / maxStamina;
         if(value == 0)
@@ -199,5 +208,5 @@ public class StaminaSadFace : MonoBehaviour
         {
             sliderCanvasGroup.alpha = 1;
         }
-    }
+    }*/
 }
