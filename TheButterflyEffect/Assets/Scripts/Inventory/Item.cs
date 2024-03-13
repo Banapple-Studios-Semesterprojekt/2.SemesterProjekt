@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName ="New Item")]
+[CreateAssetMenu(fileName = "New Item")]
 public class Item : ScriptableObject
 {
     public ItemType itemType;
@@ -20,6 +20,7 @@ public class InventoryItem
         this.item = item;
         currentStack = 1;
     }
+
     public InventoryItem(Item item, int currentStack)
     {
         this.item = item;
