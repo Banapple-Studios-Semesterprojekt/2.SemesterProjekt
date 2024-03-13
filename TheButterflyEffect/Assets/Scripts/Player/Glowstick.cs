@@ -1,46 +1,54 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Glowstick : ItemMechanic
 {
     //Bug fixes:
     //When right clicking and then turning on glowstick --> Turns on both lights.
-   
-    private Animator animator;
-    private CharacterController characterController;
+    private Material glowstickMat;
+    private Color litColor;
     private const float maxSpeed = 6;
 
     [SerializeField] private Light pointlight;
     [SerializeField] private Light spotlight;
+    [SerializeField] private bool startOn = false;
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
-        //Getting character controller from parent of glowstick --> main camera --> player
-        characterController = transform.parent.GetComponentInParent<CharacterController>();
+        glowstickMat = GetComponent<Renderer>().material;
+        litColor = glowstickMat.GetColor("_EmissionColor");
 
-        
+        pointlight.enabled = startOn;
+        spotlight.enabled = startOn;
+
+        glowstickMat.SetColor("_EmissionColor", startOn ? litColor : Color.black);
     }
 
     private void Update()
     {
         //calculates velocity, by dividing velocity by "maxSpeed", the value can only be between 0 and 1. 
-        float currentVelocity = characterController.velocity.magnitude / maxSpeed;
+        float currentVelocity = controller.velocity.magnitude / maxSpeed;
         //Finds "GlowstickWalking" layer in animator and sets "weight" (parameter in animator, blend tree) to the currentVelocity.
-        animator.SetLayerWeight(1, currentVelocity);
+
+        animator.SetFloat("Velocity", currentVelocity, 0.125f, Time.deltaTime);
     }
 
     private void Spotlight()
-    {   //Turnary operator
+    {
+        //Turnary operator
         //Sets bool of isPointing to the opposite of what it currently is.
-        animator.SetFloat("State", animator.GetFloat("State") == 0 ? 1 : 0);
-        if(pointlight.enabled || spotlight.enabled)
+        animator.SetBool("isPointing", !animator.GetBool("isPointing"));
+        bool points = animator.GetBool("isPointing");
+        if (pointlight.enabled || spotlight.enabled)
         {   //Only enables light if turned on. 
-            pointlight.enabled = animator.GetFloat("State") == 0;
-            spotlight.enabled = animator.GetFloat("State") == 1;
-        }
-        
+            pointlight.enabled = !points;
+            spotlight.enabled = points;
+            glowstickMat.SetColor("_EmissionColor", points ? Color.black : litColor);
+        }  
     }
 
     private void TurnOn()
@@ -50,11 +58,14 @@ public class Glowstick : ItemMechanic
         {
             pointlight.enabled = false;
             spotlight.enabled = false;
+            glowstickMat.SetColor("_EmissionColor", Color.black);
         }
         else
         {
-            pointlight.enabled = true;
-            spotlight.enabled = true;
+            bool points = animator.GetBool("isPointing");
+            pointlight.enabled = !points;
+            spotlight.enabled = points;
+            glowstickMat.SetColor("_EmissionColor", points ? Color.black : litColor);
         }
 
     }

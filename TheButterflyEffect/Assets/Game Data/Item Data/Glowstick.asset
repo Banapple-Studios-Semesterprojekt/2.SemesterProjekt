@@ -15,5 +15,5 @@ MonoBehaviour:
   itemType: 2
   itemObject: {fileID: 919132149155446097, guid: b9c09c4a0c3a86747810538c68d13772,
     type: 3}
-  itemSprite: {fileID: 21300000, guid: 403e1679acd01c641803b46dfdcdace6, type: 3}
+  itemSprite: {fileID: 21300000, guid: 499efbd5caf92cd419fa4acd801661bb, type: 3}
   maxStack: 1

@@ -4,16 +4,13 @@ using UnityEngine.InputSystem;
 
 public class SwingNet : ItemMechanic
 {
-    private Animator animator;
-    private CharacterController controller;
     private const int maxSpeed = 6;
 
-    void Start()
+    protected override void Awake()
     {
-        animator = GetComponent<Animator>();
-        controller = transform.parent.GetComponentInParent<CharacterController>();
-
+        base.Awake();
     }
+
     private void OnEnable()
     {
         heldItemScript.onPrimaryAction += Swing;
