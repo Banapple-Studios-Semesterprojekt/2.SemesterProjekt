@@ -6,7 +6,7 @@ public class ScreenShake : MonoBehaviour
     //public bool start = false;
     public AnimationCurve curve;
     public float duration = 1.0f;
-    
+
     /*private void Update()
     {
         if (start) //if player stops running then activate screenshake 
@@ -15,7 +15,12 @@ public class ScreenShake : MonoBehaviour
             StartCoroutine(Shaking());
         }
     }*/
-   
+
+    private void Start()
+    {
+        StartCoroutine(Shaking());
+    }
+
     public IEnumerator Shaking()
     {
         float elapsedTime = 0f;
