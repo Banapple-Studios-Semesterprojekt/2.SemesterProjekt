@@ -12,9 +12,8 @@ public class Day_Night_LightControlle : MonoBehaviour
         tm = Inventory.Instance().GetComponentInChildren<Time_controlle>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        gameObject.transform.eulerAngles=new Vector3(((tm.hour * 60 + tm.temptime) / 4)-90,0,0);
+        gameObject.transform.eulerAngles=new Vector3(((tm.hour * 60 + tm.minute) / 4)-90,0,0);
     }
 }
