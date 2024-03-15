@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   butterflyName: Monarch
   description: A famus butterfly
-  modelPrefab: {fileID: 919132149155446097, guid: a8e5e0c5d3f38e043bbe1e5f411a77c4,
+  typeEnglish: 0
+  typeDanish: 0
+  modelPrefab: {fileID: 2285536683331239113, guid: 95696f86348eacb47b1403fe8664a89b,
     type: 3}
-  size: 2
-  pairs:
-  - type: 1
-  type: 0
+  size: 1
+  pairsEnglish:
+  - typeEnglish: 0
+  - typeEnglish: 1
+  pairsDanish: []
