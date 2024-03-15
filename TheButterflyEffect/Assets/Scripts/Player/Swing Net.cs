@@ -4,29 +4,28 @@ using UnityEngine.InputSystem;
 
 public class SwingNet : ItemMechanic
 {
-    private Animator animator;
-    private CharacterController controller;
     private const int maxSpeed = 6;
-    void Start()
+
+    protected override void Awake()
     {
-        animator = GetComponent<Animator>();
-        controller = transform.parent.GetComponentInParent<CharacterController>();
+        base.Awake();
     }
+
     private void OnEnable()
     {
-        PlayerController.playerInput.Player.PrimaryAction.performed += Swing;
+        heldItemScript.onPrimaryAction += Swing;
     }
 
     private void OnDisable()
     {
-        PlayerController.playerInput.Player.PrimaryAction.performed -= Swing;
+        heldItemScript.onPrimaryAction -= Swing;
     }
 
     private void Update()
     {
         animator.SetFloat("Velocity", controller.velocity.magnitude / maxSpeed, 0.125f, Time.deltaTime);
     }
-    private void Swing(InputAction.CallbackContext context)
+    private void Swing()
     {
         animator.SetTrigger("Swing");
     }
