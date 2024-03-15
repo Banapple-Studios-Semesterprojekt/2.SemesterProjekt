@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
         //Tunary operator that is an if-statement in setting the currentSpeed
-        currentSpeed = context.performed ? runSpeed : walkSpeed;   
+        currentSpeed = context.performed ? runSpeed : walkSpeed;
     }
 
     private void Jumping(InputAction.CallbackContext context)
@@ -166,4 +166,16 @@ public class PlayerController : MonoBehaviour
     {
         this.canJump = canJump;
     }
+
+
+    /*public void ScreenShakeDoneRunning()
+    {
+        if (runSpeed == 0)
+        {
+            StartCoroutine(screenShake.Shaking());
+        } else
+        {
+            StopCoroutine(screenShake.Shaking());
+        }
+    } */
 }
