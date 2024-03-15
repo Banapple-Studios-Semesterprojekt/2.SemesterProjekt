@@ -1,26 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
-public class Time_controlle : MonoBehaviour
+public class TimeController : MonoBehaviour
 {
     private TextMeshProUGUI clockText;
     private string minuteText;
     private string hourText;
-    [SerializeField] int updateper = 5;
-    private int updateer=5;
+    [SerializeField] int updateDelay = 5;
+    private int updater=5;
     [SerializeField] float timeSpeed = 1;
     public float minute = 0;
     public int hour = 0;
 
     void Awake()
     {
-        updateer = updateper;
+        updater = updateDelay;
         clockText=gameObject.GetComponent<TextMeshProUGUI>();
     }
 
@@ -35,7 +29,7 @@ public class Time_controlle : MonoBehaviour
         else if(hour<23)
         {
             minute = 0;
-            updateer = updateper;
+            updater = updateDelay;
             hour += 1;
             UpdateClock();
         }
@@ -43,13 +37,13 @@ public class Time_controlle : MonoBehaviour
         {
             minute = 0;
             hour = 0;
-            updateer = updateper;
+            updater = updateDelay;
             UpdateClock();
         }
 
-        if (Mathf.RoundToInt(minute)>=updateer)
+        if (Mathf.RoundToInt(minute)>=updater)
         {
-            updateer += updateper;
+            updater += updateDelay;
             UpdateClock();
         }
     }

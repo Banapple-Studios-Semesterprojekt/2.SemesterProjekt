@@ -12,7 +12,6 @@ public class OpenBreedingStation : MonoBehaviour
     /// <summary>
     /// Event triggered when the breeding station is interacted with.
     /// </summary>
-    public UnityEvent onInteract;
 
     private PlayerController player;
 
