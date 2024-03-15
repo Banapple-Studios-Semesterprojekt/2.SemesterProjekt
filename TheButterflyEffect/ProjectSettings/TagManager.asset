@@ -14,6 +14,7 @@ TagManager:
   - Interactable
   - Inventory
   - Player Body
+  - Ignore Light
   - 
   - 
   - 
