@@ -167,6 +167,11 @@ public class PlayerController : MonoBehaviour
         this.canJump = canJump;
     }
 
+    public float GetRunSpeed()
+    {
+        return runSpeed;
+    }
+
 
     /*public void ScreenShakeDoneRunning()
     {
