@@ -16,6 +16,9 @@ public class HeldItem : MonoBehaviour
     public delegate void secondaryAction();
     public event secondaryAction onSecondaryAction;
 
+    public delegate void HoldItemAction(string type);
+    public event HoldItemAction onHoldItem;
+
     private void Start()
     {
         interactor=GetComponent<Interactor>();
@@ -53,8 +56,13 @@ public class HeldItem : MonoBehaviour
             obj_items[i].SetActive(false);
         }
         interactor.enabled = item == null;
-        if (item == null) { return; }
+        if (item == null) 
+        {
+            onHoldItem?.Invoke(null);
+            return; 
+        }
         int itemIndex = Array.IndexOf(items, item.item);
         obj_items[itemIndex].SetActive(true);
+        onHoldItem?.Invoke(items[itemIndex].name);
     }
 }
