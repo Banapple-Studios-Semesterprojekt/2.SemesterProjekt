@@ -12,7 +12,7 @@ public class ButterflyData : ScriptableObject
     public GameObject modelPrefab; // Reference to the 3D model prefab
 
     public float size;
-
+    public int spawnProbability;
     public PairWithEnglish[] pairsEnglish; // Array to store the English names butterflies that can be paired with
     public PairWithDanish[] pairsDanish; // Array to store the danish names butterflies that can be paired with
 }

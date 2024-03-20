@@ -3,42 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangeNumber
-{
-    public int min;
-    public int max;
-
-    public RangeNumber(int min, int max)
-    {
-        this.min = min;
-        this.max = max;
-    }
-}
-
 public class ButterflySpawner : MonoBehaviour
 {
     public float circleRadius = 5f;
     public float maxButterfliesSpawn;
     public float spawnTime;
-    int whatever = 0;
-
-    Vector3 center;
+    // bliver brugt til at opbevare summen af alle sommerfuglens indivduelle sandsynligheder for at spawne 
+    private int probabilitySum = 0;
+    // bliver brugt til at obevare somerfulgeprfabsnes chance for at spawne
+    public int[] rangeNumber;
+    
+    private Vector3 center;
     public ButterflyData[] butterflyPrefab;
     public List<GameObject> currentButterflies;
-    public RangeNumber[] rangeNumber;
+    
 
     private void Start()
     {
         StartCoroutine(SpawnButteflies());
         center = transform.position;
 
-        rangeNumber= new RangeNumber[butterflyPrefab.Length];
+        // vi køre et for loop der sætter ragnumber og probabiletysum
         for (int i = 0; i < butterflyPrefab.Length; i++)
         {
-            rangeNumber[i] = new RangeNumber(whatever, butterflyPrefab[i].spawnProbability+whatever);
-            whatever += butterflyPrefab[i].spawnProbability;
+            //rangenumber sætter vi til at være lig med sommfulgleprfabens spawnProbability pluds summen af alle forige sommerfugles spawnProbability
+            rangeNumber[i] = butterflyPrefab[i].spawnProbability+ probabilitySum ;
+            // probabilitySum sætter vi til at værer lig med sommerfuglens spawnProbability 
+            probabilitySum += butterflyPrefab[i].spawnProbability;
         }
-
     }
 
     public IEnumerator SpawnButteflies()
@@ -58,19 +50,19 @@ public class ButterflySpawner : MonoBehaviour
             if(currentButterflies.Count < maxButterfliesSpawn)
             {
                 Vector3 spawnPosition = center + new Vector3(Random.Range(-circleRadius, circleRadius), Random.Range(3, 5), Random.Range(-circleRadius, circleRadius));
-                // GameObject currentButterfly = Instantiate(butterflyPrefab[Random.Range(0, butterflyPrefab.Length)].modelPrefab, spawnPosition, Quaternion.identity);
-                //currentButterflies.Add(currentButterfly);
 
-                
-                int r = Random.Range(0, whatever);
-               
+                // vi får et tilfældigt nummer mellem nul og probabilitySum
+                int r = Random.Range(0, probabilitySum);
+
+                // vi kører så et for loop der køre igenem alle butterflyPrefabsne for at finde ud af hvilken sommerfugl vi skal spawne på bagrund
+                // r vi har fået 
                 for (int i = 0; i < butterflyPrefab.Length; i++)
                 {
-                    Debug.Log("rangeNumber[i].max"+ rangeNumber[i].max);
-                    if (rangeNumber[i].max > r)
+                    // vi spøre om rangnumber er stører end r hvis det er spawner vi den representative sommerfugl og stopper loppet
+                    // hvis ikke køre vi vider til det næste prefab og tjekker igen
+                    if (rangeNumber[i] > r)
                     {
                         GameObject currentButterfly = Instantiate(butterflyPrefab[i].modelPrefab, spawnPosition, Quaternion.identity);
-                       
                         currentButterflies.Add(currentButterfly);
                         break;
                     }
