@@ -20,7 +20,7 @@ public class ButterflySpawner : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(SpawnButteflies());
+        StartCoroutine(SpawnButterflies());
         center = transform.position;
 
         // vi køre et for loop der sætter ragnumber og probabiletysum
@@ -33,7 +33,7 @@ public class ButterflySpawner : MonoBehaviour
         }
     }
 
-    public IEnumerator SpawnButteflies()
+    public IEnumerator SpawnButterflies()
     {
         while(true)
         {

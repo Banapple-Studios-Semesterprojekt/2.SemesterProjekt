@@ -13,6 +13,7 @@ public class ButterflyData : ScriptableObject
 
     public float size;
     public int spawnProbability;
+
     public PairWithEnglish[] pairsEnglish; // Array to store the English names butterflies that can be paired with
     public PairWithDanish[] pairsDanish; // Array to store the danish names butterflies that can be paired with
 }
