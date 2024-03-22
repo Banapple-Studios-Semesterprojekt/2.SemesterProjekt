@@ -439,6 +439,7 @@ MonoBehaviour:
   circleRadius: 5
   maxButterfliesSpawn: 10
   spawnTime: 1
+  rangeNumber: 
   butterflyPrefab:
   - {fileID: 11400000, guid: 4a39db68be450d74690f2a175b05df5b, type: 2}
   - {fileID: 11400000, guid: 49b96b82d8d632246b498f275960a861, type: 2}
@@ -3028,6 +3029,74 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1612241948}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1687982176
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: f94b8c67d8dc3ca4d992971006dd288d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.360525
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f94b8c67d8dc3ca4d992971006dd288d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0000009536743
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f94b8c67d8dc3ca4d992971006dd288d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.7045116
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f94b8c67d8dc3ca4d992971006dd288d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f94b8c67d8dc3ca4d992971006dd288d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f94b8c67d8dc3ca4d992971006dd288d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f94b8c67d8dc3ca4d992971006dd288d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f94b8c67d8dc3ca4d992971006dd288d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f94b8c67d8dc3ca4d992971006dd288d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f94b8c67d8dc3ca4d992971006dd288d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f94b8c67d8dc3ca4d992971006dd288d,
+        type: 3}
+      propertyPath: m_Name
+      value: BrownNormalShroom
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f94b8c67d8dc3ca4d992971006dd288d, type: 3}
 --- !u!4 &1724325024 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8402192020399817176, guid: e2578a8ae2f5b0840a1777de6bfde68c,
@@ -4136,3 +4205,4 @@ SceneRoots:
   - {fileID: 1326686100}
   - {fileID: 1122524783}
   - {fileID: 176412515}
+  - {fileID: 1687982176}
