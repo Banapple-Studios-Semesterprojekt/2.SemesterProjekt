@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92a36265d15f8604bb8b6d90f24ab964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updateper: 10
+  updateDelay: 5
   timeSpeed: 15
   minute: 0
   hour: 6
