@@ -12,6 +12,8 @@ public class Floating : MonoBehaviour
     private Vector3 initialPosition;
     private float floatHeight;
 
+    private float randomStart;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,13 +22,15 @@ public class Floating : MonoBehaviour
 
         // Generate a random floating height within the specified range
         floatHeight = Random.Range(minFloatHeight, maxFloatHeight);
+
+        randomStart = Random.Range(0, 1000);
     }
 
     // Update is called once per frame
     void Update()
     {
         // Calculate the float offset based on Perlin noise
-        float floatOffset = Mathf.PerlinNoise(Time.time * floatSpeed, 0) * 2 - 1;
+        float floatOffset = Mathf.PerlinNoise((Time.time + randomStart) * floatSpeed, 0) * 2 - 1;
 
         // Apply the float offset to the initial position
         Vector3 newPosition = initialPosition + Vector3.up * floatOffset * floatHeight;
