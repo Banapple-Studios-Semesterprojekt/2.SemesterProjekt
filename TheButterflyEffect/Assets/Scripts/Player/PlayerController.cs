@@ -1,5 +1,3 @@
-using System;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float mouseSensitivity = 1f;
     [SerializeField] private float gravity = -9.82f;
     [SerializeField] private float crouchSpeed = 1.5f;
+    [SerializeField] private float crouchYPos = -0.5f;
 
     //Cached private variables
     private Vector3 move;
@@ -39,6 +38,8 @@ public class PlayerController : MonoBehaviour
     public event JumpAction onJump;
     public delegate void SprintAction(bool isRunning);
     public event SprintAction onSprint;
+    public delegate void CrouchAction(bool isCrouching);
+    public event SprintAction onCrouch;
 
 
     private void Awake()
@@ -100,6 +101,7 @@ public class PlayerController : MonoBehaviour
             currentSpeed = isCrouching ? crouchSpeed : walkSpeed;
             Debug.Log("Player is crouching");
         }
+        onCrouch?.Invoke(isCrouching);
     }
 
     private void Update()
@@ -139,6 +141,10 @@ public class PlayerController : MonoBehaviour
         cam.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         //Setting player bodys yRotation
         transform.Rotate(Vector3.up * lookInput.x * mouseSensitivity);
+
+        //Setting the correct local camera position when crouching
+        Vector3 targetPos = isCrouching ? new Vector3(0f, isCrouching ? crouchYPos : 0f, 0.2f) : Vector3.zero;
+        cam.localPosition = Vector3.Lerp(cam.localPosition, targetPos, 10f * Time.deltaTime);
     }
 
     public Transform GetCamera()
@@ -167,15 +173,8 @@ public class PlayerController : MonoBehaviour
         this.canJump = canJump;
     }
 
-
-    /*public void ScreenShakeDoneRunning()
+    public float GetRunSpeed()
     {
-        if (runSpeed == 0)
-        {
-            StartCoroutine(screenShake.Shaking());
-        } else
-        {
-            StopCoroutine(screenShake.Shaking());
-        }
-    } */
+        return runSpeed;
+    }
 }

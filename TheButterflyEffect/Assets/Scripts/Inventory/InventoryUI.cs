@@ -90,10 +90,12 @@ public class InventoryUI : MonoBehaviour
         if (grabbedItemGO != null)
         {
             Vector2 mouseDelta = PlayerController.playerInput.Player.CameraLook.ReadValue<Vector2>();
-            float xScale = 1 + Mathf.Abs(mouseDelta.x) * 0.7f; xScale = Mathf.Clamp(xScale, 1f, 3f);
-            float yScale = 1 + Mathf.Abs(mouseDelta.y) * 0.7f; yScale = Mathf.Clamp(yScale, 1f, 3f);
+            float xScale = 1 + Mathf.Abs(mouseDelta.x) * 0.1f; xScale = Mathf.Clamp(xScale, 1f, 3f);
+            float yScale = 1 + Mathf.Abs(mouseDelta.y) * 0.1f; yScale = Mathf.Clamp(yScale, 1f, 3f);
+            float zRot = mouseDelta.x * 4; zRot = Mathf.Clamp(zRot, -20f, 20f);
             grabbedItemGO.transform.position = Mouse.current.position.value;
-            grabbedItemGO.transform.localScale = Vector3.Lerp(grabbedItemGO.transform.localScale, new Vector2(xScale, yScale), 15 * Time.deltaTime);
+            grabbedItemGO.transform.localScale = Vector3.Lerp(grabbedItemGO.transform.localScale, new Vector2(xScale, yScale), 10 * Time.deltaTime);
+            grabbedItemGO.transform.localRotation = Quaternion.Euler(0f, 0f, zRot);
         }
     }
     private void InventorySlotInteract(InputAction.CallbackContext context)

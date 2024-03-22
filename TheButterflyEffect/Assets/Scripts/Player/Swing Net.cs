@@ -1,15 +1,9 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-
 
 public class SwingNet : ItemMechanic
-{
-    private const int maxSpeed = 6;
-
-    protected override void Awake()
-    {
-        base.Awake();
-    }
+{   
+    public delegate void SwingAction();
+    public event SwingAction onSwing;
 
     private void OnEnable()
     {
@@ -21,13 +15,9 @@ public class SwingNet : ItemMechanic
         heldItemScript.onPrimaryAction -= Swing;
     }
 
-    private void Update()
-    {
-        animator.SetFloat("Velocity", controller.velocity.magnitude / maxSpeed, 0.125f, Time.deltaTime);
-    }
     private void Swing()
     {
-        animator.SetTrigger("Swing");
+        onSwing?.Invoke();
     }
 
     private void OnTriggerEnter(Collider other)
