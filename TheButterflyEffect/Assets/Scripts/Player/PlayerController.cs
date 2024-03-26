@@ -72,15 +72,27 @@ public class PlayerController : MonoBehaviour
 
     private void Sprinting(InputAction.CallbackContext context)
     {
-        if(isCrouching) { return; }
-        onSprint?.Invoke(context.performed);
+
         
         if(!canRun)
         {
             return;
         }
+             onSprint?.Invoke(context.performed);
+        
+        if (isCrouching && canRun && context.performed)
+        {
+            isCrouching = false; //toggle
+            controller.height = 2;
+        }
+        if (!isCrouching)
+        {
+            currentSpeed = context.performed ? runSpeed : walkSpeed;
+        }
+           
+    
         //Tunary operator that is an if-statement in setting the currentSpeed
-        currentSpeed = context.performed ? runSpeed : walkSpeed;
+       
     }
 
     private void Jumping(InputAction.CallbackContext context)
@@ -95,6 +107,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed) //when controlkey is pressed
         {
+            onSprint?.Invoke(false);
             isCrouching = !isCrouching; //toggle
             controller.height = isCrouching ? 1 : 2;
             currentSpeed = isCrouching ? crouchSpeed : walkSpeed;
@@ -154,10 +167,11 @@ public class PlayerController : MonoBehaviour
         //When the function is called the bool will change depending on the Stamina script.
         //The bool "canJump" works similarly
         this.canRun = canRun;
-
+       
         if (!canRun)
         {
-            currentSpeed = walkSpeed;
+           currentSpeed = isCrouching ? crouchSpeed : walkSpeed;
+           onSprint?.Invoke(false);
         }
     }
 

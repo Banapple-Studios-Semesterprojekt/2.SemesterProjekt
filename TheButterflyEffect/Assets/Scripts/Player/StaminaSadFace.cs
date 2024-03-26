@@ -87,14 +87,19 @@ public class StaminaSadFace : MonoBehaviour
     private void Sprinting(bool isRunning)
     {
         //Sets the bool "sprinting" from Stamina script = the bool isRunning which becomes true when Lshift has been pressed.
+       
+        
         sprinting = isRunning;
-        if(!isRunning && !isRegenerating)
-        {
-            //If "DelayRegenCoroutine" is not null, then it will be stopped, else it will start.
-            //"DelayRegenCoroutine" monitors the "DelayRegenerating()" coroutine. 
-            if(DelayRegenCoroutine != null) { StopCoroutine(DelayRegenCoroutine); }
-            DelayRegenCoroutine = StartCoroutine(DelayRegenerating());         
-        }
+         
+        
+        if(!isRunning && !isRegenerating){
+              //If "DelayRegenCoroutine" is not null, then it will be stopped, else it will start.
+              //"DelayRegenCoroutine" monitors the "DelayRegenerating()" coroutine. 
+              if(DelayRegenCoroutine != null) { StopCoroutine(DelayRegenCoroutine); }
+              DelayRegenCoroutine = StartCoroutine(DelayRegenerating());         
+         }
+        
+       
     }
 
     //Coroutine that delays regeneration
@@ -117,6 +122,7 @@ public class StaminaSadFace : MonoBehaviour
                 //Checks all the conditions for when the player should start to regenerate.
                 if ((!sprinting) || (sprinting && !isMoving) || (playerStamina < maxStamina && sprinting) || canJump)
                 {
+
                     playerController.SetCanRun(true);
                     playerStamina += staminaRegen * Time.deltaTime; //Stamina regenerates
 
@@ -158,14 +164,16 @@ public class StaminaSadFace : MonoBehaviour
                         //If playerStamina is less than 0, they cannot run/sprint
                         if (playerStamina <= 0)
                         {
+                         
                             playerStamina = 0;
                             sprinting = false;
                             playerController.SetCanRun(false);
                             
                             //This prevents from instant regeneration when playerStamina is less than 0 and sprinting is false. 
                             //Because sprinting is being set to true, it is as if the player is running -> isRegenerating is never set to true.
-                            if (playerStamina <= 0 && !sprinting)
-                            {    
+                            if (playerStamina >0 && !sprinting)
+                            {
+                              
                                 sprinting = true;
                             }
                         }
