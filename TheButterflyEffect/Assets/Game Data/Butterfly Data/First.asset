@@ -18,7 +18,8 @@ MonoBehaviour:
   typeDanish: 0
   modelPrefab: {fileID: 2285536683331239113, guid: 95696f86348eacb47b1403fe8664a89b,
     type: 3}
-  size: 1
+  size: 10
+  spawnProbability: 5
   pairsEnglish:
   - typeEnglish: 0
   - typeEnglish: 1
