@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7012452640115181214}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.11987305, y: -0.39232817, z: 0.051651318, w: 0.910517}
+  m_LocalRotation: {x: -0.11987759, y: -0.392324, z: 0.051653087, w: 0.91051817}
   m_LocalPosition: {x: 518.8636, y: 1.596, z: 509.20856}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -45,7 +45,7 @@ SkinnedMeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7012452640115181214}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 2
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcbd63f004c2aba449d43625d05d4bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 4bcdba415b33bb54d9dd0b1596d4681b, type: 2}
+  item: {fileID: 11400000, guid: 4a39db68be450d74690f2a175b05df5b, type: 2}
   canTake: 0
 --- !u!114 &275777711957972179
 MonoBehaviour:

@@ -62,7 +62,7 @@ public class ButterflySpawner : MonoBehaviour
                     // hvis ikke køre vi vider til det næste prefab og tjekker igen
                     if (rangeNumber[i] > r)
                     {
-                        GameObject currentButterfly = Instantiate(butterflyPrefab[i].modelPrefab, spawnPosition, Quaternion.identity);
+                        GameObject currentButterfly = Instantiate(butterflyPrefab[i].itemObject, spawnPosition, Quaternion.identity);
                         currentButterflies.Add(currentButterfly);
                         break;
                     }

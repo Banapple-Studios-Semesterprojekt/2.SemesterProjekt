@@ -12,12 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06c8d9de77ff3ea498209cbe35c37df3, type: 3}
   m_Name: Leaf
   m_EditorClassIdentifier: 
+  itemType: 0
+  itemObject: {fileID: 669734854031319290, guid: e20faaaace066ea4890890973aecaff7,
+    type: 3}
+  itemSprite: {fileID: 21300000, guid: f28eb8d6dbda395438563a98bd9a2aa2, type: 3}
+  maxStack: 1
   butterflyName: Admiral
   description: A butterfly
   typeEnglish: 2
   typeDanish: 2
-  modelPrefab: {fileID: 669734854031319290, guid: e20faaaace066ea4890890973aecaff7,
-    type: 3}
   size: 1
   spawnProbability: 25
   pairsEnglish:

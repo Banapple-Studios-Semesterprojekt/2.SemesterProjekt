@@ -1,64 +1,105 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.UI;
 public class Interactor : MonoBehaviour
 {
-    private RaycastHit hit;
     private Transform cam;
+    [SerializeField] private Image interactIcon;
+    [SerializeField] private float i_Distance = 2f;
+    [SerializeField] private LayerMask i_Mask;
+    [SerializeField] private Vector2 normalSize = Vector2.one * 20, highlightSize = Vector2.one * 30;
+    [SerializeField] private float highlightSmooth = 10f;
+    public bool canRaycast = true;
 
-    [Header("Raycast Settings")]
-    [SerializeField] private float rayDistance = 2f;
+    private RaycastHit hit;
+    private Ray ray;
+    private bool hitInteractable = false;
 
-    [SerializeField] private LayerMask rayMask;
+    private Interactable interactable;
 
-    private Interactable currentInteractable;
+    private void Interact_performed(InputAction.CallbackContext obj)
+    {
+        Interact();
+    }
 
-    private void Start()
+    void Start()
     {
         PlayerController playerController = GetComponent<PlayerController>();
         if (playerController != null)
         {
             cam = playerController.GetCamera();
         }
-        else
-        {
-            Debug.LogError("PlayerController component not found!");
-        }
-    }
-
-    private void OnEnable()
-    {
-        PlayerController.playerInput.Player.PrimaryAction.performed += Interact;
-    }
-
-    private void OnDisable()
-    {
-        PlayerController.playerInput.Player.PrimaryAction.performed -= Interact;
-    }
-
-    private void Interact(InputAction.CallbackContext context)
-    {
-        if (currentInteractable != null)
-        {
-            currentInteractable.onInteract?.Invoke();
-        }
     }
 
     private void Update()
     {
-        UpdateRaycast();
+        UpdateInteractor();
     }
 
-    private void UpdateRaycast()
+    private void UpdateInteractor()
     {
-        Ray ray = new Ray(cam.position, cam.forward);
-        if (Physics.Raycast(ray, out hit, rayDistance, rayMask, QueryTriggerInteraction.Ignore) && hit.transform.GetComponent<Interactable>())
+        ray = new(cam.position, cam.forward);
+        if (Physics.Raycast(ray, out hit, i_Distance, i_Mask, QueryTriggerInteraction.Ignore) && canRaycast)
         {
-            currentInteractable = hit.transform.GetComponent<Interactable>();
+            bool canInteract = hit.transform.TryGetComponent(out interactable);
+            if (canInteract)
+            {
+                if (!hitInteractable)
+                {
+                    StopAllCoroutines();
+                    StartCoroutine(SetInteractIcon(true));
+                    hitInteractable = true;
+                }
+            }
         }
-        else
+        else if (interactable != null)
         {
-            currentInteractable = null;
+            interactable = null;
+            if (hitInteractable)
+            {
+                StopAllCoroutines();
+                StartCoroutine(SetInteractIcon(false));
+                hitInteractable = false;
+            }
         }
+    }
+
+    private void Interact()
+    {
+        if (interactable != null)
+        {
+            interactable.onInteract?.Invoke();
+            Debug.Log("Interacted with: " + interactable.gameObject.name);
+        }
+    }
+
+    private IEnumerator SetInteractIcon(bool isVisible)
+    {
+        Debug.Log(isVisible ? "Icon Visible" : "Icon Faded");
+
+        RectTransform rect = interactIcon.GetComponent<RectTransform>();
+        Vector2 desiredSize = isVisible ? highlightSize : normalSize;
+        Color desiredColor = isVisible ? new Color(1, 1, 1, 1) : new Color(1f, 1f, 1f, 1f / 255f);
+        while (Mathf.Abs(rect.sizeDelta.x - desiredSize.x) > 0.01f)
+        {
+            rect.sizeDelta = Vector2.Lerp(rect.sizeDelta, desiredSize, highlightSmooth * Time.deltaTime);
+            interactIcon.color = Color.Lerp(interactIcon.color, desiredColor, highlightSmooth * Time.deltaTime);
+            yield return null;
+        }
+
+        rect.sizeDelta = desiredSize;
+        interactIcon.color = desiredColor;
+    }
+
+    private void OnEnable()
+    {
+        PlayerController.playerInput.Player.PrimaryAction.performed += Interact_performed;
+    }
+
+
+    private void OnDisable()
+    {
+        PlayerController.playerInput.Player.PrimaryAction.performed -= Interact_performed;
     }
 }

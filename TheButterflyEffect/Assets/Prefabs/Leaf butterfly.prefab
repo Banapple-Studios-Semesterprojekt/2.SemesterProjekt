@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3580305539255391957}
   - component: {fileID: 5824648792634235578}
   - component: {fileID: 4420362812763453710}
+  - component: {fileID: 1318778837069789105}
   m_Layer: 6
   m_Name: Leaf butterfly
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 669734854031319290}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.89757323, y: 0.36193684, z: 0.095761485, w: 0.23279567}
+  m_LocalRotation: {x: -0.8975726, y: 0.3619391, z: 0.09575806, w: 0.23279606}
   m_LocalPosition: {x: 516.22455, y: 1.855, z: 510.85492}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -145,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcbd63f004c2aba449d43625d05d4bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 4bcdba415b33bb54d9dd0b1596d4681b, type: 2}
+  item: {fileID: 11400000, guid: 2dc5d65c45c617947a93874a1bc6f292, type: 2}
   canTake: 0
 --- !u!114 &4420362812763453710
 MonoBehaviour:
@@ -174,3 +175,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1318778837069789105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669734854031319290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7cfb59c4faf8c844a3fb18e187c540d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatSpeed: 1
+  minFloatHeight: 0.2
+  maxFloatHeight: 1

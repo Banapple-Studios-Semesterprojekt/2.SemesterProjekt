@@ -21,7 +21,7 @@ public class HeldItem : MonoBehaviour
 
     private void Start()
     {
-        interactor=GetComponent<Interactor>();
+        interactor = GetComponent<Interactor>();
         List<Item> itemMechs = new List<Item>();
         foreach (GameObject obj in obj_items)
         {
@@ -55,7 +55,7 @@ public class HeldItem : MonoBehaviour
             if (item != null && items[i] == item.item) { continue; }
             obj_items[i].SetActive(false);
         }
-        interactor.enabled = item == null;
+        interactor.canRaycast = item == null;
         if (item == null) 
         {
             onHoldItem?.Invoke(null);
