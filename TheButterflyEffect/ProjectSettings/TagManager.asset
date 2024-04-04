@@ -11,9 +11,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Interactable
+  - Inventory
+  - Player Body
+  - Ignore Light
   - 
   - 
   - 

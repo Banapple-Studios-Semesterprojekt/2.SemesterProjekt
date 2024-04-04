@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06c8d9de77ff3ea498209cbe35c37df3, type: 3}
+  m_Name: Monarch
+  m_EditorClassIdentifier: 
+  butterflyName: Monarch
+  description: A famus butterfly
+  typeEnglish: 0
+  typeDanish: 0
+  modelPrefab: {fileID: 7012452640115181214, guid: efb677d4fe94a794ca2173be025c52b5,
+    type: 3}
+  size: 1
+  spawnProbability: 100
+  pairsEnglish:
+  - typeEnglish: 0
+  - typeEnglish: 1
+  pairsDanish: []
