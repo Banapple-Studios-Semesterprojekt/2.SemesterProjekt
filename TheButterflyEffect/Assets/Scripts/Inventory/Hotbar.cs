@@ -66,6 +66,11 @@ public class Hotbar : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        onSlotSelect?.Invoke(null);
+    }
+
     public InventoryItem GetSelectedItem()
     {
         return hotbarSlots[selectedSlot].currentItem;

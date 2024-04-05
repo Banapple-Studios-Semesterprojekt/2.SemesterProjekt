@@ -13,6 +13,7 @@ public class StaminaUI : MonoBehaviour
 
     public void SetStaminaBar(float stamina, bool visible)
     {
+        if(!enabled) return;
         staminaBar.fillAmount = stamina;
         staminaBarParent.SetActive(visible);
     }

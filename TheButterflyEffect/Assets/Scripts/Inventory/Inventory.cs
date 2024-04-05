@@ -121,4 +121,53 @@ public class Inventory : Singleton<Inventory>
         return inventoryCapacity;
     }
 
+    public void isDead(bool d)
+    {
+        if (d)
+        {
+            PlayerController.playerInput.Player.Inventory.performed -= ToggleInventory;
+            inventoryCanvas.SetActive(false);
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            PlayerController.playerInput.Player.Inventory.performed += ToggleInventory;
+        }
+    }
+
+    public void Empty_inventory(bool dropinven, bool Empty_Hotbar)
+    {
+        int invensize;
+        if (Empty_Hotbar)
+        {
+            invensize = 15;
+        }
+        else
+        {
+            invensize = 12;
+        }
+        InventoryUI invenUI = GetComponentInChildren<InventoryUI>();
+        for (int i = 0; i < invensize; i++)
+        {
+            if (dropinven)
+            {
+                for (int j = 0; j < inventoryItems[i].currentStack; j++)
+                {
+                    GameObject droppedItem = Instantiate(inventoryItems[i].item.itemObject, transform.position + Vector3.up * 0.5f + transform.forward, Quaternion.identity);
+                    droppedItem.name = inventoryItems[i].item.name;
+                }
+            }
+            RemoveItem(i);
+            if (!Empty_Hotbar)
+            {
+                invenUI.slots[i].RemoveInventorySlot();
+            }
+        }
+        if (Empty_Hotbar)
+        {
+            invenUI.ClearAllSlots();
+        }
+    }
+
 }

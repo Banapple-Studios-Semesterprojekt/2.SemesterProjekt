@@ -164,7 +164,7 @@ public class StaminaSadFace : MonoBehaviour
                             
                             //This prevents from instant regeneration when playerStamina is less than 0 and sprinting is false. 
                             //Because sprinting is being set to true, it is as if the player is running -> isRegenerating is never set to true.
-                            if (playerStamina <= 0 && !sprinting)
+                            if (playerStamina > 0 && !sprinting)
                             {    
                                 sprinting = true;
                             }
@@ -186,6 +186,8 @@ public class StaminaSadFace : MonoBehaviour
 
     private void OnEnable()
     {
+        playerStamina = 100f;
+
         playerController.onSprint += Sprinting;
         playerController.onJump += Jumping;
     }

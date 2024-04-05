@@ -38,4 +38,9 @@ public class Floating : MonoBehaviour
         // Update the object's position
         transform.position = newPosition;
     }
+
+    private void OnEnable()
+    {
+        initialPosition = transform.position;
+    }
 }

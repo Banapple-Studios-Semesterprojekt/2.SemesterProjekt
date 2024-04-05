@@ -12,6 +12,9 @@ public class TimeController : MonoBehaviour
     public float minute = 0;
     public int hour = 0;
 
+    public delegate void NightAction(bool isNight);
+    public event NightAction onNight;
+
     void Awake()
     {
         updater = updateDelay;
@@ -46,6 +49,17 @@ public class TimeController : MonoBehaviour
         {
             updater += updateDelay;
             UpdateClock();
+        }
+
+        //Events for spawning enemies
+        if (hour == 20)
+        {
+            onNight?.Invoke(true);
+        }
+
+        if (hour == 6)
+        {
+            onNight?.Invoke(false);
         }
     }
     void UpdateClock()

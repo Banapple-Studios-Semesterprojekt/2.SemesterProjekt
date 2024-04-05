@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Singleton<PlayerController>
 {
     public static PlayerInput playerInput;
 
@@ -73,15 +73,21 @@ public class PlayerController : MonoBehaviour
 
     private void Sprinting(InputAction.CallbackContext context)
     {
-        if(isCrouching) { return; }
-        onSprint?.Invoke(context.performed);
-        
-        if(!canRun)
+        if (!canRun)
         {
             return;
         }
-        //Tunary operator that is an if-statement in setting the currentSpeed
-        currentSpeed = context.performed ? runSpeed : walkSpeed;
+        onSprint?.Invoke(context.performed);
+
+        if (isCrouching && canRun && context.performed)
+        {
+            isCrouching = false; //toggle
+            controller.height = 2;
+        }
+        if (!isCrouching)
+        {
+            currentSpeed = context.performed ? runSpeed : walkSpeed;
+        }
     }
 
     private void Jumping(InputAction.CallbackContext context)
@@ -96,12 +102,12 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed) //when controlkey is pressed
         {
+            onSprint?.Invoke(false);
             isCrouching = !isCrouching; //toggle
             controller.height = isCrouching ? 1 : 2;
             currentSpeed = isCrouching ? crouchSpeed : walkSpeed;
             Debug.Log("Player is crouching");
         }
-        onCrouch?.Invoke(isCrouching);
     }
 
     private void Update()
@@ -176,5 +182,13 @@ public class PlayerController : MonoBehaviour
     public float GetRunSpeed()
     {
         return runSpeed;
+    }
+
+    public void ResetPlayer()
+    {
+        isCrouching = false;
+        controller.height = 2;
+        currentSpeed = walkSpeed;
+        onSprint?.Invoke(false);
     }
 }

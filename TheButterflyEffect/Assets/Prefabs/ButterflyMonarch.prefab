@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7683498197775762808}
   - component: {fileID: 275777711957972179}
   - component: {fileID: 1131497047787991224}
-  - component: {fileID: 6392998023527401440}
+  - component: {fileID: 8234622397180649730}
   m_Layer: 6
   m_Name: ButterflyMonarch
   m_TagString: Untagged
@@ -174,7 +174,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6392998023527401440
+--- !u!114 &8234622397180649730
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -183,9 +183,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7012452640115181214}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7cfb59c4faf8c844a3fb18e187c540d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2eb82fcee0b17d3418d97e041a7389cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fleeSpeed: 2
+  fleeRadius: 7
   floatSpeed: 1
   minFloatHeight: 0.2
   maxFloatHeight: 1
