@@ -4,7 +4,7 @@ using UnityEngine;
 public class ButterflyData : Item
 {
     public string butterflyName;
-    public string description;
+    [TextArea(5, 10)] public string description;
 
     public ButterflyTypeEnglish typeEnglish; //Enum for the English butterfly type
     public ButterflyTypeDanish typeDanish; //Enum for the Danish butterfly type
@@ -13,9 +13,6 @@ public class ButterflyData : Item
 
     public float size;
     public int spawnProbability;
-
-    public PairWithEnglish[] pairsEnglish; // Array to store the English names butterflies that can be paired with
-    public PairWithDanish[] pairsDanish; // Array to store the danish names butterflies that can be paired with
 }
 
 [System.Serializable]

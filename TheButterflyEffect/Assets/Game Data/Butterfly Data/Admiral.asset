@@ -15,15 +15,11 @@ MonoBehaviour:
   itemType: 0
   itemObject: {fileID: 4495880325807851004, guid: c7077de750eab7f4586d73902069905c,
     type: 3}
-  itemSprite: {fileID: 21300000, guid: d099b6e437302b84abd0b48422491e9e, type: 3}
+  itemSprite: {fileID: 21300000, guid: c9ee857a6a70d644f831d562737258eb, type: 3}
   maxStack: 1
-  butterflyName: Admiral
+  butterflyName: Admiral Butterfly
   description: A butterfly
   typeEnglish: 1
   typeDanish: 1
   size: 1
   spawnProbability: 25
-  pairsEnglish:
-  - typeEnglish: 0
-  - typeEnglish: 1
-  pairsDanish: []

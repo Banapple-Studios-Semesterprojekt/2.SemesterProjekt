@@ -15,15 +15,11 @@ MonoBehaviour:
   itemType: 0
   itemObject: {fileID: 7012452640115181214, guid: efb677d4fe94a794ca2173be025c52b5,
     type: 3}
-  itemSprite: {fileID: 21300000, guid: 5f60253ce42f6544787a930ae9c48153, type: 3}
+  itemSprite: {fileID: 21300000, guid: ef4b232f30945a44b9c1b394e27a2054, type: 3}
   maxStack: 1
-  butterflyName: Monarch
+  butterflyName: Monarch Butterfly
   description: A famus butterfly
   typeEnglish: 0
   typeDanish: 0
   size: 1
   spawnProbability: 100
-  pairsEnglish:
-  - typeEnglish: 0
-  - typeEnglish: 1
-  pairsDanish: []

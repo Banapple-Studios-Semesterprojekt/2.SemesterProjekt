@@ -2,15 +2,17 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour
 {
     private NavMeshAgent agent;
     private Transform target;
     private Animator animator;
 
-    public int NoOfRays;
-    public float visionAngle;
-    public float visionRadius;
+    [SerializeField] private int NoOfRays = 10;
+    [SerializeField] private float visionAngle = 1;
+    [SerializeField] private float visionRadius = 75;
+    [SerializeField] private LayerMask rayMask;
 
     // Start is called before the first frame update
     void Start()
@@ -66,9 +68,9 @@ public class Enemy : MonoBehaviour
         Vector3 origin = transform.position + Vector3.up * 0.5f; //Starting point of raycast.
 
         //Draws raycasts so they can be visualized
-        Debug.DrawRay(origin, direction, Color.red, 0.1f);
+        Debug.DrawRay(origin, direction * visionRadius, Color.red, 0.1f);
 
-        if (Physics.Raycast(origin, direction, out hit, visionRadius))
+        if (Physics.Raycast(origin, direction, out hit, visionRadius, rayMask, QueryTriggerInteraction.Ignore))
         {
             print("hit = " + hit.transform.name);
             if (hit.transform.CompareTag("Player"))
@@ -87,6 +89,7 @@ public class Enemy : MonoBehaviour
         {
             //Respawn function needs to be here. Function is probably in player script.
             //PlayerController.Instance(). <respawn-function-name> -- Thomas
+            collider.GetComponent<Death_and_respawn>().Die();
             Debug.Log("Player dies");
         }
     }

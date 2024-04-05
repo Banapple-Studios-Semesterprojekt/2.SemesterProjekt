@@ -7,6 +7,7 @@ public class Inventory : Singleton<Inventory>
     [SerializeField] private InventoryItem[] inventoryItems;
     [SerializeField] private int inventoryCapacity = 10;
     [SerializeField] private GameObject inventoryCanvas;
+    [SerializeField] private GameObject buttons;
 
     private PlayerController playerController;
 
@@ -31,6 +32,7 @@ public class Inventory : Singleton<Inventory>
     {
         playerController.enabled = !playerController.enabled;
         SetInventory(!playerController.enabled);
+        buttons.SetActive(!playerController.enabled);
     }
 
     public void SetInventory(bool isActive)
