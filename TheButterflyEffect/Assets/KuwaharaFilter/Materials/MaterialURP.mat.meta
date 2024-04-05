@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1557b9ec07a8964449bc4ff9e3250ee2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 162009
+  packageName: 'Kuwahara Filter [BuiltIn/URP]'
+  packageVersion: 1.1.3
+  assetPath: Assets/KuwaharaFilter/Materials/MaterialURP.mat
+  uploadId: 610974

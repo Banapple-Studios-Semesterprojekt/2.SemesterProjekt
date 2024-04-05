@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ef1779fd879c1b5439d62451d6e66a41
+ComputeShaderImporter:
+  externalObjects: {}
+  currentAPIMask: 4
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 162009
+  packageName: 'Kuwahara Filter [BuiltIn/URP]'
+  packageVersion: 1.1.3
+  assetPath: Assets/KuwaharaFilter/Resources/Shaders/ComputerAnisotropicKuwahara.compute
+  uploadId: 610974

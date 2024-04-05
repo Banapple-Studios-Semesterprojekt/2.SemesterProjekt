@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7ce79f78d5d1d584cb96ee0bccbddc63
+ComputeShaderImporter:
+  externalObjects: {}
+  currentAPIMask: 4
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 162009
+  packageName: 'Kuwahara Filter [BuiltIn/URP]'
+  packageVersion: 1.1.3
+  assetPath: Assets/KuwaharaFilter/Resources/Shaders/ComputerLineIntegralConvolution.compute
+  uploadId: 610974

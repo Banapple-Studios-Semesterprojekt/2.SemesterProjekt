@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 92b7589d80912424496b577ecadeab6f
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 162009
+  packageName: 'Kuwahara Filter [BuiltIn/URP]'
+  packageVersion: 1.1.3
+  assetPath: Assets/KuwaharaFilter/Documentation/Documentation.html
+  uploadId: 610974
