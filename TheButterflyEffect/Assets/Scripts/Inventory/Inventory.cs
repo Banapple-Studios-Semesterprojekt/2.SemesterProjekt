@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Linq;
 using System;
 
 public class Inventory : Singleton<Inventory>
@@ -32,12 +30,19 @@ public class Inventory : Singleton<Inventory>
     private void ToggleInventory(InputAction.CallbackContext context)
     {
         playerController.enabled = !playerController.enabled;
-        inventoryCanvas.SetActive(!playerController.enabled);
-        //GetComponent<Interactor>().enabled = playerController.enabled;
-        Cursor.visible = !playerController.enabled;
-        Cursor.lockState = !playerController.enabled ? CursorLockMode.None : CursorLockMode.Locked;
+        SetInventory(!playerController.enabled);
+    }
 
-        onToggleInventory?.Invoke(!playerController.enabled);
+    public void SetInventory(bool isActive)
+    {
+        print("Sat inventory ui to: " + isActive);
+        playerController.enabled = !isActive;
+        inventoryCanvas.SetActive(isActive);
+
+        Cursor.visible = isActive;
+        Cursor.lockState = isActive ? CursorLockMode.None : CursorLockMode.Locked;
+
+        onToggleInventory?.Invoke(isActive);
     }
 
     public bool AddItem(Item newItem)
@@ -52,8 +57,6 @@ public class Inventory : Singleton<Inventory>
                 return true;
             }
         }
-
-        //This for-loop makes NO sense... It works fine when the inspector isn't looking at the array, but not when it does...
         int index;
         for (index = 0; index < inventoryItems.Length - 1; index++)
         {
@@ -63,6 +66,17 @@ public class Inventory : Singleton<Inventory>
             }
         }
         if(index == inventoryCapacity - 1 && inventoryItems[inventoryCapacity - 1].item != null) { return false; }
+        if(newItem.itemType == ItemType.Tools)
+        {
+            for (index = inventoryCapacity - 3; index < inventoryCapacity; index++)
+            {
+                if (inventoryItems[index].item == null)
+                {
+                    break;
+                }
+            }
+        }
+        Debug.Log(index);
         InventoryItem invItem = new InventoryItem(newItem);
         inventoryItems[index] = invItem;
 
@@ -72,7 +86,7 @@ public class Inventory : Singleton<Inventory>
     }
 
     public InventoryItem UpdateItem(InventoryItem item, int index)
-    {Debug.Log(index);
+    {
         if(inventoryItems[index] != null && inventoryItems[index].item != null && inventoryItems[index].item == item.item)
         {
             if((inventoryItems[index].currentStack + item.currentStack) <= item.item.maxStack)
@@ -92,7 +106,6 @@ public class Inventory : Singleton<Inventory>
             inventoryItems[index].item = item.item;
             inventoryItems[index].currentStack = item.currentStack;
             //inventoryItems[index] = item;
-            Debug.Log(item.item.itemType);
         }
         return inventoryItems[index];
     }

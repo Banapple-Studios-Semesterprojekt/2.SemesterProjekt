@@ -20,7 +20,7 @@ public class ButterflyController : MonoBehaviour
         }
 
         // Instantiate the butterfly model
-        GameObject butterflyModel = Instantiate(butterflyData.modelPrefab, transform.position, Quaternion.identity);
+        GameObject butterflyModel = Instantiate(butterflyData.itemObject, transform.position, Quaternion.identity);
 
         // Set the parent of the butterfly model to the controller's GameObject
         butterflyModel.transform.parent = transform;

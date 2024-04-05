@@ -13,6 +13,9 @@ public class InventorySlot : MonoBehaviour
 
     public InventoryItem currentItem { get; private set; }
 
+    public delegate void SlotChangeAction();
+    public event SlotChangeAction onSlotChange;
+
     private void Start()
     {
         normalColor = itemBackground.color;
@@ -32,6 +35,7 @@ public class InventorySlot : MonoBehaviour
         itemLogo.enabled = true;
         itemLogo.sprite = invItem.item.itemSprite;
         itemQuantityText.text = invItem.currentStack <= 1 ? string.Empty : invItem.currentStack.ToString();
+        onSlotChange?.Invoke();
         return currentItem;
     }
 
@@ -41,7 +45,9 @@ public class InventorySlot : MonoBehaviour
         {
             currentItem = null;
             itemLogo.sprite = null;
+            itemLogo.enabled = false;
             itemQuantityText.text = string.Empty;
+            onSlotChange?.Invoke();
         }
     }
 

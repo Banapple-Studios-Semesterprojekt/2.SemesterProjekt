@@ -16,9 +16,12 @@ public class HeldItem : MonoBehaviour
     public delegate void secondaryAction();
     public event secondaryAction onSecondaryAction;
 
+    public delegate void HoldItemAction(string type);
+    public event HoldItemAction onHoldItem;
+
     private void Start()
     {
-        interactor=GetComponent<Interactor>();
+        interactor = GetComponent<Interactor>();
         List<Item> itemMechs = new List<Item>();
         foreach (GameObject obj in obj_items)
         {
@@ -52,9 +55,14 @@ public class HeldItem : MonoBehaviour
             if (item != null && items[i] == item.item) { continue; }
             obj_items[i].SetActive(false);
         }
-        interactor.enabled = item == null;
-        if (item == null) { return; }
+        interactor.canRaycast = item == null;
+        if (item == null) 
+        {
+            onHoldItem?.Invoke(null);
+            return; 
+        }
         int itemIndex = Array.IndexOf(items, item.item);
         obj_items[itemIndex].SetActive(true);
+        onHoldItem?.Invoke(items[itemIndex].name);
     }
 }

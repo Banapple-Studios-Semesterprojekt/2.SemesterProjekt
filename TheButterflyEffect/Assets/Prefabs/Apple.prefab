@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 310d5e78b4177454ab94aa7f6c6fb58d, type: 2}
+  canTake: 1
 --- !u!54 &6618350916520665434
 Rigidbody:
   m_ObjectHideFlags: 0

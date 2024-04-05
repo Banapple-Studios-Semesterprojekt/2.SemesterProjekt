@@ -16,6 +16,7 @@ public class TimeController : MonoBehaviour
     {
         updater = updateDelay;
         clockText=gameObject.GetComponent<TextMeshProUGUI>();
+        UpdateClock();
     }
 
     // Update is called once per frame
@@ -59,9 +60,13 @@ public class TimeController : MonoBehaviour
         {
             hourText = "0" + hour;
         }
-        else { hourText = "" + hour; }
+        else 
+        { 
+            hourText = "" + (hour >= 13 ? hour - 12 : hour); 
+        }
 
-        clockText.text = hourText + minuteText;
+        string usTime = (hour >= 0 && hour <= 13) ? "AM" : "PM";
+        clockText.text = hourText + minuteText + $" {usTime}";
     }
 
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Butterfly", menuName = "Butterfly")]
-public class ButterflyData : ScriptableObject
+public class ButterflyData : Item
 {
     public string butterflyName;
     public string description;
@@ -9,7 +9,7 @@ public class ButterflyData : ScriptableObject
     public ButterflyTypeEnglish typeEnglish; //Enum for the English butterfly type
     public ButterflyTypeDanish typeDanish; //Enum for the Danish butterfly type
 
-    public GameObject modelPrefab; // Reference to the 3D model prefab
+    //public GameObject modelPrefab; // Reference to the 3D model prefab
 
     public float size;
     public int spawnProbability;

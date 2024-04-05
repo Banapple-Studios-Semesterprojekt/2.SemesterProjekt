@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Glowstick
   m_EditorClassIdentifier: 
   itemType: 2
-  itemObject: {fileID: 919132149155446097, guid: b9c09c4a0c3a86747810538c68d13772,
+  itemObject: {fileID: 8538018272925877695, guid: 2ddc5840aabbea74daff01232b7983f8,
     type: 3}
   itemSprite: {fileID: 21300000, guid: 499efbd5caf92cd419fa4acd801661bb, type: 3}
   maxStack: 1

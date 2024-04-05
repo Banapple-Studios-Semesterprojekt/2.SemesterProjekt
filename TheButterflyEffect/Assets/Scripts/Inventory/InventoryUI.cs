@@ -10,11 +10,13 @@ using UnityEngine.UI;
 public class InventoryUI : MonoBehaviour
 {
     public InventorySlot[] slots;
-    public InventorySlot[] HotbarSlots;
+    public InventorySlot[] hotbarSlots;
+    public InventorySlot[] breedingSlots;
     //the parent object for all inventory slots
     [SerializeField] private Transform slotsParent;
     [SerializeField] private Transform slotsParentHotbar;
-
+    [SerializeField] private Transform slotsParentBreeding;
+    [SerializeField] private GameObject breedingUI;
     //canvas references
     private PointerEventData pointerData;
     private EventSystem eventSystem;
@@ -35,7 +37,8 @@ public class InventoryUI : MonoBehaviour
     {
         //Finding all the inventory slots through the parent object
         slots = slotsParent.Find("Inventory Slots").GetComponentsInChildren<InventorySlot>();
-        HotbarSlots = slotsParentHotbar.Find("Hotbar Slots").GetComponentsInChildren<InventorySlot>();
+        hotbarSlots = slotsParentHotbar.Find("Hotbar Slots").GetComponentsInChildren<InventorySlot>();
+        breedingSlots = slotsParentBreeding.GetComponentsInChildren<InventorySlot>();
     }
 
     private void Start()
@@ -60,13 +63,12 @@ public class InventoryUI : MonoBehaviour
         UpdateGrabbedItemToMouse();
     }
 
-
-
     #region Events
     private void AddItemEvent(InventoryItem item, int index)
     {
         slotType = InventorySlotType.InventorySlots;
         SetSpecificSlot(item, index);
+        onPlaceItem?.Invoke();
     }
     private void ToggleInventoryEvent(bool isActive)
     {
@@ -79,6 +81,17 @@ public class InventoryUI : MonoBehaviour
         {
             PlayerController.playerInput.Player.PrimaryAction.performed -= InventorySlotInteract;
             PlayerController.playerInput.Player.SecondaryAction.performed -= StackSplit;
+
+            breedingUI.SetActive(false);
+
+            if(grabbedItemGO)
+            {
+                Inventory.Instance().RemoveItem(grabbedItemIndex);
+                StartCoroutine(DropItem(grabbedItem));
+                grabbedItem = null;
+                Destroy(grabbedItemGO);
+                onPlaceItem?.Invoke();
+            }
         }
     }
     #endregion
@@ -90,15 +103,16 @@ public class InventoryUI : MonoBehaviour
         if (grabbedItemGO != null)
         {
             Vector2 mouseDelta = PlayerController.playerInput.Player.CameraLook.ReadValue<Vector2>();
-            float xScale = 1 + Mathf.Abs(mouseDelta.x) * 0.7f; xScale = Mathf.Clamp(xScale, 1f, 3f);
-            float yScale = 1 + Mathf.Abs(mouseDelta.y) * 0.7f; yScale = Mathf.Clamp(yScale, 1f, 3f);
+            float xScale = 1 + Mathf.Abs(mouseDelta.x) * 0.1f; xScale = Mathf.Clamp(xScale, 1f, 3f);
+            float yScale = 1 + Mathf.Abs(mouseDelta.y) * 0.1f; yScale = Mathf.Clamp(yScale, 1f, 3f);
+            float zRot = mouseDelta.x * 4; zRot = Mathf.Clamp(zRot, -20f, 20f);
             grabbedItemGO.transform.position = Mouse.current.position.value;
-            grabbedItemGO.transform.localScale = Vector3.Lerp(grabbedItemGO.transform.localScale, new Vector2(xScale, yScale), 15 * Time.deltaTime);
+            grabbedItemGO.transform.localScale = Vector3.Lerp(grabbedItemGO.transform.localScale, new Vector2(xScale, yScale), 10 * Time.deltaTime);
+            grabbedItemGO.transform.localRotation = Quaternion.Euler(0f, 0f, zRot);
         }
     }
     private void InventorySlotInteract(InputAction.CallbackContext context)
     {
-    
         //First raycast to any ui graphic, to select an item from the inventory
         List<RaycastResult> results = UIRaycasting();
 
@@ -108,17 +122,7 @@ public class InventoryUI : MonoBehaviour
 
         //Retrieving the clicked inventory slot
         InventorySlot hitSlot = results[0].gameObject.GetComponentInParent<InventorySlot>();
-        if (slots.Contains(hitSlot))
-        {   
-            grabbedItemIndex = Array.IndexOf(slots, hitSlot);
-            slotType = InventorySlotType.InventorySlots;
-        }
-        else
-        {
-            grabbedItemIndex = Array.IndexOf(HotbarSlots, hitSlot);
-            slotType = InventorySlotType.HotbarSlots;
-        }
-        
+        SetSlotType(hitSlot);
 
         //If the clicked slot is occupied and no grabbed object, take the object on mouse, else if clicked empty slot with grabbed item, place it
         TakeOrPlaceItem(hitSlot, true);
@@ -131,18 +135,28 @@ public class InventoryUI : MonoBehaviour
             List<RaycastResult> results = UIRaycasting();
             if(results.Count <= 0) { return; }
             InventorySlot hitSlot = results[0].gameObject.GetComponentInParent<InventorySlot>();
-            if (slots.Contains(hitSlot))
-            {
-                grabbedItemIndex = Array.IndexOf(slots, hitSlot);
-                slotType = InventorySlotType.InventorySlots;
-            }
-            else
-            {
-                grabbedItemIndex = Array.IndexOf(HotbarSlots, hitSlot);
-                slotType = InventorySlotType.HotbarSlots;
-            }
+            SetSlotType(hitSlot);
             if (hitSlot != null && hitSlot.currentItem != null && hitSlot.currentItem.item != grabbedItem.item) { return; }
             TakeOrPlaceItem(hitSlot, false);
+        }
+    }
+
+    private void SetSlotType(InventorySlot hitSlot)
+    {
+        if (slots.Contains(hitSlot))
+        {
+            grabbedItemIndex = Array.IndexOf(slots, hitSlot);
+            slotType = InventorySlotType.InventorySlots;
+        }
+        else if (hotbarSlots.Contains(hitSlot))
+        {
+            grabbedItemIndex = Array.IndexOf(hotbarSlots, hitSlot);
+            slotType = InventorySlotType.HotbarSlots;
+        }
+        else if (breedingSlots.Contains(hitSlot))
+        {
+            grabbedItemIndex = Array.IndexOf(breedingSlots, hitSlot);
+            slotType = InventorySlotType.BreedingSlots;
         }
     }
 
@@ -189,7 +203,7 @@ public class InventoryUI : MonoBehaviour
             InventoryItem itemInSlot = new InventoryItem(hitSlot.currentItem.item, hitSlot.currentItem.currentStack);
             if(itemInHand.item != itemInSlot.item) 
             {
-                if(slotType == InventorySlotType.InventorySlots || (slotType == InventorySlotType.HotbarSlots && grabbedItem.item.itemType == ItemType.Tools))
+                if(slotType == InventorySlotType.InventorySlots || slotType == InventorySlotType.BreedingSlots || (slotType == InventorySlotType.HotbarSlots && grabbedItem.item.itemType == ItemType.Tools))
                 {
                     PlaceItem(fullPlace);
                     GrabItem(itemInSlot, itemInHand);
@@ -215,11 +229,14 @@ public class InventoryUI : MonoBehaviour
     {
         if (fullPlace)
         {
-            if (slotType == InventorySlotType.InventorySlots || (slotType == InventorySlotType.HotbarSlots && grabbedItem.item.itemType == ItemType.Tools))
+            if (slotType == InventorySlotType.InventorySlots || slotType == InventorySlotType.BreedingSlots || (slotType == InventorySlotType.HotbarSlots && grabbedItem.item.itemType == ItemType.Tools))
             { 
-                int i = slotType == InventorySlotType.InventorySlots ? grabbedItemIndex : grabbedItemIndex + inventoryCapacity - HotbarSlots.Length;
-                InventoryItem placedItem = Inventory.Instance().UpdateItem(new InventoryItem(grabbedItem.item, grabbedItem.currentStack), i);
-                SetSpecificSlot(placedItem, grabbedItemIndex);
+                int i = (slotType == InventorySlotType.InventorySlots || slotType == InventorySlotType.BreedingSlots) ? grabbedItemIndex : grabbedItemIndex + inventoryCapacity - hotbarSlots.Length;
+                if(slotType != InventorySlotType.BreedingSlots)
+                {
+                    InventoryItem placedItem = Inventory.Instance().UpdateItem(new InventoryItem(grabbedItem.item, grabbedItem.currentStack), i);
+                }
+                SetSpecificSlot(grabbedItem, grabbedItemIndex);
                 grabbedItem = null;
                 Destroy(grabbedItemGO);
                 grabbedItemGO = null;
@@ -248,6 +265,12 @@ public class InventoryUI : MonoBehaviour
     }
     private void GrabItem(InventoryItem invItem, InventoryItem exchangeItem)
     {
+        if(invItem == null)
+        {
+            Debug.LogError("No Invetory Item To Grab!");
+            return;
+        }
+
         grabbedItem = new InventoryItem(invItem.item, invItem.currentStack);
         grabbedItemGO = new GameObject("Grabbed Item Icon");
 
@@ -260,15 +283,20 @@ public class InventoryUI : MonoBehaviour
 
         if (slotType == InventorySlotType.InventorySlots)
         {
-            slots[grabbedItemIndex].SetInventorySlot(exchangeItem == null ? null : exchangeItem);
-        }else if (slotType == InventorySlotType.HotbarSlots)
+            slots[grabbedItemIndex].SetInventorySlot(exchangeItem);
+        }
+        else if (slotType == InventorySlotType.HotbarSlots)
         {
-            HotbarSlots[grabbedItemIndex].SetInventorySlot(exchangeItem == null ? null : exchangeItem);
+            hotbarSlots[grabbedItemIndex].SetInventorySlot(exchangeItem);
+        }
+        else if(slotType == InventorySlotType.BreedingSlots)
+        {
+            breedingSlots[grabbedItemIndex].SetInventorySlot(exchangeItem);
         }
         
-        if(exchangeItem == null)
+        if(exchangeItem == null && slotType != InventorySlotType.BreedingSlots)
         {
-            int i = slotType == InventorySlotType.InventorySlots ? grabbedItemIndex : grabbedItemIndex + inventoryCapacity - HotbarSlots.Length;
+            int i = slotType == InventorySlotType.InventorySlots ? grabbedItemIndex : grabbedItemIndex + inventoryCapacity - hotbarSlots.Length;
             Inventory.Instance().RemoveItem(i);
         }
         print("Instanitate");
@@ -283,7 +311,12 @@ public class InventoryUI : MonoBehaviour
         {
             item.SetInventorySlot(null);
         }
-        foreach (InventorySlot item in HotbarSlots)
+        foreach (InventorySlot item in hotbarSlots)
+        {
+            item.SetInventorySlot(null);
+        }
+
+        foreach (InventorySlot item in breedingSlots)
         {
             item.SetInventorySlot(null);
         }
@@ -293,14 +326,18 @@ public class InventoryUI : MonoBehaviour
     {
         if (slotType == InventorySlotType.InventorySlots)
         {
+            if(index > 11) { hotbarSlots[index - inventoryCapacity + 3].SetInventorySlot(item); return; }
             slots[index].SetInventorySlot(item);
         }
         else if(slotType == InventorySlotType.HotbarSlots)
         {
             Debug.Log(index);
-            HotbarSlots[index].SetInventorySlot(item);
+            hotbarSlots[index].SetInventorySlot(item);
         }
-        
+        else if(slotType == InventorySlotType.BreedingSlots)
+        {
+            breedingSlots[index].SetInventorySlot(item);
+        }
     }
 
     IEnumerator DropItem(InventoryItem item)
@@ -315,12 +352,13 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public InventorySlot[] GetHotbarSlots() { return HotbarSlots; }
+    public InventorySlot[] GetHotbarSlots() { return hotbarSlots; }
     #endregion
 }
 
 public enum InventorySlotType
 {
     InventorySlots,
-    HotbarSlots
+    HotbarSlots,
+    BreedingSlots
 }

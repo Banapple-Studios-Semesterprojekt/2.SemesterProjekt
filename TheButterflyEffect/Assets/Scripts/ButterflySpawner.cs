@@ -27,7 +27,7 @@ public class ButterflySpawner : MonoBehaviour
         for (int i = 0; i < butterflyPrefab.Length; i++)
         {
             //rangenumber sætter vi til at være lig med sommfulgleprfabens spawnProbability pluds summen af alle forige sommerfugles spawnProbability
-            rangeNumber[i] = butterflyPrefab[i].spawnProbability+ probabilitySum ;
+            rangeNumber[i] = butterflyPrefab[i].spawnProbability + probabilitySum;
             // probabilitySum sætter vi til at værer lig med sommerfuglens spawnProbability 
             probabilitySum += butterflyPrefab[i].spawnProbability;
         }
@@ -49,7 +49,7 @@ public class ButterflySpawner : MonoBehaviour
 
             if(currentButterflies.Count < maxButterfliesSpawn)
             {
-                Vector3 spawnPosition = center + new Vector3(Random.Range(-circleRadius, circleRadius), Random.Range(3, 5), Random.Range(-circleRadius, circleRadius));
+                Vector3 spawnPosition = center + new Vector3(Random.Range(-circleRadius, circleRadius), Random.Range(1.5f, 3f), Random.Range(-circleRadius, circleRadius));
 
                 // vi får et tilfældigt nummer mellem nul og probabilitySum
                 int r = Random.Range(0, probabilitySum);
@@ -62,7 +62,7 @@ public class ButterflySpawner : MonoBehaviour
                     // hvis ikke køre vi vider til det næste prefab og tjekker igen
                     if (rangeNumber[i] > r)
                     {
-                        GameObject currentButterfly = Instantiate(butterflyPrefab[i].modelPrefab, spawnPosition, Quaternion.identity);
+                        GameObject currentButterfly = Instantiate(butterflyPrefab[i].itemObject, spawnPosition, Quaternion.identity);
                         currentButterflies.Add(currentButterfly);
                         break;
                     }
