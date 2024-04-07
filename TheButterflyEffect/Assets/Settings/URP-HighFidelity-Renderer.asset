@@ -112,9 +112,9 @@ MonoBehaviour:
   m_Active: 1
   Settings:
     GaussRadius: 5
-    GaussSigma: 8
+    GaussSigma: 2.82
     KuwaharaAlpha: 1
-    KuwaharaRadius: 2
-    KuwaharaQ: 8
+    KuwaharaRadius: 3
+    KuwaharaQ: 13
     ResolutionScale: 1
     RenderPassEvent: 550

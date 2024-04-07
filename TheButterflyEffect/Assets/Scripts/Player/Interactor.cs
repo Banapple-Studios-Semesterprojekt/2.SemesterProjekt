@@ -53,7 +53,7 @@ public class Interactor : MonoBehaviour
                 }
             }
         }
-        else if (interactable != null)
+        else
         {
             interactable = null;
             if (hitInteractable)
@@ -61,6 +61,7 @@ public class Interactor : MonoBehaviour
                 StopAllCoroutines();
                 StartCoroutine(SetInteractIcon(false));
                 hitInteractable = false;
+                Debug.Log("Not hitting interactable");
             }
         }
     }
@@ -70,14 +71,11 @@ public class Interactor : MonoBehaviour
         if (interactable != null)
         {
             interactable.onInteract?.Invoke();
-            Debug.Log("Interacted with: " + interactable.gameObject.name);
         }
     }
 
     private IEnumerator SetInteractIcon(bool isVisible)
     {
-        Debug.Log(isVisible ? "Icon Visible" : "Icon Faded");
-
         RectTransform rect = interactIcon.GetComponent<RectTransform>();
         Vector2 desiredSize = isVisible ? highlightSize : normalSize;
         Color desiredColor = isVisible ? new Color(1, 1, 1, 1) : new Color(1f, 1f, 1f, 1f / 255f);

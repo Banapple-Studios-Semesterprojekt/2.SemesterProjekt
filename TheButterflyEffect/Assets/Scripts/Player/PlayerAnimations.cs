@@ -23,7 +23,6 @@ public class PlayerAnimations : MonoBehaviour
     {
         scientistAnimator.SetBool("isNet", itemName == "Net");
         scientistAnimator.SetBool("isGlowstick", itemName == "Glowstick");
-        Debug.Log(itemName);
     }
 
     private void OnPoint(bool isPointing)

@@ -32,4 +32,21 @@ public static class Extensions
 
         return returns;
     }
+
+    public static void PlayRandomClip(this AudioSource source, AudioClip[] clips)
+    {
+        source.pitch = 1f;
+        source.PlayOneShot(clips[Random.Range(0, clips.Length)]);
+    }
+    public static void PlayRandomClip(this AudioSource source, AudioClip[] clips, bool randomPitch)
+    {
+        source.pitch = randomPitch ? Random.Range(0.85f, 1.25f) : 1f;
+        source.PlayOneShot(clips[Random.Range(0, clips.Length)]);
+    }
+
+    public static void PlayClipWithRandomPitch(this AudioSource source, AudioClip clip)
+    {
+        source.pitch = Random.Range(0.85f, 1.25f);
+        source.PlayOneShot(clip);
+    }
 }

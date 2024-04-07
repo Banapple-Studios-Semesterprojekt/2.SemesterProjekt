@@ -26,8 +26,6 @@ public class PlayerController : Singleton<PlayerController>
     private Vector3 fallVelocity;
     private float xRotation;
     private float currentSpeed;
-    private float normalHeight;
-    private float crouchHeight;
     private bool isCrouching;
     //bools needed for the stamina script to work
     private bool canRun;
@@ -179,9 +177,21 @@ public class PlayerController : Singleton<PlayerController>
         this.canJump = canJump;
     }
 
+    public float GetCurrentSpeed()
+    {
+        return currentSpeed;
+    }
+    public float GetWalkSpeed()
+    {
+        return walkSpeed;
+    }
     public float GetRunSpeed()
     {
         return runSpeed;
+    }
+    public float GetCrouchSpeed()
+    {
+        return crouchSpeed;
     }
 
     public void ResetPlayer()

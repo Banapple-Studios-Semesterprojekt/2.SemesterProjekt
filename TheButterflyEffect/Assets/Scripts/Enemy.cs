@@ -28,7 +28,6 @@ public class Enemy : MonoBehaviour
     {
         while (target != null)
         {
-            print("I have been called on");
             //Performs the function "CheckForPlayer()" which returns true or false, depending on this it will enter the if statement or not. 
             CheckForPlayer();
 

@@ -78,7 +78,6 @@ public class Inventory : Singleton<Inventory>
                 }
             }
         }
-        Debug.Log(index);
         InventoryItem invItem = new InventoryItem(newItem);
         inventoryItems[index] = invItem;
 
