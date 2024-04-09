@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Active: 1
   Settings:
     GaussRadius: 5
-    GaussSigma: 8
+    GaussSigma: 2
     KuwaharaAlpha: 1
     KuwaharaRadius: 2
     KuwaharaQ: 8

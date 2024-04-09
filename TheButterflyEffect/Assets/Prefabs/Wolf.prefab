@@ -33492,7 +33492,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7750236145257533705}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: -0.00000035762784}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
   m_LocalPosition: {x: 514.4557, y: 0.947, z: 524.4168}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
@@ -33515,10 +33515,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NoOfRays: 6
   visionAngle: 1
-  visionRadius: 75
+  visionRadius: 35
   rayMask:
     serializedVersion: 2
     m_Bits: 257
+  sphereRadius: 4
+  sphereMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!195 &7459712050867129519
 NavMeshAgent:
   m_ObjectHideFlags: 0

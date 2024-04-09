@@ -51,7 +51,7 @@ public class EnemySpawner : MonoBehaviour
     {
         while(isNight && count < spawnLimit)
         {
-            Vector3 pos = Random.insideUnitSphere * spawnRadius;
+            Vector3 pos = transform.position + Random.insideUnitSphere * spawnRadius;
             pos.y = spawnHeight; //y-coordinate of Vector3 "pos" is set to "spawnHeight".
             GameObject enemy = Instantiate(enemyPrefab, pos, Quaternion.identity);
             count++;
@@ -60,4 +60,8 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position, spawnRadius);
+    }
 }
