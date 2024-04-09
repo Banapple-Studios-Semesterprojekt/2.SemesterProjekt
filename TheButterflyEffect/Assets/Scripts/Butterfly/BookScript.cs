@@ -12,14 +12,13 @@ public class BookScript : MonoBehaviour
     public Button prevPage;
 
     private int pageNumber;
-    private int totalPages;
     // Start is called before the first frame update
     void Start()
     {
         //Referencing children in book and converting transform to a gameobject array
         pages = GetComponentsInChildren<Transform>().Where(s => s.name.Contains("Page") && s != transform).Select(t => t.gameObject).ToArray();
+        butterflySlot = GetComponentInChildren<ButterflySlot>();
 
-        totalPages = pages.Length;
         pageNumber = 0;
 
         //Button
@@ -28,6 +27,7 @@ public class BookScript : MonoBehaviour
 
         print("First SetPageActive call");
         SetPageActive();
+        UpdatePageNumbers(pageNumber);
     }
 
     void NextPage()
@@ -36,6 +36,7 @@ public class BookScript : MonoBehaviour
         {  
             pageNumber = 0;
             SetPageActive();
+            UpdatePageNumbers(pageNumber);
             print("Go to very first page " + "page number = " + pageNumber);
             return;
         }
@@ -43,6 +44,7 @@ public class BookScript : MonoBehaviour
         {
             pageNumber++;
             SetPageActive();
+            UpdatePageNumbers(pageNumber);
             print("Incease page number, new page number = " + pageNumber);
         }   
     }
@@ -53,6 +55,7 @@ public class BookScript : MonoBehaviour
         {
             pageNumber = pages.Length - 1;
             SetPageActive();
+            UpdatePageNumbers(pageNumber);
             print("Go to the last page, page number = " + pageNumber);
             return;
         }
@@ -60,6 +63,7 @@ public class BookScript : MonoBehaviour
         {
             pageNumber--;
             SetPageActive();
+            UpdatePageNumbers(pageNumber);
             print("Decrease page number, page number = " + pageNumber);
         }
     }
@@ -72,11 +76,22 @@ public class BookScript : MonoBehaviour
             print("Deactivate pages " + pages[i].name);
         }
         pages[pageNumber].SetActive(true);
+        //UpdatePageNumbers(pageNumber);
         print("Current page number = " + pageNumber);
     }
 
-    void PageNumbers()
+    void UpdatePageNumbers(int pageNumber)
     {
-        
+        print("Update page numbers, left page number = " + butterflySlot.pageNumberLeft.text + " and right page number = " + butterflySlot.pageNumberRight.text);
+        print("(UpdatePageNumbers) Current page number = " + pageNumber);
+
+        int leftPageNumber = pageNumber + 1;
+        int rightPageNumber = pageNumber + 2;
+        butterflySlot.pageNumberLeft.text = leftPageNumber.ToString();
+        butterflySlot.pageNumberRight.text = rightPageNumber.ToString();
+
+        butterflySlot.pageNumberLeft.enabled = true;
+        butterflySlot.pageNumberRight.enabled = true;
+
     }
 }
