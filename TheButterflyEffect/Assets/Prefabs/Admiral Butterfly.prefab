@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8076160503852277312}
   - component: {fileID: 5481415367880901785}
   - component: {fileID: 7955353644580422127}
-  - component: {fileID: 5526046690039361388}
+  - component: {fileID: 2976703674303444608}
   m_Layer: 0
   m_Name: Admiral Butterfly
   m_TagString: Untagged
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 49b96b82d8d632246b498f275960a861, type: 2}
   canTake: 0
---- !u!114 &5526046690039361388
+--- !u!114 &2976703674303444608
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,9 +155,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4495880325807851004}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7cfb59c4faf8c844a3fb18e187c540d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2eb82fcee0b17d3418d97e041a7389cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fleeSpeed: 2
+  fleeRadius: 7
   floatSpeed: 1
   minFloatHeight: 0.2
   maxFloatHeight: 1

@@ -259,11 +259,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialgoue:
     sentences:
-    - Once upon a time there was a brave scientist.
-    - This scientist has always had one goal in life.
-    - To restore nature from what is lost.
-    - Because the selfishness of humanity ruined it all.
-    - Thus the scientist began their journey.
+    - 'Years ago, I was in an enchanting forest. It had been suffering and was slowly
+      decomposing. Our world was blinded by new technology and developments. We forgot
+      and denied the importance of nature, and how the planet benefits from its growth. '
+    - "However, I recalled playing in the forest, what I had learned from that time
+      and my childhood. It brought me to the forest with a sense of determination
+      to save it. \r\r\n"
+    - 'I soon learned that my determination was not entirely my own, a Forest Spirit
+      had approached me way back then. It reminded me why I chose to become a scientist. '
+    - "My goal is and always has been; to improve natural environments and preserve
+      the Earth for future generations. \r\n"
   delayBeforeTrigger: 2
 --- !u!114 &266846688
 MonoBehaviour:
@@ -277,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8aeff6ad92ceb741812b449f417fa36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSentenceDelay: 3
+  nextSentenceDelay: 5
   dialogueText: {fileID: 736455079}
   blackScreenAnimator: {fileID: 1833108555}
 --- !u!1 &473825014

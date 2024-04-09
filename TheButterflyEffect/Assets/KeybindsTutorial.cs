@@ -6,22 +6,30 @@ using UnityEngine.InputSystem;
 public class KeybindsTutorial : MonoBehaviour
 {
     private Image[] moveLookImages;
-    private TextMeshProUGUI moveLooktext;
+    private TextMeshProUGUI[] moveLookText;
 
     [SerializeField] private float fadeDuration = 1f;
 
     private bool hasMoved = false;
     private bool hasLooked = false;
+    private bool hasInventoried = false;
     private bool isFading;
 
     private void Start()
     {
         Transform t = transform.Find("Movement And Look");
         moveLookImages = t.GetComponentsInChildren<Image>();
-        moveLooktext = t.GetComponentInChildren<TextMeshProUGUI>();
+        moveLookText = t.GetComponentsInChildren<TextMeshProUGUI>();
 
         PlayerController.playerInput.Player.Movement.performed += Movement_performed;
         PlayerController.playerInput.Player.CameraLook.performed += CameraLook_performed;
+        PlayerController.playerInput.Player.Inventory.performed += Inventory_performed;
+    }
+
+    private void Inventory_performed(InputAction.CallbackContext obj)
+    {
+        hasInventoried = true;
+        CheckIfTutorialDone();
     }
 
     private void CameraLook_performed(InputAction.CallbackContext obj)
@@ -38,13 +46,13 @@ public class KeybindsTutorial : MonoBehaviour
 
     private void CheckIfTutorialDone()
     {
-        if(hasMoved && hasLooked && !isFading)
+        if (hasMoved && hasLooked && hasInventoried && !isFading)
         {
-            FadeGuide(moveLookImages, moveLooktext, false);
+            FadeGuide(moveLookImages, moveLookText, false);
         }
     }
 
-    private void FadeGuide(Image[] images, TextMeshProUGUI text, bool fadeIn)
+    private void FadeGuide(Image[] images, TextMeshProUGUI[] texts, bool fadeIn)
     {
         isFading = true;
 
@@ -52,6 +60,9 @@ public class KeybindsTutorial : MonoBehaviour
         {
             image.CrossFadeAlpha(fadeIn ? 1f : 0f, fadeDuration, true);
         }
-        text.CrossFadeAlpha(fadeIn ? 1f : 0f, fadeDuration, true);
+        foreach (TextMeshProUGUI text in texts)
+        {
+            text.CrossFadeAlpha(fadeIn ? 1f : 0f, fadeDuration, true);
+        }
     }
 }

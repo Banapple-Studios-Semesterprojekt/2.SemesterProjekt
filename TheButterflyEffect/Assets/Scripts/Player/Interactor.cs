@@ -30,6 +30,7 @@ public class Interactor : MonoBehaviour
         {
             cam = playerController.GetCamera();
         }
+        StartCoroutine(SetInteractIcon(false));
     }
 
     private void Update()
@@ -78,7 +79,7 @@ public class Interactor : MonoBehaviour
     {
         RectTransform rect = interactIcon.GetComponent<RectTransform>();
         Vector2 desiredSize = isVisible ? highlightSize : normalSize;
-        Color desiredColor = isVisible ? new Color(1, 1, 1, 1) : new Color(1f, 1f, 1f, 1f / 255f);
+        Color desiredColor = isVisible ? new Color(1, 1, 1, 1f) : new Color(1f, 1f, 1f, 10f / 255f);
         while (Mathf.Abs(rect.sizeDelta.x - desiredSize.x) > 0.01f)
         {
             rect.sizeDelta = Vector2.Lerp(rect.sizeDelta, desiredSize, highlightSmooth * Time.deltaTime);
