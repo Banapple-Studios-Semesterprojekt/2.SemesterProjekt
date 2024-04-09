@@ -1,20 +1,25 @@
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BookScript : MonoBehaviour
 {
     private GameObject[] pages;
+    private ButterflySlot butterflySlot;
 
     public Button nextPage;
     public Button prevPage;
 
     private int pageNumber;
+    private int totalPages;
     // Start is called before the first frame update
     void Start()
     {
         //Referencing children in book and converting transform to a gameobject array
         pages = GetComponentsInChildren<Transform>().Where(s => s.name.Contains("Page") && s != transform).Select(t => t.gameObject).ToArray();
+
+        totalPages = pages.Length;
         pageNumber = 0;
 
         //Button
@@ -68,5 +73,10 @@ public class BookScript : MonoBehaviour
         }
         pages[pageNumber].SetActive(true);
         print("Current page number = " + pageNumber);
+    }
+
+    void PageNumbers()
+    {
+        
     }
 }

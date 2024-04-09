@@ -13,6 +13,8 @@ public class ButterflySlot : MonoBehaviour
     //==========BUTTERFLY SLOT===========//
     public TextMeshProUGUI butterflyDescription;
     public TextMeshProUGUI butterflyName;
+    [SerializeField] private TextMeshProUGUI pageNumberRight;
+    [SerializeField] private TextMeshProUGUI pageNumberLeft;
     public Image butterflyImage;
     public bool butterflyCaught;
 
