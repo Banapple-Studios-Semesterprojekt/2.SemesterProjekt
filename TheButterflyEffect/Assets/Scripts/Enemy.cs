@@ -2,17 +2,21 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(NavMeshAgent), typeof(AudioSource))]
 public class Enemy : MonoBehaviour
 {
     private NavMeshAgent agent;
     private Transform target;
     private Animator animator;
+    private AudioSource sound;
+    private AudioClip howl, grunt, bark;
 
     [SerializeField] private int NoOfRays = 10;
     [SerializeField] private float visionAngle = 1;
     [SerializeField] private float visionRadius = 75;
     [SerializeField] private LayerMask rayMask;
+
+    private bool howlDone = false;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +24,16 @@ public class Enemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         target = PlayerController.Instance().transform;
         animator = GetComponent<Animator>();
+
+        sound = GetComponent<AudioSource>();
+        AudioData data = AudioManager.Instance().data;
+        howl = data.howl;
+        grunt = data.grunt;
+        bark = data.bark;
+
+        PlayAudio(howl, false, 0.95f);
+        Invoke(nameof(SetHowlDone), 7f);
+        
 
         StartCoroutine(FollowTarget());
     }
@@ -56,8 +70,16 @@ public class Enemy : MonoBehaviour
             if (ShootRay(directionRight) || ShootRay(directionLeft))
             {
                 agent.SetDestination(target.position); //Function that recalculates destination when target position changes.
-            } 
+            }
+        }
 
+        if(agent.velocity.magnitude > 0 && howlDone)
+        {
+            PlayAudio(bark, true, 0.75f);
+        }
+        else if(howlDone)
+        {
+            PlayAudio(grunt, true, 1f);
         }
     }
 
@@ -93,5 +115,19 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void PlayAudio(AudioClip clip, bool loop, float pitch)
+    {
+        if(sound.clip != clip)
+        {
+             sound.clip = clip;
+             sound.loop = loop;
+             sound.pitch = pitch;
+             sound.Play();
+        }
+    }
 
+    private void SetHowlDone()
+    {
+        howlDone = true;
+    }
 }

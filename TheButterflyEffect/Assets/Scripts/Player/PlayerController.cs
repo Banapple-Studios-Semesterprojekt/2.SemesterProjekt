@@ -112,6 +112,8 @@ public class PlayerController : Singleton<PlayerController>
     {
         UpdateMovement();
         UpdateCameraLook();
+
+        if (Keyboard.current.escapeKey.wasPressedThisFrame) SceneLoader.LoadScene("Main Menu");
     }
 
     private void UpdateMovement()

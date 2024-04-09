@@ -259,16 +259,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialgoue:
     sentences:
-    - 'Years ago, I was in an enchanting forest. It had been suffering and was slowly
-      decomposing. Our world was blinded by new technology and developments. We forgot
-      and denied the importance of nature, and how the planet benefits from its growth. '
-    - "However, I recalled playing in the forest, what I had learned from that time
-      and my childhood. It brought me to the forest with a sense of determination
-      to save it. \r\r\n"
-    - 'I soon learned that my determination was not entirely my own, a Forest Spirit
-      had approached me way back then. It reminded me why I chose to become a scientist. '
-    - "My goal is and always has been; to improve natural environments and preserve
-      the Earth for future generations. \r\n"
+    - Years ago, I was in an enchanting forest. It had been suffering and was slowly
+      decomposing. As our world had been blinded by new technology and developments.
+      We forgot and denied the importance of nature, and how we benefit from its
+      growth.
+    - "I recalled playing in the forest, as a kid, where I experienced the wonders
+      of nature. This led me to the forest accompanied by a want to save it. \r"
+    - 'But, I soon discovered that my determination was not entirely my own. Learning
+      that a Forest Spirit had approached me as a child reminded me why I chose to
+      become a scientist. '
+    - 'My goal is and always will be; to improve natural environments and preserve
+      the Earth for future generations. '
   delayBeforeTrigger: 2
 --- !u!114 &266846688
 MonoBehaviour:

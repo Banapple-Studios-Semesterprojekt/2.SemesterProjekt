@@ -23,3 +23,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e1baed2dbf96646409fecff1cb572262, type: 3}
   swingSFX: {fileID: 8300000, guid: 8a0a319f58ad57644b45f11e48121c18, type: 3}
   flashlightClick: {fileID: 8300000, guid: 2b87573ce20cce649997c4551a39ae80, type: 3}
+  glassKnock: {fileID: 8300000, guid: 577fc1d42c7c0bb419830c65f7a08b2b, type: 3}
+  popClick: {fileID: 8300000, guid: 80914a88593aeb64c89df60a4eb95f41, type: 3}
+  howl: {fileID: 8300000, guid: 603e71445bb34df40b89ae8e17cac113, type: 3}
+  grunt: {fileID: 8300000, guid: 2fbebb703ca171b4b9ea7ffa36a54806, type: 3}
+  bark: {fileID: 8300000, guid: 078da34b21f725a42af840d28be6e003, type: 3}

@@ -11631,16 +11631,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7286458210703022022, guid: 6edc52f1d7c79aa438d76419b3596557,
-        type: 3}
-      propertyPath: highlightSize.x
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 7286458210703022022, guid: 6edc52f1d7c79aa438d76419b3596557,
-        type: 3}
-      propertyPath: highlightSize.y
-      value: 45
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

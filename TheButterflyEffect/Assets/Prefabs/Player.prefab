@@ -5575,7 +5575,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   normalSize: {x: 20, y: 20}
-  highlightSize: {x: 60, y: 60}
+  highlightSize: {x: 45, y: 45}
   highlightSmooth: 10
   canRaycast: 1
 --- !u!114 &2046343854256767664
