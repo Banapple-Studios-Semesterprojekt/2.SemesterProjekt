@@ -21,21 +21,24 @@ public class BookScript : MonoBehaviour
         nextPage.onClick.AddListener(NextPage);
         prevPage.onClick.AddListener(PreviousPage);
 
+        print("First SetPageActive call");
         SetPageActive();
     }
 
     void NextPage()
     {
         if (pageNumber >= pages.Length - 1)
-        {
+        {  
             pageNumber = 0;
             SetPageActive();
+            print("Go to very first page " + "page number = " + pageNumber);
             return;
         }
         else
         {
             pageNumber++;
             SetPageActive();
+            print("Incease page number, new page number = " + pageNumber);
         }   
     }
 
@@ -45,12 +48,14 @@ public class BookScript : MonoBehaviour
         {
             pageNumber = pages.Length - 1;
             SetPageActive();
+            print("Go to the last page, page number = " + pageNumber);
             return;
         }
         else
         {
             pageNumber--;
             SetPageActive();
+            print("Decrease page number, page number = " + pageNumber);
         }
     }
 
@@ -59,7 +64,9 @@ public class BookScript : MonoBehaviour
         for (int i = 0; i < pages.Length; i++)
         {
             pages[i].SetActive(false);
+            print("Deactivate pages " + pages[i].name);
         }
         pages[pageNumber].SetActive(true);
+        print("Current page number = " + pageNumber);
     }
 }

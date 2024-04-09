@@ -14,15 +14,11 @@ public class ButterflySlot : MonoBehaviour
     public TextMeshProUGUI butterflyDescription;
     public TextMeshProUGUI butterflyName;
     public Image butterflyImage;
-    public Image hideButterflySprite;
     public bool butterflyCaught;
 
     //In the beginning there are no butterflies
     public void ZeroButterflies()
     {
-        butterflyImage.sprite = null;
-        butterflyImage.enabled = false;
-        hideButterflySprite.enabled = true;
     }
 
     public void AddButterflyToSlot(ButterflyData newButterfly)
@@ -34,8 +30,6 @@ public class ButterflySlot : MonoBehaviour
         butterflyDescription.text = newButterfly.description;
         butterflyImage.sprite = newButterfly.itemSprite;
         Debug.Log(newButterfly.itemSprite.name);
-        //Disabling "hideButterflySprite" 
-        hideButterflySprite.enabled = false;
 
         //Enabling "butterflyImage"
         butterflyImage.enabled = true;
