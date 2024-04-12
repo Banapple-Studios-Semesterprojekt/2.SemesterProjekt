@@ -126,7 +126,6 @@ public class Enemy : MonoBehaviour
 
         if (Physics.Raycast(origin, direction, out hit, visionRadius, rayMask, QueryTriggerInteraction.Ignore))
         {
-            print("hit = " + hit.transform.name);
             if (hit.transform.CompareTag("Player"))
             {
                 print("I follow player :D");

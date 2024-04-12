@@ -8,6 +8,8 @@ public class BreedingSystem : MonoBehaviour
     [SerializeField] private ButteflyRecipe[] recipies;
     [SerializeField] private Slider BreedSlider;
 
+    Coroutine breedCoroutine;
+
     private void Start()
     {
         slot1.onSlotChange += OnSlotChange;
@@ -24,9 +26,9 @@ public class BreedingSystem : MonoBehaviour
         foreach (ButteflyRecipe recipe in recipies)
         {
             ButterflyData output = TryGetOutput(recipe);
-            if (output != null)
+            if (output != null && breedCoroutine == null)
             {
-                StartCoroutine(Breed(recipe, output));
+                breedCoroutine = StartCoroutine(Breed(recipe, output));
             }
         }
     }
@@ -45,6 +47,8 @@ public class BreedingSystem : MonoBehaviour
         ClearInputSlots();
         BreedSlider.value = 0;
         print("Sets Inventory Output Slot!");
+        breedCoroutine = null;
+
     }
 
     public void ClearInputSlots()
