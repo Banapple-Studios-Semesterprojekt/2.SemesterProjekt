@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,12 +12,23 @@ public class Enemy : MonoBehaviour
     private AudioSource sound;
     private AudioClip howl, grunt, bark;
 
+    private Transform[] patrolPositions;
+    private bool isPatrolling;
+    private Coroutine patrolCoroutine;
+
+    [Header("Patrolling Properties")]
+    [SerializeField] private float patrolTime = 15f;
+
+    [Header("Raycast Cone Properties")]
     [SerializeField] private int NoOfRays = 10;
     [SerializeField] private float visionAngle = 1;
     [SerializeField] private float visionRadius = 75;
     [SerializeField] private LayerMask rayMask;
 
     private bool howlDone = false;
+    [Header("Check Sphere Properties")]
+    [SerializeField] private float sphereRadius = 4f;
+    [SerializeField] private LayerMask sphereMask;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +46,8 @@ public class Enemy : MonoBehaviour
         PlayAudio(howl, false, 0.95f);
         Invoke(nameof(SetHowlDone), 7f);
         
+        GameObject patrolPointsParent = GameObject.Find("Wolf Patrol Positions");
+        patrolPositions = patrolPointsParent.GetComponentsInChildren<Transform>().Where(x => x != patrolPointsParent.transform).ToArray();
 
         StartCoroutine(FollowTarget());
     }
@@ -55,6 +69,7 @@ public class Enemy : MonoBehaviour
 
     void CheckForPlayer()
     {
+        //Raycasting Cone Vision
         for (int i = 0; i < NoOfRays; i++)
         {
             if(i == 0)
@@ -72,6 +87,9 @@ public class Enemy : MonoBehaviour
                 agent.SetDestination(target.position); //Function that recalculates destination when target position changes.
             }
         }
+                isPatrolling = false;
+                return;
+            } 
 
         if(agent.velocity.magnitude > 0 && howlDone)
         {
@@ -80,6 +98,20 @@ public class Enemy : MonoBehaviour
         else if(howlDone)
         {
             PlayAudio(grunt, true, 1f);
+        }
+
+        //Sphere cast: checking for if player is nearby
+        if (Physics.CheckSphere(transform.position, sphereRadius, sphereMask, QueryTriggerInteraction.Ignore))
+        {
+            agent.SetDestination(target.position);
+            isPatrolling = false;
+            return;
+        }
+
+        if(patrolCoroutine == null)
+        {
+            isPatrolling = true;
+            patrolCoroutine = StartCoroutine(Patrol());
         }
     }
 
@@ -102,6 +134,16 @@ public class Enemy : MonoBehaviour
             }
         }
         return false;
+    }
+
+    IEnumerator Patrol()
+    {
+        while(isPatrolling)
+        {
+            agent.SetDestination ( patrolPositions[Random.Range(0, patrolPositions.Length)].position );
+            yield return new WaitForSeconds(Random.Range(patrolTime / 1.5f, patrolTime));
+        }
+        patrolCoroutine = null;
     }
 
     private void OnTriggerEnter(Collider collider)
@@ -129,5 +171,9 @@ public class Enemy : MonoBehaviour
     private void SetHowlDone()
     {
         howlDone = true;
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new Color(255f, 255, 0f, 100f / 255f);
+        Gizmos.DrawWireSphere(transform.position, sphereRadius);
     }
 }

@@ -33516,10 +33516,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NoOfRays: 6
   visionAngle: 1
-  visionRadius: 75
+  visionRadius: 35
   rayMask:
     serializedVersion: 2
     m_Bits: 257
+  sphereRadius: 4
+  sphereMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!195 &7459712050867129519
 NavMeshAgent:
   m_ObjectHideFlags: 0

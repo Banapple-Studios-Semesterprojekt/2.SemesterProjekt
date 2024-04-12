@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   m_Settings:
-    AOMethod: 1
+    AOMethod: 0
     Downsample: 1
     AfterOpaque: 0
     Source: 1
@@ -112,9 +112,9 @@ MonoBehaviour:
   m_Active: 1
   Settings:
     GaussRadius: 5
-    GaussSigma: 2.82
+    GaussSigma: 2
     KuwaharaAlpha: 1
-    KuwaharaRadius: 3
-    KuwaharaQ: 13
+    KuwaharaRadius: 2
+    KuwaharaQ: 8
     ResolutionScale: 1
     RenderPassEvent: 550
