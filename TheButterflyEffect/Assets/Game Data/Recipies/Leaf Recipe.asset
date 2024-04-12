@@ -15,4 +15,3 @@ MonoBehaviour:
   input1: {fileID: 11400000, guid: 49b96b82d8d632246b498f275960a861, type: 2}
   input2: {fileID: 11400000, guid: 4a39db68be450d74690f2a175b05df5b, type: 2}
   output: {fileID: 11400000, guid: 2dc5d65c45c617947a93874a1bc6f292, type: 2}
-  BreedTime: 2
