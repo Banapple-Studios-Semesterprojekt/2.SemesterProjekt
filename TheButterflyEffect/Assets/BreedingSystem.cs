@@ -1,9 +1,12 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BreedingSystem : MonoBehaviour
 {
     [SerializeField] private InventorySlot slot1, slot2, result;
     [SerializeField] private ButteflyRecipe[] recipies;
+    [SerializeField] private Slider BreedSlider;
 
     private void Start()
     {
@@ -14,7 +17,6 @@ public class BreedingSystem : MonoBehaviour
     private void OnSlotChange()
     {
         print("Invetory Slot Changed!");
-        Invoke(nameof(TryBreed), 0.2f);
     }
 
     public void TryBreed()
@@ -24,12 +26,26 @@ public class BreedingSystem : MonoBehaviour
             ButterflyData output = TryGetOutput(recipe);
             if(output != null)
             {
-                InventoryItem outputItem = new InventoryItem(output);
-                result.SetInventorySlot(outputItem);
-                ClearInputSlots();
-                print("Sets Inventory Output Slot!");
+                StartCoroutine(Breed(recipe,output));
             }
         }
+    }
+
+    IEnumerator Breed(ButteflyRecipe butteflyRecipe,ButterflyData output)
+    {
+        float bredingtime=0;
+        while(bredingtime< butteflyRecipe.BreedTime)
+        {
+            yield return new WaitForSeconds(0.05f);
+            bredingtime += 0.05f;
+            BreedSlider.value = bredingtime/ butteflyRecipe.BreedTime;
+        }
+         InventoryItem outputItem = new InventoryItem(output);
+         result.SetInventorySlot(outputItem);
+         ClearInputSlots();
+        BreedSlider.value = 0;
+        print("Sets Inventory Output Slot!");
+        
     }
 
     public void ClearInputSlots()

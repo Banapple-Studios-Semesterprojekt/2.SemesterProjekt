@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4393212555223340732}
   - component: {fileID: 8007763066106720758}
   - component: {fileID: 7683498197775762808}
-  - component: {fileID: 275777711957972179}
   - component: {fileID: 1131497047787991224}
   - component: {fileID: 6392998023527401440}
+  - component: {fileID: 6839939027442013376}
   m_Layer: 6
   m_Name: ButterflyMonarch
   m_TagString: Untagged
@@ -126,33 +126,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 4a39db68be450d74690f2a175b05df5b, type: 2}
   canTake: 0
---- !u!114 &275777711957972179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7012452640115181214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e28754e38928d684d9c194329b7914ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onInteract:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7683498197775762808}
-        m_TargetAssemblyTypeName: ItemObject, Assembly-CSharp
-        m_MethodName: AddItemToInventoryWithNet
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!95 &1131497047787991224
 Animator:
   serializedVersion: 5
@@ -189,3 +162,30 @@ MonoBehaviour:
   floatSpeed: 1
   minFloatHeight: 0.2
   maxFloatHeight: 1
+--- !u!114 &6839939027442013376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7012452640115181214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa7997a91976e34ea7597fb9e0c990c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7683498197775762808}
+        m_TargetAssemblyTypeName: ItemObject, Assembly-CSharp
+        m_MethodName: AddItemToInventoryWithNet
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

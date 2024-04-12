@@ -186,7 +186,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8538018272925877695}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e28754e38928d684d9c194329b7914ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 9aa7997a91976e34ea7597fb9e0c990c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   onInteract:
