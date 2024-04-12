@@ -33514,13 +33514,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6aeccb749985843a860d0ee16ea2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  patrolTime: 25
   NoOfRays: 6
   visionAngle: 1
   visionRadius: 35
   rayMask:
     serializedVersion: 2
     m_Bits: 257
-  sphereRadius: 4
+  sphereRadius: 7
   sphereMask:
     serializedVersion: 2
     m_Bits: 256

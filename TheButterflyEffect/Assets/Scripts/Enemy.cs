@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
 
         PlayAudio(howl, false, 0.95f);
         Invoke(nameof(SetHowlDone), 7f);
-        
+
         GameObject patrolPointsParent = GameObject.Find("Wolf Patrol Positions");
         patrolPositions = patrolPointsParent.GetComponentsInChildren<Transform>().Where(x => x != patrolPointsParent.transform).ToArray();
 
@@ -69,15 +69,17 @@ public class Enemy : MonoBehaviour
 
     void CheckForPlayer()
     {
+        bool playerHit = false;
+
         //Raycasting Cone Vision
         for (int i = 0; i < NoOfRays; i++)
         {
-            if(i == 0)
+            if (i == 0)
             {
-                ShootRay(transform.forward);
+                playerHit = ShootRay(transform.forward);
             }
             float directionAngle = visionAngle / i;
-            
+
             Vector3 directionRight = transform.forward + (transform.right * directionAngle); //Calculates raycast to the right.
             Vector3 directionLeft = transform.forward + (-transform.right * directionAngle); //"- transform.right" = transform to the left.
 
@@ -85,19 +87,9 @@ public class Enemy : MonoBehaviour
             if (ShootRay(directionRight) || ShootRay(directionLeft))
             {
                 agent.SetDestination(target.position); //Function that recalculates destination when target position changes.
-            }
-        }
                 isPatrolling = false;
-                return;
-            } 
-
-        if(agent.velocity.magnitude > 0 && howlDone)
-        {
-            PlayAudio(bark, true, 0.75f);
-        }
-        else if(howlDone)
-        {
-            PlayAudio(grunt, true, 1f);
+                playerHit = true;
+            }
         }
 
         //Sphere cast: checking for if player is nearby
@@ -105,13 +97,22 @@ public class Enemy : MonoBehaviour
         {
             agent.SetDestination(target.position);
             isPatrolling = false;
-            return;
+            playerHit = true;
         }
 
-        if(patrolCoroutine == null)
+        if (patrolCoroutine == null)
         {
             isPatrolling = true;
             patrolCoroutine = StartCoroutine(Patrol());
+        }
+
+        if (agent.velocity.magnitude > 0 && howlDone && playerHit)
+        {
+            PlayAudio(bark, true, 0.75f);
+        }
+        else if (howlDone)
+        {
+            PlayAudio(grunt, true, 1f);
         }
     }
 
@@ -171,6 +172,7 @@ public class Enemy : MonoBehaviour
     private void SetHowlDone()
     {
         howlDone = true;
+    }
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(255f, 255, 0f, 100f / 255f);
