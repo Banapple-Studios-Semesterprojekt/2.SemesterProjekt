@@ -13,19 +13,11 @@ public class ButterflySlot : MonoBehaviour
     //==========BUTTERFLY SLOT===========//
     public TextMeshProUGUI butterflyDescription;
     public TextMeshProUGUI butterflyName;
-    public TextMeshProUGUI pageNumberRight;
-    public TextMeshProUGUI pageNumberLeft;
     public Image butterflyImage;
     public bool butterflyCaught;
 
-    //In the beginning there are no butterflies
-    public void ZeroButterflies()
-    {
-    }
-
     public void AddButterflyToSlot(ButterflyData newButterfly)
     {
-        Debug.Log("Bye");
         //Setting variables of this script = the newly caught butterfly data.
         //By using the data from the scriptable objects
         butterflyName.text = newButterfly.butterflyName;
@@ -39,4 +31,7 @@ public class ButterflySlot : MonoBehaviour
         //Setting bool "isCaught" to true, so only one can be caught
         butterflyCaught = true;
     }
+
+    
+
 }
