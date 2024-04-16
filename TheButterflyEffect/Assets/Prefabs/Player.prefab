@@ -3606,7 +3606,7 @@ MonoBehaviour:
   baseTransform: {fileID: 0}
   Hips: {fileID: 736218032772826979}
   ScaleReferenceMode: 3
-  finalScaleReference: 0.9774896
+  finalScaleReference: 0.9774891
   finalScaleReferenceSqrt: 0.1
   customScaleReferenceValue: 0.5
   DelayedInitialization: 0
@@ -8144,6 +8144,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 266.7556
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907570510327016693, guid: bc261f18359549f44987c52e436a72a8,
+        type: 3}
+      propertyPath: hour
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1907570510327016693, guid: bc261f18359549f44987c52e436a72a8,
         type: 3}

@@ -73,7 +73,7 @@ public class PlayerSounds : MonoBehaviour
     {
         pc_currentSpeed = pc.GetCurrentSpeed();
 
-        if(cc.velocity.sqrMagnitude > 0.1f)
+        if(cc.velocity.sqrMagnitude > 0.1f && cc.isGrounded)
         {
             moveTime += Time.deltaTime;
             if(moveTime > GetCurrentDelay())
