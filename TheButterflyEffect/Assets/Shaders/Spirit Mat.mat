@@ -60,7 +60,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Alpha: 1
-    - _Base_Gradient_Power: 0.5
+    - _Base_Gradient_Power: 10
     - _Fresnel_Effect: 3
     - _Fresnel_Power: 5
     - _Glitter_Offset: 0.7
@@ -72,10 +72,10 @@ Material:
     - _QueueOffset: 0
     - _Smoothness: 0.95
     m_Colors:
-    - _Base_Color_1: {r: 0.37254906, g: 0.8413293, b: 1, a: 1}
+    - _Base_Color_1: {r: 0.63584906, g: 0.90896225, b: 1, a: 1}
     - _Base_Color_2: {r: 0.49807727, g: 0.080188684, b: 1, a: 1}
     - _Color: {r: 0.2641511, g: 0.33882964, b: 8, a: 1}
-    - _Fresnel_Color: {r: 14.233625, g: 13.081239, b: 31.626795, a: 1}
+    - _Fresnel_Color: {r: 4.6495137, g: 2.3569798, b: 39.037518, a: 1}
     - _Glitter_Color: {r: 0.6109066, g: 0, b: 1, a: 1}
     - _Noise_Scale: {r: 1.5, g: 1.5, b: 0, a: 0}
     - _Normal_Scale: {r: 1, g: 1, b: 0, a: 0}
