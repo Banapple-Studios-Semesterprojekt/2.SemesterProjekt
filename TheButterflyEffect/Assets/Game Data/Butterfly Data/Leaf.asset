@@ -18,8 +18,14 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: 89a10093773f7cf45b7afe4d153eff1d, type: 3}
   maxStack: 1
   butterflyName: Leaf Butterfly
-  description: A butterfly
-  typeEnglish: 2
-  typeDanish: 2
+  description: "Scientific name: Folium papilinonem\r.\n\nLocation: Can often be
+    found near trees and bushes, they appear both during the day and the evening.
+    \r\n\nWingspan: 3.5 - 4.7 cm.\r\n\nFamily: Leaf family.\r\n\nCharacteristics:
+    This butterfly is characterized by its two different colored wings. It has a
+    green- and red-like wing. The green wing is to camouflage itself during summer
+    and spring, meanwhile the red wing resembles autumn leaves. Similarly, this is
+    used for camouflage.\r\n\nRarity: Rare"
+  typeEnglish: 5
+  typeDanish: 5
   size: 1
-  spawnProbability: 25
+  spawnProbability: 45

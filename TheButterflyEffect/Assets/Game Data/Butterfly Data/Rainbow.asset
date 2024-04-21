@@ -13,13 +13,19 @@ MonoBehaviour:
   m_Name: Rainbow
   m_EditorClassIdentifier: 
   itemType: 0
-  itemObject: {fileID: 7012452640115181214, guid: efb677d4fe94a794ca2173be025c52b5,
+  itemObject: {fileID: 262309803650399132, guid: c7f0fbbc8964405498a89d259508c952,
     type: 3}
   itemSprite: {fileID: 21300000, guid: da0ef9c5ed287cc4d99b8eb47385993f, type: 3}
   maxStack: 1
   butterflyName: Rainbow Butterfly
-  description: A legendary buttefly! Nice catch!
-  typeEnglish: 0
-  typeDanish: 0
+  description: "Scientific name: Eritque arcus papilinonem\r.\n\nLocation: This butterfly
+    is the rarest butterfly in the forest. It can only be found in the last area
+    of the forest and can only be found when it is almost dawn. \r\nWingspan: 4.0
+    - 5.2 cm.\r\n\nFamily: Rainbow family.\n\r\nCharacteristics: The rainbow butterfly
+    is recognized from its distinct shape of its wings. Likewise, are the wings colored
+    like a rainbow, this makes it easy to distinguish from other butterflies, but
+    it also makes it difficult to see in the dark. \r\n\nRarity: Ultra rare"
+  typeEnglish: 7
+  typeDanish: 7
   size: 1
-  spawnProbability: 100
+  spawnProbability: 25

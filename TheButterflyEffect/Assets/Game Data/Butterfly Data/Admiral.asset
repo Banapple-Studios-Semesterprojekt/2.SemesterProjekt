@@ -17,9 +17,14 @@ MonoBehaviour:
     type: 3}
   itemSprite: {fileID: 21300000, guid: c9ee857a6a70d644f831d562737258eb, type: 3}
   maxStack: 1
-  butterflyName: Admiral Butterfly
-  description: A butterfly
+  butterflyName: Admiral
+  description: "Scientific name: Vanessa Atalanta\r.\n\nLocation: The butterfly is
+    commonly found in Europe, Scandinavia, North America as well as North Africa.
+    \r\n\nWingspan: 4.4 - 6.4 cm (medium size).\r\n\nFamily: Nymphalidae\r.\n\nCharacteristics:
+    The coloration of the butterfly consists of black wings with white bands and
+    reddish brown marks. Furthermore, it has white spots on the dorsal (top) side.
+    \r\n\nRarity: Common"
   typeEnglish: 1
   typeDanish: 1
   size: 1
-  spawnProbability: 25
+  spawnProbability: 100
