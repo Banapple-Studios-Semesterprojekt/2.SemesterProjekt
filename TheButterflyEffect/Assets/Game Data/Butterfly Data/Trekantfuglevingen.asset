@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06c8d9de77ff3ea498209cbe35c37df3, type: 3}
+  m_Name: Trekantfuglevingen
+  m_EditorClassIdentifier: 
+  itemType: 0
+  itemObject: {fileID: 925659492296142400, guid: c5e2f6122ade52c4eb2aff33e3255cab,
+    type: 3}
+  itemSprite: {fileID: 21300000, guid: 6eec014774aa73c4eae18f9a81990534, type: 3}
+  maxStack: 1
+  butterflyName: Triangle Birdwing
+  description: "Scientific name: Trogonoptera Trojana\r.\n\nLocation: The T. Trojana
+    originates from the Philippines. \r\n\nWingspan: 18- 19 cm.\r\n\nFamily: Papilionidae.\r\n\nCharacteristics:
+    The butterfly is recognizable from its dark colors and emerald green strokes
+    on the edges of its wings. \r\n\nRarity: Rare, one of only two species in its
+    genus. "
+  typeEnglish: 4
+  typeDanish: 4
+  size: 1
+  spawnProbability: 60

@@ -33,7 +33,11 @@ public enum ButterflyTypeEnglish
     RedAdmiral,
     CommonBrimstone,
     HollyBlue,
-    TriangleBirdwing
+    TriangleBirdwing,
+    LeafButterfly,
+    CrystalButterfly,
+    RainbowButterfly
+
 }
 
 public enum ButterflyTypeDanish
@@ -42,5 +46,9 @@ public enum ButterflyTypeDanish
     Admiral,
     Citronsommerfugl,
     Skovblåfugl,
-    TrogonopteraTrojana //Trekantfuglevingen, der findes ikke en dansk oversættelse
+    TrogonopteraTrojana, //Trekantfuglevingen, der findes ikke en dansk oversættelse
+    BladSommerfugl,
+    KrystalSommerfugl,
+    RegnbueSommerfugl
+
 }
