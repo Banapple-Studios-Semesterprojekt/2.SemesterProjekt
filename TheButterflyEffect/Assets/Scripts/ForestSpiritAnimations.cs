@@ -8,12 +8,16 @@ public class ForestSpiritAnimations : MonoBehaviour
     private Vector3 forestSpiritPosition;
     private Transform playerCamera;
     private float smoothTime;
+    private Canvas playerCanvas;
+    private DialogueManager dialogueManager;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         forestSpiritPosition = transform.position;
         playerCamera = PlayerController.Instance().GetCamera();
+        playerCanvas = PlayerController.Instance().GetComponentInChildren<Canvas>();
+        dialogueManager = FindAnyObjectByType<DialogueManager>();
 
         StartCoroutine(Spirit());
     }
@@ -35,6 +39,11 @@ public class ForestSpiritAnimations : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
 
         //cutscene, when done it should fly away
+        PlayerController.Instance().enabled = false;
+        playerCanvas.enabled = false;
+        dialogueManager.enabled = true;
+
+
         float timer = 0;
         while(timer < 10f)
         {
