@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9.9127, y: -179.93396}
-  m_SizeDelta: {x: 656.401, y: 250.0398}
+  m_AnchoredPosition: {x: 37.721474, y: -100.32}
+  m_SizeDelta: {x: 685.981, y: 499.61}
   m_Pivot: {x: 0.49999997, y: 0.5}
 --- !u!222 &4168390543678520399
 CanvasRenderer:
@@ -75,8 +75,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_fontSize: 50
   m_fontSizeBase: 50
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -169,8 +169,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.1968, y: 24}
-  m_SizeDelta: {x: 274.3343, y: 81.495}
+  m_AnchoredPosition: {x: 190.36, y: 263}
+  m_SizeDelta: {x: 380.71, y: 115.0824}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6390983937644003592
 CanvasRenderer:
@@ -210,8 +210,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -304,8 +304,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 385, y: -185}
-  m_SizeDelta: {x: 282.5327, y: 278.5714}
+  m_AnchoredPosition: {x: 251, y: -147}
+  m_SizeDelta: {x: 230.26, y: 227.0364}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2555691925231272282
 CanvasRenderer:
@@ -407,7 +407,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   butterflyDescription: {fileID: 5724206211670875344}
   butterflyName: {fileID: 4595295884428782047}
-  pageNumberRight: {fileID: 0}
-  pageNumberLeft: {fileID: 0}
   butterflyImage: {fileID: 7342364518152796865}
   butterflyCaught: 0

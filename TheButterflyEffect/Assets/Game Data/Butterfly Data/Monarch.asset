@@ -18,13 +18,11 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: ef4b232f30945a44b9c1b394e27a2054, type: 3}
   maxStack: 1
   butterflyName: 'Monarch '
-  description: "Scientific name: Danaus Plexippus\r.\n\nLocation: This butterfly
-    is mostly seen in Mexico and the USA. It travels far and wide to Australia, New
-    Zealand, Europe and especially visits England. However, it is rarely seen in
-    Denmark.\r\n\nWingspan: 8.9 - 10.2 cm.\r\n\nFamily: Nymphalidae\r.\n\nCharacteristics:
-    The butterfly is easily recognizable from its vibrant pattern of black and orange
-    wings. Additionally, its white spots along the edge of the black margins are
-    a key characteristic for these butterflies.\r\n\nRarity: Common"
+  description: "Scientific name: Danaus Plexippus\r.\nLocation: Mostly seen in Mexico
+    and the USA. It travels far and wide to Australia, New Zealand, Europe and especially
+    visits England.\nWingspan: 8.9 - 10.2 cm.\r\nFamily: Nymphalidae\r.\nCharacteristics:
+    Easily recognizable from its vibrant pattern of black and orange wings. And,
+    it has white spots along the edge of the black margins.\nRarity: Common"
   typeEnglish: 0
   typeDanish: 0
   size: 1
