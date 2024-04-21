@@ -11,13 +11,13 @@ public class Dialog_Controler : MonoBehaviour
     [SerializeField] private TextMeshProUGUI DisplayText;
     [SerializeField] private float scentensSwitchSpeed;
     private float letterSpeed=0.02f;
-    private bool activeDialogue;
+    public bool activeDialogue;
     private bool skip;
     [SerializeField] private Image Backkground;
     private void Start()
     {
         DisplayText.text = "";
-        DiaTrigger= GameObject.Find("DialogeuManeger").GetComponent<Dialogue_Triggers>();
+        DiaTrigger= GameObject.Find("DialogueManager").GetComponent<Dialogue_Triggers>();
        
     }
     public void RunDialogue(Dialogue dialogue, Color color,bool isMoreDialogue)

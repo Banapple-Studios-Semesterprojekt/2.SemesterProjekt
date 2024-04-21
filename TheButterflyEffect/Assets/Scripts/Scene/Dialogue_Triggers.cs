@@ -7,7 +7,7 @@ using UnityEngine.PlayerLoop;
 public class DialogueAndColor
 {
     public Dialogue dialouge;
-    public Color color;
+    public Color color = Color.white;
 }
 
 [System.Serializable]
