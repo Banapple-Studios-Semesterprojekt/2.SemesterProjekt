@@ -35,7 +35,9 @@ public class ForestSpirit : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
 
         //Sets spawn position of Forest Spirit close to the player
-        transform.position = (3 * Random.insideUnitSphere) + playerCamera.transform.position + Vector3.up * 5;
+        Vector3 unitSphere = Random.insideUnitSphere * 3;
+        unitSphere.y = 0;
+        transform.position = unitSphere + playerCamera.transform.position + Vector3.up * 5;
         forestSpiritPosition = transform.position;
         forestSpiritRenderer.enabled = true;
 
@@ -43,10 +45,8 @@ public class ForestSpirit : MonoBehaviour
         {
             Vector3 playerCamPosition = playerCamera.position + playerCamera.forward * 2;
             smoothTime += Time.deltaTime;
-
             transform.position = Vector3.Lerp(forestSpiritPosition, playerCamPosition, smoothTime);
             transform.LookAt(playerCamera);
-            transform.Rotate(transform.up, 90, Space.Self);
 
             yield return null;
         }
@@ -68,11 +68,12 @@ public class ForestSpirit : MonoBehaviour
         PlayerController.Instance().enabled = true;
         inventoryUI.SetActive(true);
         dialogueUI.SetActive(false);
+        animator.SetBool("isIdle", false);
         float timer = 0;
         while(timer < 30f)
         {
             timer += Time.deltaTime;
-            transform.Translate(Vector3.up * Time.deltaTime * waitTime);
+            transform.Translate(Vector3.up * Time.deltaTime * waitTime, Space.World);
             yield return null;
         }
         gameObject.SetActive(false);
