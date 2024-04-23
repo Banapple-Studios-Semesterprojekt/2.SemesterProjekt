@@ -33,5 +33,8 @@ public class ChangeUI : MonoBehaviour
         hotbar.SetActive(false);
         catalogueUI.SetActive(true);    
     }
-
+    public void DiactivateCatalogue()
+    {
+        catalogueUI.SetActive(false);
+    }
 }

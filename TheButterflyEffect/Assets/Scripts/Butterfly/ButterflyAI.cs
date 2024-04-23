@@ -22,10 +22,13 @@ public class ButterflyAI : MonoBehaviour
     // Minimum and maximum values for random floating height
     [SerializeField] private float minFloatHeight = 0.2f;
     [SerializeField] private float maxFloatHeight = 1.0f;
-
+    [SerializeField] private float floatheight = 4;
     private Vector3 initialPosition;
     private float floatHeight;
 
+
+    [SerializeField] private bool flyuporDown;
+    
     private float randomStart;
 
     private void Start()
@@ -36,11 +39,32 @@ public class ButterflyAI : MonoBehaviour
 
     private void Update()
     {
-        if(flee)
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, -Vector3.up, out hit)&&!flee)
+        {
+            Debug.Log(hit.distance);
+            if (hit.distance < floatheight-1)
+            {
+                Flyup();
+                flyuporDown = true;
+            }
+            else if (hit.distance > floatheight+1)
+            {
+                FlyDown();
+                flyuporDown = true;
+
+            }
+            else
+            {
+                flyuporDown = false;
+
+            }
+        }
+
+        if (flee)
         {
             UpdateFlee();
-        }
-        else
+        }else if(!flyuporDown)
         {
             UpdateFloating();
         }
@@ -55,14 +79,29 @@ public class ButterflyAI : MonoBehaviour
 
     private void UpdateFloating()
     {
-        // Calculate the float offset based on Perlin noise
-        float floatOffset = Mathf.PerlinNoise((Time.time + randomStart) * floatSpeed, 0) * 2 - 1;
+                 // Calculate the float offset based on Perlin noise
+                float floatOffset = Mathf.PerlinNoise((Time.time + randomStart) * floatSpeed, 0) * 2 - 1;
 
-        // Apply the float offset to the initial position
-        Vector3 newPosition = initialPosition + Vector3.up * floatOffset * floatHeight;
+                // Apply the float offset to the initial position
+                Vector3 newPosition = initialPosition + Vector3.up * floatOffset * floatHeight;
 
-        // Update the object's position
-        transform.position = newPosition;
+                // Update the object's position
+                transform.position = newPosition;
+    }
+
+    private void Flyup()
+    {
+        Vector3 v3 = Vector3.up;
+        transform.position+= v3*Time.deltaTime*fleeSpeed;
+        initialPosition = transform.position;
+
+    }
+    private void FlyDown()
+    {
+        Vector3 v3 = Vector3.down;
+        transform.position += v3 * Time.deltaTime * fleeSpeed;
+        initialPosition = transform.position;
+
     }
 
     IEnumerator DetectPlayer()

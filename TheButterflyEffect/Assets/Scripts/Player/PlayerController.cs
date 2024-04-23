@@ -8,7 +8,7 @@ public class PlayerController : Singleton<PlayerController>
     [Header("References")]
     [SerializeField] private Transform cam;
 
-    private CharacterController controller;
+    [SerializeField] private CharacterController controller;
 
     [Header("Player Properties")]
     [SerializeField] private float walkSpeed = 3f;
@@ -51,6 +51,7 @@ public class PlayerController : Singleton<PlayerController>
     private void Start()
     {
         //Referencing objects
+        
         controller = GetComponent<CharacterController>();
 
         //Subscribing button events to functions 
@@ -92,6 +93,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         if(controller.isGrounded && canJump)
         {
+
             fallVelocity.y = jumpPower;
             onJump?.Invoke();
         }
@@ -115,7 +117,13 @@ public class PlayerController : Singleton<PlayerController>
 
         if (Keyboard.current.escapeKey.wasPressedThisFrame) SceneLoader.LoadScene("Main Menu");
     }
-
+    private void OnDestroy()
+    {
+        playerInput.Player.Jump.performed -= Jumping;
+        playerInput.Player.Sprint.performed -= Sprinting;
+        playerInput.Player.Sprint.canceled -= Sprinting;
+        playerInput.Player.Crouch.performed -= Crouching;
+    }
     private void UpdateMovement()
     {
         //Getting player movement input

@@ -20,18 +20,19 @@ public class Glowstick : ItemMechanic
 
     protected override void Awake()
     {
-        base.Awake();
+        base.Awake(); 
+        glowstickMat = GetComponent<Renderer>().material;
+        litColor = glowstickMat.GetColor("_EmissionColor");
+        pointlight.enabled = startOn;
+        spotlight.enabled = startOn;
+
+
+        glowstickMat.SetColor("_EmissionColor", startOn ? litColor : Color.black);
     }
 
     private void Start()
     {
-        glowstickMat = GetComponent<Renderer>().material;
-        litColor = glowstickMat.GetColor("_EmissionColor");
 
-        pointlight.enabled = startOn;
-        spotlight.enabled = startOn;
-
-        glowstickMat.SetColor("_EmissionColor", startOn ? litColor : Color.black);
     }
 
     private void Spotlight()
@@ -73,6 +74,11 @@ public class Glowstick : ItemMechanic
 
     }
     private void OnDisable()
+    {
+        heldItemScript.onPrimaryAction -= TurnOn;
+        heldItemScript.onSecondaryAction -= Spotlight;
+    }
+    private void OnDestroy()
     {
         heldItemScript.onPrimaryAction -= TurnOn;
         heldItemScript.onSecondaryAction -= Spotlight;

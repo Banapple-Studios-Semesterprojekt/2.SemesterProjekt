@@ -7,6 +7,7 @@ public class Inventory : Singleton<Inventory>
     [SerializeField] private InventoryItem[] inventoryItems;
     [SerializeField] private int inventoryCapacity = 10;
     [SerializeField] private GameObject inventoryCanvas;
+    [SerializeField] private GameObject HotBarCanvas;
     [SerializeField] private GameObject buttons;
 
     private PlayerController playerController;
@@ -26,8 +27,11 @@ public class Inventory : Singleton<Inventory>
         PlayerController.playerInput.Player.Inventory.performed += ToggleInventory;
         playerController = GetComponent<PlayerController>();
     }
-  
-    
+    private void OnDestroy()
+    {
+        PlayerController.playerInput.Player.Inventory.performed -= ToggleInventory;
+    }
+
     private void ToggleInventory(InputAction.CallbackContext context)
     {
         playerController.enabled = !playerController.enabled;
@@ -40,6 +44,7 @@ public class Inventory : Singleton<Inventory>
         print("Sat inventory ui to: " + isActive);
         playerController.enabled = !isActive;
         inventoryCanvas.SetActive(isActive);
+        HotBarCanvas.SetActive(true);
 
         Cursor.visible = isActive;
         Cursor.lockState = isActive ? CursorLockMode.None : CursorLockMode.Locked;

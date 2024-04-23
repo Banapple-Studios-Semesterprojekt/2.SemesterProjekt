@@ -9,6 +9,7 @@ public class HeldItem : MonoBehaviour
     [SerializeField] private GameObject[] obj_items;
     private Item[] items;
     private Interactor interactor;
+    [SerializeField] private InventoryUI inventoryUI;
 
     //Events
     public delegate void primaryAction();
@@ -36,16 +37,27 @@ public class HeldItem : MonoBehaviour
         PlayerController.playerInput.Player.PrimaryAction.performed += PrimaryAction;
         PlayerController.playerInput.Player.SecondaryAction.performed += SecondaryAction;
     }
-
+    void OnDestroy()
+    {
+        PlayerController.playerInput.Player.PrimaryAction.performed -= PrimaryAction;
+        PlayerController.playerInput.Player.SecondaryAction.performed -= SecondaryAction;
+    }
 
     private void PrimaryAction(InputAction.CallbackContext obj)
     {
-        onPrimaryAction?.Invoke();
+        if (!inventoryUI.invetoryIsActive)
+        {
+            onPrimaryAction?.Invoke();
+        }
+        
     }
 
     private void SecondaryAction(InputAction.CallbackContext obj)
     {
-        onSecondaryAction?.Invoke(); //Toggle or hold for glowstick??
+        if (!inventoryUI.invetoryIsActive)
+        {
+            onSecondaryAction?.Invoke(); //Toggle or hold for glowstick??
+        }
     }
 
     private void Hotbar_OnSlotSelect(InventoryItem item)

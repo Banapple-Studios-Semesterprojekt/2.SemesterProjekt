@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5427,7 +5427,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: b1c58e5c9f7dd7c41b9f9769b3dccbd4, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 0be7bc1c5e21b694cb59a0223500ae8d, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1001 &916041270
 PrefabInstance:
@@ -12916,6 +12916,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2046343854256767664, guid: 6edc52f1d7c79aa438d76419b3596557,
+        type: 3}
+      propertyPath: HotBarCanvas
+      value: 
+      objectReference: {fileID: 1164501753362536943}
+    - target: {fileID: 3013041264541293387, guid: 6edc52f1d7c79aa438d76419b3596557,
+        type: 3}
+      propertyPath: inventoryUI
+      value: 
+      objectReference: {fileID: 5602806066372633436}
+    - target: {fileID: 3288430534156926879, guid: 6edc52f1d7c79aa438d76419b3596557,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3573699873793764962, guid: 6edc52f1d7c79aa438d76419b3596557,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -12946,6 +12961,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5654677598117177868, guid: 6edc52f1d7c79aa438d76419b3596557,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6415234846631833237, guid: 6edc52f1d7c79aa438d76419b3596557,
         type: 3}
       propertyPath: m_Name
@@ -12970,6 +12990,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3768491928470748163}
   m_Mesh: {fileID: -2989305052099074096, guid: 13911f6361f64e1469392563f3894356, type: 3}
+--- !u!1 &1164501753362536943 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1674144696833328632, guid: 6edc52f1d7c79aa438d76419b3596557,
+    type: 3}
+  m_PrefabInstance: {fileID: 509722146967428119}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2160346213404281349
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13273,6 +13299,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 737b51aea738e5845870b50bb36a3b25, type: 3}
+--- !u!114 &5602806066372633436 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5391881847845158731, guid: 6edc52f1d7c79aa438d76419b3596557,
+    type: 3}
+  m_PrefabInstance: {fileID: 509722146967428119}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72852c627a809914bb72614ae17d4ff1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7064704081276909433
 PrefabInstance:
   m_ObjectHideFlags: 0

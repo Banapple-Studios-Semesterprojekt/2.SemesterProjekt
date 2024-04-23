@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
+    public bool invetoryIsActive = false;
     public InventorySlot[] slots;
     public InventorySlot[] hotbarSlots;
     public InventorySlot[] breedingSlots;
@@ -58,10 +59,18 @@ public class InventoryUI : MonoBehaviour
         //Setting the UI inventory to invisible
         slotsParent.gameObject.SetActive(false);
     }
+    private void OnDestroy()
+    {
+        Inventory.Instance().onAddItem -= AddItemEvent;
+        Inventory.Instance().onToggleInventory -= ToggleInventoryEvent;
+        PlayerController.playerInput.Player.PrimaryAction.performed -= InventorySlotInteract;
+        PlayerController.playerInput.Player.SecondaryAction.performed -= StackSplit;
+    }
     private void Update()
     {
         UpdateGrabbedItemToMouse();
     }
+
 
     #region Events
     private void AddItemEvent(InventoryItem item, int index)
@@ -76,9 +85,13 @@ public class InventoryUI : MonoBehaviour
         {
             PlayerController.playerInput.Player.PrimaryAction.performed += InventorySlotInteract;
             PlayerController.playerInput.Player.SecondaryAction.performed += StackSplit;
+            invetoryIsActive = true;
+
         }
         else
         {
+            invetoryIsActive = false;
+            GetComponent<ChangeUI>().DiactivateCatalogue();
             PlayerController.playerInput.Player.PrimaryAction.performed -= InventorySlotInteract;
             PlayerController.playerInput.Player.SecondaryAction.performed -= StackSplit;
 
