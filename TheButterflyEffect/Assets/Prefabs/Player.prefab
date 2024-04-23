@@ -3606,7 +3606,7 @@ MonoBehaviour:
   baseTransform: {fileID: 0}
   Hips: {fileID: 736218032772826979}
   ScaleReferenceMode: 3
-  finalScaleReference: 0.9774891
+  finalScaleReference: 0.97749126
   finalScaleReferenceSqrt: 0.1
   customScaleReferenceValue: 0.5
   DelayedInitialization: 0
@@ -5104,8 +5104,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 519.83, y: 1.25, z: 512.85785}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1306419947956089600}
   - {fileID: 975551932098008892}
@@ -5152,8 +5152,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 5173978566539557225}
-  walkSpeed: 4
-  runSpeed: 8
+  walkSpeed: 5
+  runSpeed: 10
   jumpPower: 7
   mouseSensitivity: 1.5
   gravity: -19.64

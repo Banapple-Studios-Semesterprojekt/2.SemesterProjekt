@@ -12,11 +12,11 @@ public class ButterflySpawner : MonoBehaviour
     // bliver brugt til at opbevare summen af alle sommerfuglens indivduelle sandsynligheder for at spawne 
     private int probabilitySum = 0;
     // bliver brugt til at obevare somerfulgeprfabsnes chance for at spawne
-    public int[] rangeNumber;
+    private int[] rangeNumber;
 
     private Vector3 center;
     public ButterflyData[] butterflyPrefab;
-    public List<GameObject> currentButterflies;
+    private List<GameObject> currentButterflies;
 
     private void Start()
     {
