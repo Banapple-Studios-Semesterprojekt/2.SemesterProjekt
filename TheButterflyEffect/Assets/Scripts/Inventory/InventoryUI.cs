@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -351,7 +352,24 @@ public class InventoryUI : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
     }
-
+    public void DropSingleItem(InventoryItem item,int index)
+    {
+        Transform target = Inventory.Instance().transform;
+        GameObject droppedItem = Instantiate(item.item.itemObject, target.position + Vector3.up * 0.5f + target.forward, Quaternion.identity);
+        droppedItem.name = item.item.name;
+    }
+    public void RemoveSingleItem(InventoryItem item, int index)
+    {
+        if (item.currentStack <= 0)
+        {
+            hotbarSlots[index - inventoryCapacity + 3].RemoveInventorySlot();
+        }
+        else
+        {
+            hotbarSlots[index - inventoryCapacity + 3].SetInventorySlot(item);
+        }
+        onPlaceItem?.Invoke();
+    }
     public InventorySlot[] GetHotbarSlots() { return hotbarSlots; }
     #endregion
 }
