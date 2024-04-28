@@ -13,6 +13,8 @@ public class ButterflyData : Item
 
     public float size;
     public int spawnProbability;
+
+    public bool nightButterfly;
 }
 
 [System.Serializable]

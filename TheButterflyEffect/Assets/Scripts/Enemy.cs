@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour
         PlayAudio(howl, false, 0.95f);
         Invoke(nameof(SetHowlDone), 7f);
 
-        GameObject patrolPointsParent = GameObject.Find("Wolf Patrol Positions");
+        GameObject patrolPointsParent = GameObject.Find("Enemy patrol locations");
         patrolPositions = patrolPointsParent.GetComponentsInChildren<Transform>().Where(x => x != patrolPointsParent.transform).ToArray();
 
         StartCoroutine(FollowTarget());
