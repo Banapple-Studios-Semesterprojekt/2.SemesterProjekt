@@ -18,11 +18,10 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: 6eec014774aa73c4eae18f9a81990534, type: 3}
   maxStack: 1
   butterflyName: Triangle Birdwing
-  description: "Scientific name: Trogonoptera Trojana\r.\n\nLocation: The T. Trojana
-    originates from the Philippines. \r\n\nWingspan: 18- 19 cm.\r\n\nFamily: Papilionidae.\r\n\nCharacteristics:
+  description: "Scientific name: Trogonoptera Trojana\r.\nLocation: The T. Trojana
+    originates from the Philippines. \r\nWingspan: 18- 19 cm.\r\nFamily: Papilionidae.\r\nCharacteristics:
     The butterfly is recognizable from its dark colors and emerald green strokes
-    on the edges of its wings. \r\n\nRarity: Rare, one of only two species in its
-    genus. "
+    on the edges of its wings. \r\nRarity: Rare, one of only two species in its genus. "
   typeEnglish: 4
   typeDanish: 4
   size: 1

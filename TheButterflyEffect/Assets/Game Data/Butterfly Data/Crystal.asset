@@ -18,13 +18,10 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: da9b9fc2ba262ca4db7b957a217e7294, type: 3}
   maxStack: 1
   butterflyName: Crystal Butterfly
-  description: "Scientific name: Cystrallo papilinonem\r.\n\nLocation: This butterfly
-    can only be found during the night. It comes out of hiding as the sun sets, it
-    prefers moonlight to sunlight and thus sleeps during daytime. When it has come
-    out it is commonly found close to the ground and rocks.\r\n\nWingspan: 6.2 -
-    7.0 cm.\r\n\nFamily: Crystal family.\r\n\nCharacteristics: The crystal butterfly
-    is characterized by its purple color and crystal-like structure that can be seen
-    in its wings. \r\n\nRarity: Rare"
+  description: "Scientific name: Cystrallo papilinonem\r.\nLocation: Can only be
+    found during the night close to the ground. It prefers moonlight to sunlight.
+    \nWingspan: 6.2 - 7.0 cm.\r\nFamily: Crystal family.\r\nCharacteristics: Has
+    purple colored and crystal-like structured wing.\nRarity: Rare"
   typeEnglish: 6
   typeDanish: 6
   size: 1

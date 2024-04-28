@@ -18,14 +18,12 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: 0328a9801e7292c41868459258644cb9, type: 3}
   maxStack: 1
   butterflyName: 'Holly Blue '
-  description: "Scientific name: Celastrina argiolus.\r\n\nLocation: This butterfly
-    tends to fly high around trees and bushes. It is widespread and can be found
-    almost anywhere in South Asia. It can be as easily found in Great Britain, but
-    is mostly situated in parts of northern England. \r\n\nWingspan: 2.6 - 3.4 cm\r.\n\nFamily:
-    Lycaenids, commonly known as Blues\r.\n\nCharacteristics: The butterfly has bright
-    blue wings, meanwhile its ventral side (bottom side) are pale blue with black
-    spots. Its ventral side sets it apart from similar blue butterflies. \r\n\nRarity:
-    Common"
+  description: "Scientific name: Celastrina argiolus.\r\nLocation: Tends to fly high
+    around trees and bushes. \nWidespread and can be found almost anywhere in South
+    Asia and Great Britain.\nWingspan: 2.6 - 3.4 cm\r.\nFamily: Lycaenids, commonly
+    known as Blues\r.\nCharacteristics: Has bright blue wings, while its ventral
+    side (bottom side) are pale blue with black spots, which sets it apart from similar
+    blue butterflies. \r\nRarity: Common"
   typeEnglish: 3
   typeDanish: 3
   size: 1

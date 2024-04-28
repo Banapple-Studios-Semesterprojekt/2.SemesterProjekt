@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ae16d209e106b40910a2554e26d893, type: 3}
   m_Name: AnisotropicKuwaharaFilter
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   Settings:
     GaussRadius: 5
     GaussSigma: 2

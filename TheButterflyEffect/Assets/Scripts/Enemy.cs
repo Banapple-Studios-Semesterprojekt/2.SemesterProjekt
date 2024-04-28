@@ -154,6 +154,10 @@ public class Enemy : MonoBehaviour
             //PlayerController.Instance(). <respawn-function-name> -- Thomas
             collider.GetComponent<Death_and_respawn>().Die();
             Debug.Log("Player dies");
+
+            //Enemy attack
+            animator.SetTrigger("Attack");
+            PlayerController.Instance().GetCamera().GetComponent<Camera>().enabled = false;
         }
     }
 

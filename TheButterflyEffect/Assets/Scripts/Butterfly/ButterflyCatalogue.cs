@@ -8,11 +8,6 @@ public class ButterflyCatalogue : MonoBehaviour
     {
         Inventory.Instance().onAddItem += ButterflyCatalogue_onAddItem;
         butterflySlot = transform.GetChildrenRecursive<ButterflySlot>().ToArray();
-        
-        for (int i = 0; i < butterflySlot.Length; i++)
-        {
-            butterflySlot[i].ZeroButterflies();
-        }
     }
 
     private void ButterflyCatalogue_onAddItem(InventoryItem item, int index)
