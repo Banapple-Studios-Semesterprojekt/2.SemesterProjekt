@@ -12514,11 +12514,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15af63679187d84fb54f92f4168603d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  circleRadius: 100
-  spawnchekradius: 2
-  maxButterfliesSpawn: 50
-  spawnTime: 2
-  rangeNumber: 
   butterflyPrefab:
   - {fileID: 11400000, guid: 49b96b82d8d632246b498f275960a861, type: 2}
   - {fileID: 11400000, guid: e2562b3d8029c984a8235381743de8a4, type: 2}
@@ -12528,7 +12523,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4a39db68be450d74690f2a175b05df5b, type: 2}
   - {fileID: 11400000, guid: 963e647e8899869499776f5944cf7c49, type: 2}
   - {fileID: 11400000, guid: 67becdb36652b9247a1bcee62076ce4b, type: 2}
-  currentButterflies: []
+  circleRadius: 100
+  spawnchekradius: 2
+  maxButterfliesSpawn: 50
+  spawnTime: 2
 --- !u!4 &1968333531
 Transform:
   m_ObjectHideFlags: 0
