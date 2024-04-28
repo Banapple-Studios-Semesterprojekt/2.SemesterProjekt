@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 175212446410586326}
   - component: {fileID: 1585743572958001303}
   m_Layer: 6
-  m_Name: Butterfly_Quick_Prototype
+  m_Name: z Butterfly_Quick_Prototype
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

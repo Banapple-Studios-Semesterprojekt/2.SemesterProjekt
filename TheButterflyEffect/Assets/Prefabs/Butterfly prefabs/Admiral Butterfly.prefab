@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5481415367880901785}
   - component: {fileID: 7955353644580422127}
   - component: {fileID: 2976703674303444608}
+  - component: {fileID: 7242302264941006890}
   m_Layer: 0
   m_Name: Admiral Butterfly
   m_TagString: Untagged
@@ -163,3 +164,30 @@ MonoBehaviour:
   floatSpeed: 1
   minFloatHeight: 0.2
   maxFloatHeight: 1
+--- !u!114 &7242302264941006890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4495880325807851004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e28754e38928d684d9c194329b7914ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7955353644580422127}
+        m_TargetAssemblyTypeName: ItemObject, Assembly-CSharp
+        m_MethodName: AddItemToInventoryWithNet
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
