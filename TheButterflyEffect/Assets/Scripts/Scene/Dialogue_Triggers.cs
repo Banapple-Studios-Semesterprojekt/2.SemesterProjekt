@@ -22,7 +22,7 @@ public class Dialogue_Triggers : MonoBehaviour
 
     public List<DialogueGroup> dialogues;
     public List<DialogueGroup> dialoguesEnglish;
-    public bool danishDialog=true;
+    public static bool danishDialog=true;
     [SerializeField] private Dialog_Controler contoler;
     private int activeDialogueGroup;
     [SerializeField] private int dialoguePage = 0;
@@ -69,6 +69,16 @@ void Update()
         }
      }
 
+    public void SetLanguage(int i)
+    {
+        if (i == 0){ 
+        danishDialog = true;
+        }
+        else
+        {
+            danishDialog = false;
+        }
+    }
 
 }
 
