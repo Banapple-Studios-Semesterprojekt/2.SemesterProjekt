@@ -8,7 +8,11 @@ public class BreedingSystem : MonoBehaviour
     [SerializeField] private ButteflyRecipe[] recipies;
     [SerializeField] private Slider BreedSlider;
 
-    Coroutine breedCoroutine;
+    private Coroutine breedCoroutine;
+
+    private int breedCount = 0;
+    public delegate void BreedAction(int breedCount);
+    public event BreedAction onBreed;
 
     private void Start()
     {
@@ -46,9 +50,9 @@ public class BreedingSystem : MonoBehaviour
         result.SetInventorySlot(outputItem);
         ClearInputSlots();
         BreedSlider.value = 0;
+        onBreed?.Invoke(++breedCount);
         print("Sets Inventory Output Slot!");
         breedCoroutine = null;
-
     }
 
     public void ClearInputSlots()
