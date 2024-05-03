@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ButterflySpawner : MonoBehaviour
 {
+    public ButterflyData[] butterflyPrefab;
     public float circleRadius = 5f;
     [SerializeField] float spawnchekradius = 2;
     public float maxButterfliesSpawn;
@@ -12,14 +13,17 @@ public class ButterflySpawner : MonoBehaviour
     // bliver brugt til at opbevare summen af alle sommerfuglens indivduelle sandsynligheder for at spawne 
     private int probabilitySum = 0;
     // bliver brugt til at obevare somerfulgeprfabsnes chance for at spawne
-    public int[] rangeNumber;
+    private int[] rangeNumber;
 
     private Vector3 center;
-    public ButterflyData[] butterflyPrefab;
-    public List<GameObject> currentButterflies;
+    private ButterflyData butterflyData;
+    private List<GameObject> currentButterflies;
+    private TimeController timeController;
 
     private void Start()
     {
+        timeController = FindAnyObjectByType<TimeController>();
+ 
         StartCoroutine(SpawnButterflies());
         center = transform.position;
         rangeNumber = new int[butterflyPrefab.Length];
@@ -75,9 +79,30 @@ public class ButterflySpawner : MonoBehaviour
             // hvis ikke køre vi vider til det n�ste prefab og tjekker igen
             if (rangeNumber[i] > r)
             {
-                GameObject currentButterfly = Instantiate(butterflyPrefab[i].itemObject, spawnPosition, Quaternion.identity);
-                currentButterflies.Add(currentButterfly);
-                break;
+                if (!butterflyData.nightButterfly)
+                {
+                    GameObject currentButterfly = Instantiate(butterflyPrefab[i].itemObject, spawnPosition, Quaternion.identity);
+                    currentButterflies.Add(currentButterfly);
+                    break;
+                }
+                else if (butterflyData.nightButterfly) //Only spawn specific butterflies during the night, depends on a bool in butterflyData
+                {
+                    while(timeController.hour < 20 && timeController.hour > 6) 
+                    {
+                        GameObject nightButterfly = Instantiate(butterflyPrefab[i].itemObject, spawnPosition, Quaternion.identity);
+                        currentButterflies.Add(nightButterfly);
+                        break;
+                    }
+                    
+                }
+
+                //Code before my changes
+                /*if (rangeNumber[i] < r)
+                {
+                    GameObject nightButterfly = Instantiate(butterflyPrefab[i].itemObject, spawnPosition, Quaternion.identity);
+                    currentButterflies.Add(nightButterfly);
+                    break;
+                }*/
             }
         }
     }
