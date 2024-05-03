@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
+using static UnityEditor.Progress;
 
 public class Inventory : Singleton<Inventory>
 {
@@ -175,5 +176,19 @@ public class Inventory : Singleton<Inventory>
             invenUI.ClearAllSlots();
         }
     }
+    public void PlaceItem(int index)
+    {
+        InventoryUI invenUI = GetComponentInChildren<InventoryUI>();
+        invenUI.DropSingleItem(inventoryItems[index], index);
+        if (inventoryItems[index].currentStack>1)
+        {
+            inventoryItems[index].currentStack--;
+        }
+        else
+        {
+            RemoveItem(index);
+        }
+        invenUI.RemoveSingleItem(inventoryItems[index], index);
 
+    }
 }

@@ -21,6 +21,8 @@ public class Dialogue_Triggers : MonoBehaviour
 {
 
     public List<DialogueGroup> dialogues;
+    public List<DialogueGroup> dialoguesEnglish;
+    public static bool danishDialog=true;
     [SerializeField] private Dialog_Controler contoler;
     private int activeDialogueGroup;
     [SerializeField] private int dialoguePage = 0;
@@ -43,11 +45,22 @@ void Update()
      public void NextDialogue()
      {
         bool Return=false;
-        if (dialoguePage < dialogues[activeDialogueGroup].dialouge.Count-1)
+        if (danishDialog)
         {
-            Return = true;
+            if (dialoguePage < dialogues[activeDialogueGroup].dialouge.Count-1)
+            {
+                Return = true;
+            }
+            contoler.RunDialogue(dialogues[activeDialogueGroup].dialouge[dialoguePage].dialouge, dialogues[activeDialogueGroup].dialouge[dialoguePage].color, Return);
         }
-        contoler.RunDialogue(dialogues[activeDialogueGroup].dialouge[dialoguePage].dialouge, dialogues[activeDialogueGroup].dialouge[dialoguePage].color, Return);
+        else
+        {
+            if (dialoguePage < dialoguesEnglish[activeDialogueGroup].dialouge.Count - 1)
+            {
+                Return = true;
+            }
+            contoler.RunDialogue(dialoguesEnglish[activeDialogueGroup].dialouge[dialoguePage].dialouge, dialoguesEnglish[activeDialogueGroup].dialouge[dialoguePage].color, Return);
+        }
         Debug.Log(Return);
         dialoguePage++;
         if (!Return)
@@ -56,6 +69,16 @@ void Update()
         }
      }
 
+    public void SetLanguage(int i)
+    {
+        if (i == 0){ 
+        danishDialog = true;
+        }
+        else
+        {
+            danishDialog = false;
+        }
+    }
 
 }
 

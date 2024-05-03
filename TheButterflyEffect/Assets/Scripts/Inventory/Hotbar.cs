@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class Hotbar : MonoBehaviour
 {
     private InventorySlot[] hotbarSlots;
-    private int selectedSlot = 0;
+    public int selectedSlot = 0;
     public event Action<InventoryItem> onSlotSelect;
 
     private void Start()

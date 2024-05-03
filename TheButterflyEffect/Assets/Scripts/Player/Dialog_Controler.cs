@@ -17,7 +17,7 @@ public class Dialog_Controler : MonoBehaviour
     private void Start()
     {
         DisplayText.text = "";
-        DiaTrigger= GameObject.Find("DialogueManager").GetComponent<Dialogue_Triggers>();
+        DiaTrigger= GameObject.Find("DialogeuManeger").GetComponent<Dialogue_Triggers>();
        
     }
     public void RunDialogue(Dialogue dialogue, Color color,bool isMoreDialogue)
