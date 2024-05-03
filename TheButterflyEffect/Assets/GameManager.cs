@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -8,20 +9,30 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private int countForBlueTerrain = 5, countForRedTerrain = 10;
 
+    [SerializeField] private GameObject blueMushroomParent;
+    [SerializeField] private GameObject redMushroomParent;
+
     private void Start()
     {
         terrain = FindAnyObjectByType<Terrain>(FindObjectsInactive.Exclude);
-        terrainGreen = Resources.Load<TerrainData>("Forest-Terrain");
-        terrainBlue = Resources.Load<TerrainData>("ForestBlue-Terrain");
-        terrainRed = Resources.Load<TerrainData>("ForestRed-Terrain");
+        terrainGreen = Resources.Load<TerrainData>("Game-Terrain");
+        terrainBlue = Resources.Load<TerrainData>("GameBlue-Terrain");
+        terrainRed = Resources.Load<TerrainData>("GameRed-Terrain");
 
         FindAnyObjectByType<BreedingSystem>().onBreed += BreedingSystem_OnBreed;
     }
 
     private void BreedingSystem_OnBreed(int breedCount)
     {
-        ForestState state = breedCount >= countForRedTerrain ? ForestState.RedBiome : breedCount >= countForBlueTerrain ? ForestState.BlueBiome : ForestState.GreenBiome;
-        StartCoroutine(ChangeForestState(state));
+        if(breedCount == countForBlueTerrain)
+        {
+            StartCoroutine(ChangeForestState(ForestState.BlueBiome));
+        }
+        else if(breedCount == countForRedTerrain)
+        {
+            StartCoroutine(ChangeForestState(ForestState.RedBiome));
+        }
+
     }
 
     IEnumerator ChangeForestState(ForestState state)
@@ -35,9 +46,11 @@ public class GameManager : MonoBehaviour
                 break;
             case ForestState.BlueBiome:
                 terrain.terrainData = terrainBlue;
+                blueMushroomParent.SetActive(false);
                 break;
             case ForestState.RedBiome:
                 terrain.terrainData = terrainRed;
+                redMushroomParent.SetActive(false);
                 break;
         }
         BlackScreen.Instance().SetBlackScreen(false);

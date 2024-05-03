@@ -26,4 +26,4 @@ MonoBehaviour:
   typeDanish: 6
   size: 1
   spawnProbability: 30
-  nightButterfly: 0
+  nightButterfly: 1

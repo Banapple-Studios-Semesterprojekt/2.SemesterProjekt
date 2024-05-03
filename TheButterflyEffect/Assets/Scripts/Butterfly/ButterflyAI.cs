@@ -42,7 +42,6 @@ public class ButterflyAI : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, -Vector3.up, out hit)&&!flee)
         {
-            Debug.Log(hit.distance);
             if (hit.distance < floatheight-1)
             {
                 Flyup();

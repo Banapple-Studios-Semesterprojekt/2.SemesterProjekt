@@ -14,10 +14,11 @@ public class Dialog_Controler : MonoBehaviour
     public bool activeDialogue;
     private bool skip;
     [SerializeField] private Image Backkground;
+    [SerializeField] private GameObject dialogueUI;
     private void Start()
     {
         DisplayText.text = "";
-        DiaTrigger= GameObject.Find("DialogeuManeger").GetComponent<Dialogue_Triggers>();
+        DiaTrigger= GameObject.Find("DialogueManager").GetComponent<Dialogue_Triggers>();
        
     }
     public void RunDialogue(Dialogue dialogue, Color color,bool isMoreDialogue)
@@ -25,6 +26,7 @@ public class Dialog_Controler : MonoBehaviour
         DisplayText.color = color;
         StartCoroutine(DisplayDialgue(dialogue.sentences,isMoreDialogue));
         Backkground.enabled = true;
+        dialogueUI.SetActive(true);
     }
     IEnumerator DisplayDialgue(string[] dia,bool isMoreDialogue)
     {
@@ -54,6 +56,7 @@ public class Dialog_Controler : MonoBehaviour
         else
         {
             Backkground.enabled = false;
+            dialogueUI.SetActive(false);
         }
     }
     private void Update()
@@ -62,7 +65,5 @@ public class Dialog_Controler : MonoBehaviour
         {
             skip = true;    
         }
-        
-
     }
 }

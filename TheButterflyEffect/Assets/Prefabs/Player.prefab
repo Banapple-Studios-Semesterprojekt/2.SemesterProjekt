@@ -2007,8 +2007,9 @@ GameObject:
   - component: {fileID: 565625541841607381}
   - component: {fileID: 4656085060657647567}
   - component: {fileID: 6888746838966913556}
+  - component: {fileID: 5601967032782290975}
   m_Layer: 5
-  m_Name: Player_Dialog
+  m_Name: DialogueManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2144,10 +2145,97 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testdialogue:
     sentences: []
-  DisplayText: {fileID: 0}
-  scentensSwitchSpeed: 0
+  DisplayText: {fileID: 3687918989060132887}
+  scentensSwitchSpeed: 3
   activeDialogue: 0
-  Backkground: {fileID: 0}
+  Backkground: {fileID: 7216811022061031543}
+  dialogueUI: {fileID: 7560999906290986678}
+--- !u!114 &5601967032782290975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2351859296918282215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39bbea058bcce744191e8382d82d9f5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogues:
+  - dialouge:
+    - dialouge:
+        sentences:
+        - "Hej med dig, \nJeg er en skov \xE5nd"
+      color: {r: 0.51320755, g: 0.80719215, b: 1, a: 1}
+  - dialouge:
+    - dialouge:
+        sentences:
+        - Det her er godt nok en stor skov!
+      color: {r: 0, g: 1, b: 0.48255873, a: 1}
+  - dialouge:
+    - dialouge:
+        sentences:
+        - "Der er s\xE5 mange sommerfugle her!"
+      color: {r: 0, g: 1, b: 0.48255873, a: 0.972549}
+  - dialouge:
+    - dialouge:
+        sentences:
+        - 'Jeg tror jeg ser en ny race af sommerfugle '
+      color: {r: 0, g: 1, b: 0.48255873, a: 0.972549}
+  - dialouge:
+    - dialouge:
+        sentences:
+        - Du finder ikke skove som den her i storbyen
+      color: {r: 0, g: 1, b: 0.48255873, a: 0.972549}
+  - dialouge:
+    - dialouge:
+        sentences:
+        - "\xC5h nej, en ulv!"
+      color: {r: 0, g: 1, b: 0.48255873, a: 0.972549}
+  - dialouge:
+    - dialouge:
+        sentences:
+        - Det ligner ulvespor?
+      color: {r: 0, g: 1, b: 0.48255873, a: 0.972549}
+  dialoguesEnglish:
+  - dialouge:
+    - dialouge:
+        sentences:
+        - "Hello human, \nI'm a forest spirit. \nNice to meet you"
+      color: {r: 1, g: 1, b: 1, a: 0}
+  - dialouge:
+    - dialouge:
+        sentences:
+        - 'This is a huge forest! '
+      color: {r: 0, g: 1, b: 0.48235294, a: 0}
+  - dialouge:
+    - dialouge:
+        sentences:
+        - There are so many butterflies here!
+      color: {r: 0, g: 1, b: 0.48235294, a: 0}
+  - dialouge:
+    - dialouge:
+        sentences:
+        - I think a see a new butterfly species!
+      color: {r: 0, g: 1, b: 0.48235294, a: 0}
+  - dialouge:
+    - dialouge:
+        sentences:
+        - You won't find forests like this in the city
+      color: {r: 0, g: 1, b: 0.48235294, a: 0}
+  - dialouge:
+    - dialouge:
+        sentences:
+        - Oh no! A wolf!
+      color: {r: 0, g: 1, b: 0.48235294, a: 0}
+  - dialouge:
+    - dialouge:
+        sentences:
+        - There are pawprints here. I wonder what has made them
+      color: {r: 0, g: 1, b: 0.48235294, a: 0}
+  contoler: {fileID: 6888746838966913556}
+  dialoguePage: 0
 --- !u!1 &2369078076297102375
 GameObject:
   m_ObjectHideFlags: 0
@@ -5088,8 +5176,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0c18f0a7f6d67d840bfd3f8b4a90561a, type: 2}
-  m_sharedMaterial: {fileID: 8002940187317132056, guid: 2385556eb35a8fe4587589b676a6ad35,
+  m_fontAsset: {fileID: 11400000, guid: 9691f172a1df0a84e89d5cf4b370db85, type: 2}
+  m_sharedMaterial: {fileID: 1526726064867868033, guid: 9691f172a1df0a84e89d5cf4b370db85,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -5153,7 +5241,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &6037597842643132633
@@ -5777,6 +5865,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 5173978566539557225}
+  controller: {fileID: 5654677598117177868}
   walkSpeed: 5
   runSpeed: 10
   jumpPower: 7
@@ -5820,6 +5909,7 @@ MonoBehaviour:
   inventoryItems: []
   inventoryCapacity: 15
   inventoryCanvas: {fileID: 9071934729743570499}
+  HotBarCanvas: {fileID: 1674144696833328632}
   buttons: {fileID: 6040259069937907941}
 --- !u!114 &3013041264541293387
 MonoBehaviour:
@@ -5837,6 +5927,7 @@ MonoBehaviour:
   - {fileID: 8146530129455348986}
   - {fileID: 8752635019559117897}
   - {fileID: 6190281209037500525}
+  inventoryUI: {fileID: 5391881847845158731}
 --- !u!114 &6254945521679441252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6421,6 +6512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72852c627a809914bb72614ae17d4ff1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invetoryIsActive: 0
   slots: []
   hotbarSlots: []
   breedingSlots: []

@@ -23,7 +23,6 @@ public class ForestSpirit : MonoBehaviour
         dialogueTriggers = FindAnyObjectByType<Dialogue_Triggers>();
         dialogueController = FindAnyObjectByType<Dialog_Controler>();
         inventoryUI = playerCanvas.transform.Find("Inventory UI").gameObject;
-        dialogueUI = playerCanvas.transform.Find("Dialogue UI").gameObject;
         forestSpiritRenderer = GetComponentInChildren<Renderer>();
 
         forestSpiritRenderer.enabled = false;
@@ -55,8 +54,9 @@ public class ForestSpirit : MonoBehaviour
         //cutscene, when done it should fly away
         PlayerController.Instance().enabled = false;
         inventoryUI.SetActive(false);
-        dialogueUI.SetActive(true);
         dialogueTriggers.runDialogue(0); //Starts dialogue
+
+        yield return new WaitForSeconds(0.2f);
 
         while (dialogueController.activeDialogue)
         {
@@ -67,7 +67,6 @@ public class ForestSpirit : MonoBehaviour
         //Spirit flies away
         PlayerController.Instance().enabled = true;
         inventoryUI.SetActive(true);
-        dialogueUI.SetActive(false);
         animator.SetBool("isIdle", false);
         float timer = 0;
         while(timer < 30f)

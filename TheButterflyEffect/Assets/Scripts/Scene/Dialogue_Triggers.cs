@@ -13,9 +13,7 @@ public class DialogueAndColor
 [System.Serializable]
 public class DialogueGroup
 {
-
     public List<DialogueAndColor> dialouge;
-    
 }
 public class Dialogue_Triggers : MonoBehaviour
 {

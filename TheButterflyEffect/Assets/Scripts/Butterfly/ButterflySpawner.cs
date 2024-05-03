@@ -16,13 +16,13 @@ public class ButterflySpawner : MonoBehaviour
     private int[] rangeNumber;
 
     private Vector3 center;
-    private ButterflyData butterflyData;
     private List<GameObject> currentButterflies;
     private TimeController timeController;
 
     private void Start()
     {
         timeController = FindAnyObjectByType<TimeController>();
+        currentButterflies = new List<GameObject>();
  
         StartCoroutine(SpawnButterflies());
         center = transform.position;
@@ -79,13 +79,13 @@ public class ButterflySpawner : MonoBehaviour
             // hvis ikke køre vi vider til det n�ste prefab og tjekker igen
             if (rangeNumber[i] > r)
             {
-                if (!butterflyData.nightButterfly)
+                if (!butterflyPrefab[i].nightButterfly)
                 {
                     GameObject currentButterfly = Instantiate(butterflyPrefab[i].itemObject, spawnPosition, Quaternion.identity);
                     currentButterflies.Add(currentButterfly);
                     break;
                 }
-                else if (butterflyData.nightButterfly) //Only spawn specific butterflies during the night, depends on a bool in butterflyData
+                else if (butterflyPrefab[i].nightButterfly) //Only spawn specific butterflies during the night, depends on a bool in butterflyData
                 {
                     while(timeController.hour < 20 && timeController.hour > 6) 
                     {
