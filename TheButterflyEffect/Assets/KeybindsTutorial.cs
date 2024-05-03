@@ -25,7 +25,12 @@ public class KeybindsTutorial : MonoBehaviour
         PlayerController.playerInput.Player.CameraLook.performed += CameraLook_performed;
         PlayerController.playerInput.Player.Inventory.performed += Inventory_performed;
     }
-
+    private void OnDestroy()
+    {
+        PlayerController.playerInput.Player.Movement.performed -= Movement_performed;
+        PlayerController.playerInput.Player.CameraLook.performed -= CameraLook_performed;
+        PlayerController.playerInput.Player.Inventory.performed -= Inventory_performed;
+    }
     private void Inventory_performed(InputAction.CallbackContext obj)
     {
         hasInventoried = true;
