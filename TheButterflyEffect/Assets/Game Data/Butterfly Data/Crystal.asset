@@ -21,7 +21,8 @@ MonoBehaviour:
   description: "Scientific name: Cystrallo papilinonem\r.\nLocation: Can only be
     found during the night close to the ground. It prefers moonlight to sunlight.
     \nWingspan: 6.2 - 7.0 cm.\r\nFamily: Crystal family.\r\nCharacteristics: Has
-    purple colored and crystal-like structured wing.\nRarity: Rare"
+    purple colored and crystal-like structured wing.\nRarity: Rare.\n\nCan be bred
+    with: Trogonoptera Trojana\r"
   typeEnglish: 6
   typeDanish: 6
   size: 1

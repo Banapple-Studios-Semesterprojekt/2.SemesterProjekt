@@ -22,8 +22,10 @@ MonoBehaviour:
     near trees and bushes, they appear both during the day and the evening. \r\nWingspan:
     3.5 - 4.7 cm.\r\nFamily: Leaf family.\r\nCharacteristics: This butterfly is characterized
     by its two different colored wings. It has a green- and red-like wing. These
-    are used as camouflage depending on the season.\nRarity: Rare"
+    are used as camouflage depending on the season.\nRarity: Rare.\n\nCan be bred
+    with: Brimstone and Trogonoptera Trojana\r."
   typeEnglish: 5
   typeDanish: 5
   size: 1
   spawnProbability: 45
+  nightButterfly: 0

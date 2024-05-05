@@ -22,8 +22,9 @@ MonoBehaviour:
     Europe, Asia and northern Africa. It is found in grass- and woodland.\r\nWingspan:
     5.2 - 6.0 cm. \r\nFamily: Pierida\r.\nCharacteristics: The pale green/yellow-ish
     color of the wings are almost solid, and seem to have tiny orange central blotch
-    on each wing. \r\nRarity: Common"
+    on each wing. \r\nRarity: Common.\n\nCan be bred with: Hollyblue and Monarch"
   typeEnglish: 2
   typeDanish: 2
   size: 1
   spawnProbability: 90
+  nightButterfly: 0

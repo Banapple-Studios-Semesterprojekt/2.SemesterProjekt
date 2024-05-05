@@ -6,15 +6,14 @@ using TMPro;
 
 public class ButterflySlot : MonoBehaviour
 {
-    //==========ITEM DATA==========//
-    ButterflyData butterfly; //All information is in the scriptable object.
-
-
     //==========BUTTERFLY SLOT===========//
     public TextMeshProUGUI butterflyDescription;
     public TextMeshProUGUI butterflyName;
     public Image butterflyImage;
     public bool butterflyCaught;
+
+    //==========REFERENCES============//
+    private ButterflyRecipeVisualizer butterflyRecipeVisualizer;
 
     public void AddButterflyToSlot(ButterflyData newButterfly)
     {

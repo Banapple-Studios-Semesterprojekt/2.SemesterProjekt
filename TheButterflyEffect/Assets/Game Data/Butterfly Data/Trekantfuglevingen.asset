@@ -21,7 +21,8 @@ MonoBehaviour:
   description: "Scientific name: Trogonoptera Trojana\r.\nLocation: The T. Trojana
     originates from the Philippines. \r\nWingspan: 18- 19 cm.\r\nFamily: Papilionidae.\r\nCharacteristics:
     The butterfly is recognizable from its dark colors and emerald green strokes
-    on the edges of its wings. \r\nRarity: Rare, one of only two species in its genus. "
+    on the edges of its wings. \r\nRarity: Rare, one of only two species in its genus.
+    \n\nCan be bred with: Leaf and Crystal"
   typeEnglish: 4
   typeDanish: 4
   size: 1

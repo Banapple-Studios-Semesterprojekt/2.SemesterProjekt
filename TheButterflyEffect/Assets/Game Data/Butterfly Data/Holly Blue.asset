@@ -23,8 +23,10 @@ MonoBehaviour:
     Asia and Great Britain.\nWingspan: 2.6 - 3.4 cm\r.\nFamily: Lycaenids, commonly
     known as Blues\r.\nCharacteristics: Has bright blue wings, while its ventral
     side (bottom side) are pale blue with black spots, which sets it apart from similar
-    blue butterflies. \r\nRarity: Common"
+    blue butterflies. \r\nRarity: Common.\n\nCan be bred with: Monarch, Admiral and
+    Brimstone"
   typeEnglish: 3
   typeDanish: 3
   size: 1
   spawnProbability: 100
+  nightButterfly: 0
