@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class BookScript : MonoBehaviour
 {
     private GameObject[] pages;
-    private ButterflySlot butterflySlot;
+    private ButterflyRecipeVisualizer butterflyRecipeVisualizer;
 
     public Button nextPage;
     public Button prevPage;
@@ -20,7 +20,7 @@ public class BookScript : MonoBehaviour
     {
         //Referencing children in book and converting transform to a gameobject array
         pages = GetComponentsInChildren<Transform>().Where(s => s.name.Contains("Page") && s != transform).Select(t => t.gameObject).ToArray();
-        butterflySlot = GetComponentInChildren<ButterflySlot>();
+        butterflyRecipeVisualizer = FindAnyObjectByType<ButterflyRecipeVisualizer>();
 
         pageIndex = 0;
         pageCount = 2;

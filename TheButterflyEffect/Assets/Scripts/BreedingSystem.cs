@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class BreedingSystem : MonoBehaviour
 {
     [SerializeField] private InventorySlot slot1, slot2, result;
-    [SerializeField] private ButteflyRecipe[] recipies;
+    [SerializeField] private ButterflyRecipes[] recipies;
     [SerializeField] private Slider BreedSlider;
 
     private Coroutine breedCoroutine;
@@ -27,7 +27,7 @@ public class BreedingSystem : MonoBehaviour
 
     public void TryBreed()
     {
-        foreach (ButteflyRecipe recipe in recipies)
+        foreach (ButterflyRecipes recipe in recipies)
         {
             ButterflyData output = TryGetOutput(recipe);
             if (output != null && breedCoroutine == null)
@@ -37,7 +37,7 @@ public class BreedingSystem : MonoBehaviour
         }
     }
 
-    IEnumerator Breed(ButteflyRecipe butteflyRecipe, ButterflyData output)
+    IEnumerator Breed(ButterflyRecipes butteflyRecipe, ButterflyData output)
     {
         float bredingtime = 0;
         while (bredingtime < butteflyRecipe.breedTime)
@@ -61,7 +61,7 @@ public class BreedingSystem : MonoBehaviour
         slot2.RemoveInventorySlot();
     }
 
-    ButterflyData TryGetOutput(ButteflyRecipe recipe)
+    ButterflyData TryGetOutput(ButterflyRecipes recipe)
     {
         if (slot1.currentItem != null && slot2.currentItem != null)
         {
