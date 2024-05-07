@@ -15,7 +15,7 @@ public class ButterflyRecipeVisualizer : MonoBehaviour
 
     private void Start()
     {
-        recipes = GetComponentsInChildren<Transform>().Where(s => s.name.Contains("Recipes") && s != transform).Select(t => gameObject).ToArray();
+        recipes = GetComponentsInChildren<Transform>().Where(s => s.name.Contains("Recipes") && s != transform).Select(t => t.gameObject).ToArray();
     }
 
     public void ButterflyRecipe(ButterflyRecipes[] butterflyRecipes, ButterflyData butterfly)

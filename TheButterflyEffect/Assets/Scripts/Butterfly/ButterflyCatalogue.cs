@@ -4,11 +4,13 @@ public class ButterflyCatalogue : MonoBehaviour
 {
     private ButterflySlot[] butterflySlot;
     private ButterflyRecipeVisualizer butterflyRecipeVisualizer;
+    private CaughtButterflyPopUp butterflyPopUp;
 
     private void Start()
     {
         Inventory.Instance().onAddItem += ButterflyCatalogue_onAddItem;
         butterflySlot = transform.GetChildrenRecursive<ButterflySlot>().ToArray();
+        butterflyPopUp = FindAnyObjectByType<CaughtButterflyPopUp>();
     }
 
     private void ButterflyCatalogue_onAddItem(InventoryItem item, int index)
@@ -24,7 +26,8 @@ public class ButterflyCatalogue : MonoBehaviour
                 if (!butterflySlot[i].butterflyCaught)
                 {
                     butterflySlot[i].AddButterflyToSlot(butterfly);
-                    butterflyRecipeVisualizer.ButterflyRecipe(butterflyRecipeVisualizer.butterflyRecipes, butterfly);
+                    butterflyPopUp.CaughtButterfly(butterfly, butterflySlot);
+                    //butterflyRecipeVisualizer.ButterflyRecipe(butterflyRecipeVisualizer.butterflyRecipes, butterfly);
                     print("Show ingredients");
                     return;
                 }
