@@ -80,6 +80,7 @@ public class BookScript : MonoBehaviour
             //print("Deactivate pages " + pages[i].name);
         }
         pages[pageIndex].SetActive(true);
+        butterflyRecipeVisualizer.RecipePages();
         UpdatePageNumbers();
     }
 
@@ -95,4 +96,13 @@ public class BookScript : MonoBehaviour
 
     }
 
+    public int GetPageIndex()
+    {
+        return pageIndex;
+    }
+
+    public GameObject[] GetPages()
+    {
+        return pages;
+    }
 }

@@ -4,6 +4,7 @@ public class ButterflyCatalogue : MonoBehaviour
 {
     private ButterflySlot[] butterflySlot;
     private ButterflyRecipeVisualizer butterflyRecipeVisualizer;
+    private ButterflyRecipes butterflyRecipes;
     private CaughtButterflyPopUp butterflyPopUp;
 
     private void Start()
@@ -23,11 +24,11 @@ public class ButterflyCatalogue : MonoBehaviour
 
             for (int i = 0; i < butterflySlot.Length; i++)
             {
-                if (!butterflySlot[i].butterflyCaught)
+                if (!butterflySlot[i].butterflyCaught && !butterflyRecipes.recipeUnlocked)
                 {
                     butterflySlot[i].AddButterflyToSlot(butterfly);
                     butterflyPopUp.CaughtButterfly(butterfly, butterflySlot);
-                    //butterflyRecipeVisualizer.ButterflyRecipe(butterflyRecipeVisualizer.butterflyRecipes, butterfly);
+                    butterflyRecipeVisualizer.ButterflyRecipe(butterflyRecipeVisualizer.butterflyRecipes, butterfly);
                     print("Show ingredients");
                     return;
                 }

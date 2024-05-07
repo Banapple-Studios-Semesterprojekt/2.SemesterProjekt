@@ -7,4 +7,5 @@ public class ButterflyRecipes : ScriptableObject
     public ButterflyData input2;
     public ButterflyData output;
     public float breedTime = 3f;
+    public bool recipeUnlocked;
 }
