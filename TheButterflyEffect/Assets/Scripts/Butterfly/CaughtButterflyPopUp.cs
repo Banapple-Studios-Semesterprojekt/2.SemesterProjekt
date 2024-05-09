@@ -9,7 +9,6 @@ public class CaughtButterflyPopUp : MonoBehaviour
     [Header("References")]
     [SerializeField] private Image butterflyImage;
     [SerializeField] private TextMeshProUGUI caughtButterflyText;
-    [SerializeField] private TextMeshProUGUI andAddedtoCatalogueText;
 
     private Transform butterflyPopUp;
     private Animator animator;
@@ -22,21 +21,10 @@ public class CaughtButterflyPopUp : MonoBehaviour
         butterflyPopUp.gameObject.SetActive(true);
     }
 
-    public void CaughtButterfly(ButterflyData butterfly, ButterflySlot[] butterflySlot)
+    public void CaughtButterfly(ButterflyData butterfly, bool alreadyExists)
     {
-        for (int i = 0; i < butterflySlot.Length; i++)
-        {
-            if (!butterflySlot[i].butterflyCaught)
-            {
-                ActivatePopUp(butterfly);
-                andAddedtoCatalogueText.text = "You caught a new butterfly and it has been added to the catalogue";
-            }
-            else //if (butterflySlot[i].butterflyCaught)
-            {
-                ActivatePopUp(butterfly);
-                caughtButterflyText.text = "You caught a butterfly!";
-            }
-        }
+        ActivatePopUp(butterfly);
+        caughtButterflyText.text = alreadyExists ? "You caught a butterfly!" : "You caught a new butterfly and it has been added to the catalogue";
     }
 
     public void ActivatePopUp(ButterflyData butterfly)
@@ -44,6 +32,6 @@ public class CaughtButterflyPopUp : MonoBehaviour
         butterflyPopUp.gameObject.SetActive(true);
         butterflyImage.sprite = butterfly.itemSprite;
         butterflyImage.enabled = true;
-        animator.SetBool("ButterflyCaught", true);
+        animator.SetTrigger("ButterflyCaught");
     }
 }

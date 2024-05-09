@@ -11,9 +11,7 @@ public class ButterflySlot : MonoBehaviour
     public TextMeshProUGUI butterflyName;
     public Image butterflyImage;
     public bool butterflyCaught;
-
-    //==========REFERENCES============//
-    private ButterflyRecipeVisualizer butterflyRecipeVisualizer;
+    public ButterflyData butterflyData { get; private set; }
 
     public void AddButterflyToSlot(ButterflyData newButterfly)
     {
@@ -29,6 +27,7 @@ public class ButterflySlot : MonoBehaviour
 
         //Setting bool "isCaught" to true, so only one can be caught
         butterflyCaught = true;
+        butterflyData = newButterfly;
     }
 
     

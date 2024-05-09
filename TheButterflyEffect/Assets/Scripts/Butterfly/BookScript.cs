@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class BookScript : MonoBehaviour
 {
     private GameObject[] pages;
-    private ButterflyRecipeVisualizer butterflyRecipeVisualizer;
 
     public Button nextPage;
     public Button prevPage;
@@ -20,7 +19,6 @@ public class BookScript : MonoBehaviour
     {
         //Referencing children in book and converting transform to a gameobject array
         pages = GetComponentsInChildren<Transform>().Where(s => s.name.Contains("Page") && s != transform).Select(t => t.gameObject).ToArray();
-        butterflyRecipeVisualizer = FindAnyObjectByType<ButterflyRecipeVisualizer>();
 
         pageIndex = 0;
         pageCount = 2;
@@ -34,26 +32,28 @@ public class BookScript : MonoBehaviour
         UpdatePageNumbers();
     }
 
-    void NextPage()
+    public void NextPage()
     {
         if (pageIndex >= pages.Length - 1)
-        {  
+        {
             pageIndex = 0;
             pageCount = 2;
-            SetPageActive();   
+            SetPageActive();
             //print("Go to very first page " + "page number = " + pageNumber);
             return;
+
         }
         else
         {
             pageIndex++;
             pageCount += 2;
-            SetPageActive();  
+            SetPageActive();
             //print("Incease page number, new page number = " + pageNumber);
-        }   
+        }
+
     }
 
-    void PreviousPage()
+    public void PreviousPage()
     {
         if (pageIndex <= 0)
         {
@@ -80,7 +80,6 @@ public class BookScript : MonoBehaviour
             //print("Deactivate pages " + pages[i].name);
         }
         pages[pageIndex].SetActive(true);
-        butterflyRecipeVisualizer.RecipePages();
         UpdatePageNumbers();
     }
 

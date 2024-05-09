@@ -75,4 +75,9 @@ public class BreedingSystem : MonoBehaviour
         print("Recipe gives null...");
         return null;
     }
+
+    public ButterflyRecipes[] GetRecipes()
+    {
+        return recipies;
+    }
 }

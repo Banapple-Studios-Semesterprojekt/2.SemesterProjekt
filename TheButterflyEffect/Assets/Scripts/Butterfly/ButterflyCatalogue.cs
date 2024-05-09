@@ -3,8 +3,6 @@ using UnityEngine;
 public class ButterflyCatalogue : MonoBehaviour
 {
     private ButterflySlot[] butterflySlot;
-    private ButterflyRecipeVisualizer butterflyRecipeVisualizer;
-    private ButterflyRecipes butterflyRecipes;
     private CaughtButterflyPopUp butterflyPopUp;
 
     private void Start()
@@ -23,13 +21,16 @@ public class ButterflyCatalogue : MonoBehaviour
             //butterfly.spawnProbability + "\n" + "Butterfly sprite = " + butterfly.itemSprite);
 
             for (int i = 0; i < butterflySlot.Length; i++)
-            {
-                if (!butterflySlot[i].butterflyCaught && !butterflyRecipes.recipeUnlocked)
+            {   //Ensures there are no duplications of butterflies in the catalogue.
+                if(butterflySlot[i].butterflyData == butterfly)
+                {
+                    butterflyPopUp.CaughtButterfly(butterfly, true);
+                    return;
+                }
+                else if (!butterflySlot[i].butterflyCaught)
                 {
                     butterflySlot[i].AddButterflyToSlot(butterfly);
-                    butterflyPopUp.CaughtButterfly(butterfly, butterflySlot);
-                    butterflyRecipeVisualizer.ButterflyRecipe(butterflyRecipeVisualizer.butterflyRecipes, butterfly);
-                    print("Show ingredients");
+                    butterflyPopUp.CaughtButterfly(butterfly, false);
                     return;
                 }
             }

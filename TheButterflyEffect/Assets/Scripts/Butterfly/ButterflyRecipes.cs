@@ -7,5 +7,13 @@ public class ButterflyRecipes : ScriptableObject
     public ButterflyData input2;
     public ButterflyData output;
     public float breedTime = 3f;
-    public bool recipeUnlocked;
+    
+    public bool ContainsButterfly(ButterflyData butterfly)
+    {
+        if(butterfly == input1 || butterfly == input2)
+        {
+            return true;
+        }
+        return false;
+    }
 }
