@@ -43,14 +43,18 @@ public class GameManager : MonoBehaviour
         {
             case ForestState.GreenBiome:
                 terrain.terrainData = terrainGreen;
+                blueMushroomParent.SetActive(false);
+                redMushroomParent.SetActive(false);
                 break;
             case ForestState.BlueBiome:
                 terrain.terrainData = terrainBlue;
-                blueMushroomParent.SetActive(false);
+                blueMushroomParent.SetActive(true);
+                redMushroomParent.SetActive(false);
                 break;
             case ForestState.RedBiome:
                 terrain.terrainData = terrainRed;
-                redMushroomParent.SetActive(false);
+                redMushroomParent.SetActive(true);
+                blueMushroomParent.SetActive(true);
                 break;
         }
         BlackScreen.Instance().SetBlackScreen(false);

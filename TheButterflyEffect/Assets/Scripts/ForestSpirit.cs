@@ -10,7 +10,6 @@ public class ForestSpirit : MonoBehaviour
     private float smoothTime;
     private Canvas playerCanvas;
     private GameObject inventoryUI;
-    private GameObject dialogueUI;
     private Dialogue_Triggers dialogueTriggers;
     private Dialog_Controler dialogueController;
     private Renderer forestSpiritRenderer;
@@ -76,6 +75,5 @@ public class ForestSpirit : MonoBehaviour
             yield return null;
         }
         gameObject.SetActive(false);
-        
     }
 }

@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Intro Cutscene.unity
     guid: 79462978f0d62bb41b3be28ae971619e
   - enabled: 1
-    path: Assets/Scenes/Terrain.unity
-    guid: b1a7cad9a5797e449a0dae876314e188
+    path: Assets/Scenes/Game.unity
+    guid: fdbeedc13dedf9d4fb645475c4deef55
   m_configObjects: {}
