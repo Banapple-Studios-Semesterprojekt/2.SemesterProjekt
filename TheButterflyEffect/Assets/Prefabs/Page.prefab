@@ -186,14 +186,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6241047224443511203, guid: 448c1e9d6b0251a43b1c69212733cf5b,
-        type: 3}
-      propertyPath: m_Name
-      value: RightNumber
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 6241047224443511203, guid: 448c1e9d6b0251a43b1c69212733cf5b, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 448c1e9d6b0251a43b1c69212733cf5b, type: 3}
@@ -311,25 +305,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4586649115953201909, guid: fb76250ae59d5e54a97e74c32fac70d7,
-        type: 3}
-      propertyPath: m_Name
-      value: LeftNumber
-      objectReference: {fileID: 0}
-    - target: {fileID: 6489938170039114453, guid: fb76250ae59d5e54a97e74c32fac70d7,
-        type: 3}
-      propertyPath: m_text
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8942499971162975959, guid: fb76250ae59d5e54a97e74c32fac70d7,
         type: 3}
       propertyPath: m_Name
       value: ButterflySlot
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3825207534447287604, guid: fb76250ae59d5e54a97e74c32fac70d7, type: 3}
-    m_RemovedGameObjects:
-    - {fileID: 4586649115953201909, guid: fb76250ae59d5e54a97e74c32fac70d7, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb76250ae59d5e54a97e74c32fac70d7, type: 3}

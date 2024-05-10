@@ -15,6 +15,7 @@ public class ButterflyData : Item
     public int spawnProbability;
 
     public bool nightButterfly;
+    internal Sprite sprite;
 }
 
 [System.Serializable]

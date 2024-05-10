@@ -22,8 +22,10 @@ MonoBehaviour:
     and the USA. It travels far and wide to Australia, New Zealand, Europe and especially
     visits England.\nWingspan: 8.9 - 10.2 cm.\r\nFamily: Nymphalidae\r.\nCharacteristics:
     Easily recognizable from its vibrant pattern of black and orange wings. And,
-    it has white spots along the edge of the black margins.\nRarity: Common"
+    it has white spots along the edge of the black margins.\nRarity: Common.\n\nCan
+    be bred with: Admiral, Hollyblue and Brimstone"
   typeEnglish: 0
   typeDanish: 0
   size: 1
   spawnProbability: 100
+  nightButterfly: 0

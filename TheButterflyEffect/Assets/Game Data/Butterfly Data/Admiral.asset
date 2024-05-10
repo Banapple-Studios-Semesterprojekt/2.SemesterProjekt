@@ -22,8 +22,10 @@ MonoBehaviour:
     Europe, Scandinavia, North America and North Africa. \r\nWingspan: 4.4 - 6.4
     cm.\r\nFamily: Nymphalidae\r.\nCharacteristics: Coloration of the butterfly consists
     of black wings with white bands and reddish brown marks. It has white spots on
-    the dorsal (top) side. \r\nRarity: Common"
+    the dorsal (top) side. \r\nRarity: Common.\n\nCan be bred with: Hollyblue and
+    Monarch"
   typeEnglish: 1
   typeDanish: 1
   size: 1
   spawnProbability: 100
+  nightButterfly: 0

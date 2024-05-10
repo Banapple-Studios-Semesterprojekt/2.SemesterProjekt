@@ -6,15 +6,12 @@ using TMPro;
 
 public class ButterflySlot : MonoBehaviour
 {
-    //==========ITEM DATA==========//
-    ButterflyData butterfly; //All information is in the scriptable object.
-
-
     //==========BUTTERFLY SLOT===========//
     public TextMeshProUGUI butterflyDescription;
     public TextMeshProUGUI butterflyName;
     public Image butterflyImage;
     public bool butterflyCaught;
+    public ButterflyData butterflyData { get; private set; }
 
     public void AddButterflyToSlot(ButterflyData newButterfly)
     {
@@ -30,6 +27,7 @@ public class ButterflySlot : MonoBehaviour
 
         //Setting bool "isCaught" to true, so only one can be caught
         butterflyCaught = true;
+        butterflyData = newButterfly;
     }
 
     
