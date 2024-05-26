@@ -5271,6 +5271,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1948192955401824163, guid: 6edc52f1d7c79aa438d76419b3596557,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3475780372108069606, guid: 6edc52f1d7c79aa438d76419b3596557,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3573699873793764962, guid: 6edc52f1d7c79aa438d76419b3596557,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -5301,6 +5311,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5601967032782290975, guid: 6edc52f1d7c79aa438d76419b3596557,
+        type: 3}
+      propertyPath: dialogues.Array.data[0].dialouge.Array.data[1].dialouge.sentences.Array.data[0]
+      value: "Hvordan har jeg aldrig lagt m\xE6rke til dig f\xF8---"
+      objectReference: {fileID: 0}
     - target: {fileID: 5728328685101588884, guid: 6edc52f1d7c79aa438d76419b3596557,
         type: 3}
       propertyPath: finalScaleReference
@@ -5310,6 +5325,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7560999906290986678, guid: 6edc52f1d7c79aa438d76419b3596557,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -38817,6 +38837,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Forest_Spirit - rigged
+      objectReference: {fileID: 0}
+    - target: {fileID: 8897692773250962520, guid: 0d235df67d7bb9540bfdff23c8a4b0ce,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
