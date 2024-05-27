@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
-using static UnityEditor.Progress;
 
 public class Inventory : Singleton<Inventory>
 {

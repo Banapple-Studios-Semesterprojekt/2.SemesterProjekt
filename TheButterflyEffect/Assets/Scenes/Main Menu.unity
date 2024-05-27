@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18211961, g: 0.22781791, b: 0.30738416, a: 1}
+  m_IndirectSpecularColor: {r: 0.18211989, g: 0.2278181, b: 0.30738494, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1398,7 +1398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8dcea4886a59e14688a701eee932b5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startSceneName: Terrain
+  startSceneName: Intro Cutscene
   resolutionDropdown: {fileID: 490853425}
   qualityText: {fileID: 1036708412}
   volumeText: {fileID: 301485768}

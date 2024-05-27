@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -20,9 +19,11 @@ public class GameManager : MonoBehaviour
         terrainRed = Resources.Load<TerrainData>("GameRed-Terrain");
 
         FindAnyObjectByType<BreedingSystem>().onBreed += BreedingSystem_OnBreed;
+
+        ChangeBiome(ForestState.GreenBiome);
     }
 
-    private void BreedingSystem_OnBreed(int breedCount)
+    private void BreedingSystem_OnBreed(int breedCount, Item item)
     {
         if(breedCount == countForBlueTerrain)
         {
@@ -39,7 +40,13 @@ public class GameManager : MonoBehaviour
     {
         BlackScreen.Instance().SetBlackScreen(true);
         yield return new WaitForSeconds(2f);
-        switch(state)
+        ChangeBiome(state);
+        BlackScreen.Instance().SetBlackScreen(false);
+    }
+
+    private void ChangeBiome(ForestState state)
+    {
+        switch (state)
         {
             case ForestState.GreenBiome:
                 terrain.terrainData = terrainGreen;
@@ -57,7 +64,6 @@ public class GameManager : MonoBehaviour
                 blueMushroomParent.SetActive(true);
                 break;
         }
-        BlackScreen.Instance().SetBlackScreen(false);
     }
 }
 

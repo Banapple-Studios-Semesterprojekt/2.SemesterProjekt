@@ -37,7 +37,7 @@ public class TaskManager : MonoBehaviour
         }
     }
 
-    private void BreedingSystem_OnBreed(int breedCount)
+    private void BreedingSystem_OnBreed(int breedCount, Item item)
     {
         FinishTask(2);
         if (breedCount >= 5) FinishTask(3);

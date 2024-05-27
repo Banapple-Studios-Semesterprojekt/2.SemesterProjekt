@@ -86,6 +86,7 @@ public class Enemy : MonoBehaviour
             //Raycast to the right and left and checks if "hit" is player or not.
             if (ShootRay(directionRight) || ShootRay(directionLeft))
             {
+                agent.speed = 8f;
                 agent.SetDestination(target.position); //Function that recalculates destination when target position changes.
                 isPatrolling = false;
                 playerHit = true;
@@ -95,6 +96,7 @@ public class Enemy : MonoBehaviour
         //Sphere cast: checking for if player is nearby
         if (Physics.CheckSphere(transform.position, sphereRadius, sphereMask, QueryTriggerInteraction.Ignore))
         {
+            agent.speed = 8f;
             agent.SetDestination(target.position);
             isPatrolling = false;
             playerHit = true;
@@ -138,6 +140,7 @@ public class Enemy : MonoBehaviour
 
     IEnumerator Patrol()
     {
+        agent.speed = 5f;
         while(isPatrolling)
         {
             agent.SetDestination ( patrolPositions[Random.Range(0, patrolPositions.Length)].position );

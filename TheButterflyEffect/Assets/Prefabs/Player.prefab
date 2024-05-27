@@ -1075,8 +1075,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Press F to skip
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9691f172a1df0a84e89d5cf4b370db85, type: 2}
+  m_sharedMaterial: {fileID: 1526726064867868033, guid: 9691f172a1df0a84e89d5cf4b370db85,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1100,8 +1101,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 44.43
+  m_fontSizeBase: 44.43
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1999,7 +2000,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8991819181470731245
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2304,7 +2305,7 @@ MonoBehaviour:
       color: {r: 0.51320755, g: 0.80719215, b: 1, a: 1}
     - dialouge:
         sentences:
-        - "Hvordan har jeg aldrig lagt m\xE6rke til dig f\xF8-"
+        - "Hvordan har jeg aldrig lagt m\xE6rke til dig f\xF8---"
       color: {r: 0, g: 1, b: 0.48235294, a: 1}
     - dialouge:
         sentences:
@@ -2317,6 +2318,10 @@ MonoBehaviour:
         - "Nu hidkalder jeg dig for at hj\xE6lpe med at bevare skoven. "
         - Vil du acceptere?
       color: {r: 0.5137255, g: 0.8078432, b: 1, a: 1}
+    - dialouge:
+        sentences:
+        - Jeg accepterer!
+      color: {r: 0, g: 1, b: 0.48235294, a: 1}
     - dialouge:
         sentences:
         - Jeg takker dig, jeg vidste du var det rigtige valg.
@@ -2412,43 +2417,43 @@ MonoBehaviour:
         - I urge you to be careful at night, but know that you can always return
           to your tent, there you will always be safe.
         - Once again, I thank you.
-      color: {r: 0.5137255, g: 0.80784315, b: 1, a: 0}
+      color: {r: 0.5137255, g: 0.80784315, b: 1, a: 1}
     - dialouge:
         sentences:
         - "Forest Spirit, thank you for your trust. \r\n"
         - And I will do my best to help you and I hope to restore your home to its
           former glory.
-      color: {r: 0, g: 1, b: 0.48235294, a: 0}
+      color: {r: 0, g: 1, b: 0.48235294, a: 1}
   - dialouge:
     - dialouge:
         sentences:
         - 'This is a huge forest! '
-      color: {r: 0, g: 1, b: 0.48235294, a: 0}
+      color: {r: 0, g: 1, b: 0.48235294, a: 1}
   - dialouge:
     - dialouge:
         sentences:
         - There are so many butterflies here!
-      color: {r: 0, g: 1, b: 0.48235294, a: 0}
+      color: {r: 0, g: 1, b: 0.48235294, a: 1}
   - dialouge:
     - dialouge:
         sentences:
         - I think a see a new butterfly species!
-      color: {r: 0, g: 1, b: 0.48235294, a: 0}
+      color: {r: 0, g: 1, b: 0.48235294, a: 1}
   - dialouge:
     - dialouge:
         sentences:
         - You won't find forests like this in the city
-      color: {r: 0, g: 1, b: 0.48235294, a: 0}
+      color: {r: 0, g: 1, b: 0.48235294, a: 1}
   - dialouge:
     - dialouge:
         sentences:
         - Oh no! A wolf!
-      color: {r: 0, g: 1, b: 0.48235294, a: 0}
+      color: {r: 0, g: 1, b: 0.48235294, a: 1}
   - dialouge:
     - dialouge:
         sentences:
         - There are pawprints here. I wonder what has made them
-      color: {r: 0, g: 1, b: 0.48235294, a: 0}
+      color: {r: 0, g: 1, b: 0.48235294, a: 1}
   contoler: {fileID: 6888746838966913556}
   dialoguePage: 0
 --- !u!1 &2369078076297102375
@@ -9805,6 +9810,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_margin.z
       value: 2.2766113
+      objectReference: {fileID: 0}
+    - target: {fileID: 6912719416527173594, guid: bc261f18359549f44987c52e436a72a8,
+        type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8295359703321490701, guid: bc261f18359549f44987c52e436a72a8,
         type: 3}

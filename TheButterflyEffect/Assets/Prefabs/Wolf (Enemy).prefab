@@ -5006,7 +5006,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2289270408830200822}
   - component: {fileID: 2053161858643455707}
-  - component: {fileID: 2727699923825221494}
   - component: {fileID: 1961461596938634084}
   m_Layer: 0
   m_Name: Wolf Camera
@@ -5069,7 +5068,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 247
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -5081,14 +5080,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &2727699923825221494
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5405376693005335573}
-  m_Enabled: 1
 --- !u!114 &1961461596938634084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5278,7 +5269,7 @@ GameObject:
   - component: {fileID: 3847247453698598938}
   - component: {fileID: 2097464104893532312}
   m_Layer: 0
-  m_Name: Wolf - Rigged
+  m_Name: Wolf (Enemy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5592,7 +5583,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -5619,7 +5610,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 1.3
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 2
 --- !u!114 &3847247453698598938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5633,7 +5624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolTime: 15
-  NoOfRays: 6
+  NoOfRays: 12
   visionAngle: 1
   visionRadius: 75
   rayMask:
@@ -5642,7 +5633,7 @@ MonoBehaviour:
   sphereRadius: 4
   sphereMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
 --- !u!82 &2097464104893532312
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5664,9 +5655,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 150
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -5674,23 +5665,23 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 0.002
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -2.4158924
+      outSlope: -2.4158924
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0.043675583
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: -0.05998148
+      outSlope: -0.05998148
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0.07220332
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -5699,7 +5690,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5714,7 +5705,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.25
       inSlope: 0
       outSlope: 0
       tangentMode: 0

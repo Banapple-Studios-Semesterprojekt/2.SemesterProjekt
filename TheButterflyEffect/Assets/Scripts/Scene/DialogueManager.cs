@@ -55,7 +55,13 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue()
     {
-        blackScreenAnimator.SetTrigger("Fade");
+        blackScreenAnimator.SetBool("isBlack", true);
+        Invoke(nameof(LoadGameScene), 2f);
         Debug.Log("Dialogue Finished!");
+    }
+
+    private void LoadGameScene()
+    {
+        SceneLoader.LoadScene("Game");
     }
 }
